@@ -1,0 +1,31 @@
+
+[CPU]
+command=~/.config/i3blocks/cpu/cpu_info.sh
+interval=10
+
+[MEM]
+command=~/.config/i3blocks/memory/ram.sh
+interval=10
+
+[DISK]
+command=~/.config/i3blocks/memory/disk.sh
+interval=10
+
+[BATTERY]
+command=~/.config/i3blocks/battery/battery_poly.sh 0.9 .0%
+interval=5
+
+[VOLUME-PULSEAUDIO]
+command=~/.config/i3blocks/sound/volume-pulseaudio.sh
+interval=once
+signal=1
+USE_ALSA_NAME=1
+
+[SOUND_BURST]
+command=~/.config/i3blocks/sound/sound_burst.sh
+interval=repeat
+
+[TIME_DATE]
+command=date +"%H:%M %a,%d.%b "
+interval=1
+color=#1FA97D
