@@ -80,7 +80,7 @@
     Print
 
 # Open file manager
-"alacritty -t 'File Manager' -d 120 34 --position 750 500 -e ranger"
+"alacritty -t 'File Manager' -d 120 30 --position 500 280 -e ranger"
     Mod4+f
 
 # Lock the screen

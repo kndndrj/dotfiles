@@ -10,7 +10,7 @@ cursor:
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
-  unfocused_hollow: true
+  unfocused_hollow: false
 
 window:
   # Window dimensions in character columns and lines
@@ -18,6 +18,30 @@ window:
   dimensions:
     columns: 110
     lines: 32
+
+  # Window padding (changes require restart)
+  #
+  # Blank space added around the window in pixels. This padding is not scaled by
+  # DPI and the specified value is always added at both opposing sides.
+  padding:
+    x: 0
+    y: 5
+
+  # Spread additional padding evenly around the terminal content.
+  dynamic_padding: false
+
+  # Window decorations
+  #
+  # Available values:
+  # - full: borders and title bar
+  # - none: neither borders nor title bar
+  # - transparent: title bar, transparent background and title bar buttons
+  # - buttonless: title bar, transparent background, but no title bar buttons
+  decorations: none
+
+  # Allow terminal applications to change Alacritty's window title.
+  dynamic_title: true
+
 
 # Font settings
 font:
@@ -38,7 +62,6 @@ font:
     style: Bold Italic
 
   size: 9
-
 
 # Colors (Tomorrow Night)
 colors:
