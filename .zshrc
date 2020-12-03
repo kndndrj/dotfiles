@@ -12,9 +12,11 @@ export EDITOR=nvim;
 # Source fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Enable colors and change prompt:
+# Enable colors and change prompt - add git prompt to the right:
 autoload -U colors && colors
-PS1="%B%{$fg[green]%}%n%{$fg[white]%}@%M %{$fg[blue]%}%~%{$fg[white]%}$%b%{$reset_color%} "
+source $HOME/.config/zsh/git-prompt.zsh
+PROMPT='%B%{$fg[green]%}%n%{$fg[white]%}@%M: %{$fg[blue]%}%c%{$fg[white]%}$%b%{$reset_color%} '
+RPROMPT='$(gitprompt)'
 
 # Alisases
 alias ls='ls --color=auto'
