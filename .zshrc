@@ -30,6 +30,9 @@ HISTFILE=~/.cache/zsh/history
 autoload -Uz compinit
 compinit
 
+# autocomplete - case insensitive
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|?=** r:|?=**'
+
 # Enable alias completion
 setopt COMPLETE_ALIASES
 
