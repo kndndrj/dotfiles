@@ -12,7 +12,7 @@
 * {
   black:      #000000;
   red:        #eb6e67;
-  green:      #95ee8f;
+  green:      #18815f;
   yellow:     #f8c456;
   blue:       #6eaafb;
   mangenta:   #d886f3;
@@ -46,7 +46,11 @@ inputbar {
 }
 
 prompt {
-  text-color: @green;
+  text-color: @text;
+  padding: 2px;
+  border: 2px;
+  background-color: @green;
+  border-radius: 3px;
 }
 
 textbox-prompt-colon {
