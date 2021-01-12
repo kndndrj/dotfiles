@@ -13,7 +13,7 @@
   black:      #000000;
   red:        #eb6e67;
   green:      #18815f;
-  yellow:     #f8c456;
+  yellow:     #deda60;
   blue:       #6eaafb;
   mangenta:   #d886f3;
   cyan:       #6cdcf7;
@@ -46,10 +46,10 @@ inputbar {
 }
 
 prompt {
-  text-color: @text;
+  text-color: @black;
   padding: 2px;
   border: 2px;
-  background-color: @green;
+  background-color: @yellow;
   border-radius: 3px;
 }
 

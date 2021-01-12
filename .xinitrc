@@ -1,7 +1,7 @@
-# Set keyboard layout for xserver
-setxkbmap si
+# Set keyboard layout for xserver, remap caps_lock to escape
+setxkbmap si -option caps:escape
 
-# Start xbindkeys skortcuts
+# Start xbindkeys shortcuts
 xbindkeys
 
 # Merge .Xresources

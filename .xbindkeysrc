@@ -87,6 +87,9 @@
 "slock"
     XF86Tools
 
+"alacritty -d 100 20 --position 600 30 -t Popup -e pulsemixer"
+    Mod4+v
+
 ##################################
 # End of xbindkeys configuration #
 ##################################

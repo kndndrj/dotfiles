@@ -15,7 +15,7 @@ export EDITOR=nvim;
 # Enable colors and change prompt - add git prompt to the right:
 autoload -U colors && colors
 source $HOME/.config/zsh/git-prompt.zsh
-PROMPT='%B%{$fg[green]%}%n%{$fg[white]%}@%M: %{$fg[blue]%}%c%{$fg[white]%}$%b%{$reset_color%} '
+PROMPT='%B%{$fg[yellow]%}%n%{$fg[white]%}@%M: %{$fg[blue]%}%c%{$fg[white]%}$%b%{$reset_color%} '
 RPROMPT='$(gitprompt)'
 
 # Alisases
@@ -64,6 +64,14 @@ function zle-keymap-select zle-line-init zle-line-finish {
 zle -N zle-line-init
 zle -N zle-line-finish
 zle -N zle-keymap-select
+
+# default GOPATH and seperate path for working directory
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+export GOPATH=$GOPATH:$HOME/Repos/gocode
+
+# add Cargo path to path
+export PATH=$PATH:$HOME/.cargo/bin
 
 # Handler if command not found
 command_not_found_handler() {
