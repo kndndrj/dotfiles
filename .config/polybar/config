@@ -65,13 +65,13 @@ cursor-click = pointer
 cursor-scroll = ns-resize
 
 [bar/center]
-width = 18%
+width = 19%
 height = ${bar/left.height}
 radius = ${bar/left.radius}
 fixed-center = true
-offset-x = 30%
+offset-x = 31%
 
-background = ${colors.background}
+background = ${colors.primary}
 foreground = ${colors.foreground}
 
 line-size = 3
@@ -136,7 +136,7 @@ cursor-scroll = ns-resize
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:30:...%
+label = %title:0:40:...%
 label-empty = ⚪⚪⚪
 
 [module/xkeyboard]
