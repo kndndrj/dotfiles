@@ -1,0 +1,36 @@
+#! /bin/sh
+
+### AUTOSTART ###
+
+# Launch polybar
+$HOME/.config/polybar/launch.sh
+
+# Launch schkd
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+# Cursor shape
+xsetroot -cursor_name left_ptr
+
+### MONITORS ###
+
+bspc monitor -d I II III IV V VI VII VIII IX X
+
+
+### SETTINGS ###
+
+bspc config border_width                4
+bspc config window_gap                  12
+bspc config top_padding                 27
+bspc config normal_border_color         "#444444"
+bspc config focused_border_color        "#18815f"
+
+bspc config split_ratio                 0.52
+bspc config borderless_monocle          true
+bspc config gapless_monocle             true
+
+bspc rule -a Gimp desktop='^8' state=floating follow=on
+bspc rule -a Alacritty:Popup sticky=on state=floating
+bspc rule -a Alacritty:FileManager sticky=on state=floating
+bspc rule -a Alacritty:Scratchpad sticky=on state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Screenkey manage=off

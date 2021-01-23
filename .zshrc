@@ -15,7 +15,7 @@ export EDITOR=nvim;
 # Enable colors and change prompt - add git prompt to the right:
 autoload -U colors && colors
 source $HOME/.config/zsh/git-prompt.zsh
-PROMPT='%B%{$fg[yellow]%}%n%{$fg[white]%}@%M: %{$fg[blue]%}%c%{$fg[white]%}$%b%{$reset_color%} '
+PROMPT='%B%{$fg[green]%}%n%{$fg[white]%}@%M: %{$fg[blue]%}%c%{$fg[white]%}$%b%{$reset_color%} '
 RPROMPT='$(gitprompt)'
 
 # Alisases
