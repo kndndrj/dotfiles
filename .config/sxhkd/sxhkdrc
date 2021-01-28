@@ -33,15 +33,15 @@ super + cedilla
 
 # Open file manager
 super + f
-        $HOME/.config/sxhkd/toggle_window.sh FileManager "alacritty --class FileManager -e ranger"
-#
+        $HOME/.config/sxhkd/toggle_window.sh FileManager "alacritty --class FileManager -t FileManager -e ranger"
+
 #Pulsemixer
 super + v
-        $HOME/.config/sxhkd/toggle_window.sh Popup "alacritty --class Popup -e pulsemixer"
+        $HOME/.config/sxhkd/toggle_window.sh Popup "alacritty --class Popup -t Pulsemixer -e pulsemixer"
 
 # Scratchpad
 super + w
-        $HOME/.config/sxhkd/toggle_window.sh Scratchpad "alacritty --class Scratchpad"
+        $HOME/.config/sxhkd/toggle_window.sh Scratchpad "alacritty --class Scratchpad -t Scratchpad"
 
 ### bspwm hotkeys ###
 

@@ -26,9 +26,9 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/left]
-width = 20%
+width = 22.2%
 height = 30
-radius = 15
+radius = 6
 fixed-center = false
 
 background = ${colors.background}
@@ -53,8 +53,7 @@ font-2 = siji:pixelsize=11;1
 modules-left = bspwm
 
 tray-position = right
-tray-padding = 2
-tray-offset-x = -15
+tray-offset-x = -6
 tray-detached = true
 
 wm-restack = bspwm
@@ -69,7 +68,7 @@ width = 19%
 height = ${bar/left.height}
 radius = ${bar/left.radius}
 fixed-center = true
-offset-x = 31%
+offset-x = 36.6%
 
 background = ${colors.primary}
 foreground = ${colors.foreground}
@@ -100,11 +99,11 @@ cursor-click = pointer
 cursor-scroll = ns-resize
 
 [bar/right]
-width = 38%
+width = 30%
 height = ${bar/left.height}
 radius = ${bar/left.radius}
 fixed-center = false
-offset-x = 62%
+offset-x = 70%
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -125,7 +124,7 @@ font-0 = ${bar/left.font-0}
 font-1 = ${bar/left.font-1}
 font-2 = ${bar/left.font-2}
 
-modules-right = cpu filesystem pulseaudio memory temperature date powermenu
+modules-right = cpu filesystem pulseaudio memory temperature date
 
 wm-restack = bspwm
 
@@ -158,6 +157,7 @@ label-indicator-underline = ${colors.secondary}
 [module/filesystem]
 type = internal/fs
 interval = 25
+underline = ${colors.primary}
 
 mount-0 = /
 
@@ -169,11 +169,12 @@ label-unmounted-foreground = ${colors.foreground-alt}
 type = internal/bspwm
 
 label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
+label-focused-background = ${colors.primary}
 label-focused-padding = 2
 
 label-occupied = %index%
+label-occupied-background = ${colors.background-alt}
+label-occupied-underline= ${colors.primary}
 label-occupied-padding = 2
 
 label-urgent = %index%!
@@ -318,11 +319,9 @@ format-disconnected =
 type = internal/date
 interval = 5
 
-date =
-date-alt = " %Y. %m. %d"
+date = "%d. %m. %Y"
 
 time = %H:%M
-time-alt = %H:%M
 
 format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
