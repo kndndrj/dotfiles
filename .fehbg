@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --no-fehbg --randomize --bg-fill $HOME/Slike/Ozadja/*
+feh --no-fehbg --randomize --bg-fill $(xdg-user-dir PICTURES)/Ozadja/*
