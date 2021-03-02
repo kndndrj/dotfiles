@@ -1,0 +1,17 @@
+#!/bin/sh
+
+echo "Xft.dpi: 240" | xrdb -merge
+
+# Launch polybar
+$HOME/.config/polybar/launch_240dpi.sh &
+
+# Reset the background
+$HOME/.fehbg &
+
+# Restart dunst (notification daemon) with different geometry
+pkill dunst
+dunst &
+
+bspc config border_width                6
+bspc config window_gap                  -6
+bspc config top_padding                 82

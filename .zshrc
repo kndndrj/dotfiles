@@ -20,6 +20,9 @@ RPROMPT='$(gitprompt)'
 
 # Alisases
 alias ls='ls --color=auto'
+alias vim='nvim'
+alias fm='source ranger'
+alias get_idf='. $HOME/esp/esp-idf/export.sh'
 
 # History in cache directory:
 HISTSIZE=10000

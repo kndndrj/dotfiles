@@ -16,6 +16,10 @@
 ;
 ;==========================================================
 
+[config]
+scale-dpi = 200
+scale-96dpi = 96
+
 [colors]
 background = #282c34
 background-alt = #444
@@ -25,7 +29,11 @@ primary = #18815f
 secondary = #e60053
 alert = #bd2c40
 
-[bar/left]
+;#############################
+;####### 96 dpi version ######
+;#############################
+
+[bar/left_96dpi]
 width = 22.2%
 height = 30
 radius = 6
@@ -46,6 +54,130 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
+dpi-x = ${config.scale-96dpi}
+dpi-y = ${config.scale-96dpi}
+
+font-0 = fixed:pixelsize=11;1
+font-1 = unifont:fontformat=truetype:size=11:antialias=false;0
+font-2 = siji:pixelsize=11;1
+
+modules-left = bspwm
+
+tray-position = right
+tray-offset-x = -6
+tray-detached = true
+
+wm-restack = bspwm
+
+override-redirect = true
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[bar/center_96dpi]
+width = 20%
+height = ${bar/left_96dpi.height}
+radius = ${bar/left_96dpi.radius}
+fixed-center = true
+offset-x = 33.8%
+
+background = ${colors.primary}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+border-size = 4
+border-color = #00000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+dpi-x = ${config.scale-96dpi}
+dpi-y = ${config.scale-96dpi}
+
+font-0 = ${bar/left.font-0}
+font-1 = ${bar/left.font-1}
+font-2 = ${bar/left.font-2}
+
+modules-center = xwindow
+
+wm-restack = bspwm
+
+override-redirect = true
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[bar/right_96dpi]
+width = 35%
+height = ${bar/left_96dpi.height}
+radius = ${bar/left_96dpi.radius}
+fixed-center = false
+offset-x = 65%
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+border-size = 4
+border-color = #00000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+dpi-x = ${config.scale-96dpi}
+dpi-y = ${config.scale-96dpi}
+
+font-0 = ${bar/left.font-0}
+font-1 = ${bar/left.font-1}
+font-2 = ${bar/left.font-2}
+
+modules-right = cpu battery filesystem pulseaudio memory temperature date
+
+wm-restack = bspwm
+
+override-redirect = true
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+;#############################
+;####### 240 dpi version #####
+;#############################
+
+[bar/left]
+width = 22.2%
+height = 60
+radius = 12
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+border-size = 4
+border-color = #00000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+dpi-x = ${config.scale-dpi}
+dpi-y = ${config.scale-dpi}
+
 font-0 = fixed:pixelsize=11;1
 font-1 = unifont:fontformat=truetype:size=11:antialias=false;0
 font-2 = siji:pixelsize=11;1
@@ -64,11 +196,11 @@ cursor-click = pointer
 cursor-scroll = ns-resize
 
 [bar/center]
-width = 19%
+width = 20%
 height = ${bar/left.height}
 radius = ${bar/left.radius}
 fixed-center = true
-offset-x = 36.6%
+offset-x = 33.8%
 
 background = ${colors.primary}
 foreground = ${colors.foreground}
@@ -85,6 +217,9 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
+dpi-x = ${config.scale-dpi}
+dpi-y = ${config.scale-dpi}
+
 font-0 = ${bar/left.font-0}
 font-1 = ${bar/left.font-1}
 font-2 = ${bar/left.font-2}
@@ -99,11 +234,11 @@ cursor-click = pointer
 cursor-scroll = ns-resize
 
 [bar/right]
-width = 30%
+width = 35%
 height = ${bar/left.height}
 radius = ${bar/left.radius}
 fixed-center = false
-offset-x = 70%
+offset-x = 65%
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -120,11 +255,14 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
+dpi-x = ${config.scale-dpi}
+dpi-y = ${config.scale-dpi}
+
 font-0 = ${bar/left.font-0}
 font-1 = ${bar/left.font-1}
 font-2 = ${bar/left.font-2}
 
-modules-right = cpu filesystem pulseaudio memory temperature date
+modules-right = cpu battery filesystem pulseaudio memory temperature date
 
 wm-restack = bspwm
 
@@ -398,7 +536,7 @@ format-discharging-underline = ${self.format-charging-underline}
 
 format-full-prefix = " "
 format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
+format-full-underline = ${colors.primary}
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 

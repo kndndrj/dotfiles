@@ -4,34 +4,28 @@
 ###### AUTOSTART #####
 ######################
 
-# Launch polybar
-$HOME/.config/polybar/launch.sh
+# Cursor shape
+xsetroot -cursor_name left_ptr
 
 # Launch schkd
 pgrep -x sxhkd > /dev/null || sxhkd &
-
-# Cursor shape
-xsetroot -cursor_name left_ptr
 
 ### MONITORS ###
 
 bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 
+# Run a custom script depending on the detected "autorandr" setup
+DETECTED_MONITOR=$(autorandr | awk '/current/ {print $1}')
+$HOME/.config/autorandr/$DETECTED_MONITOR/postswitch
+
 ######################
 ###### SETTINGS ######
 ######################
-
-# Overlaping borders
-bspc config border_width                4
-bspc config window_gap                  -4
 
 # Only outter gaps
 for side in right bottom left ; do
 	bspc config ${side}_padding     16
 done
-
-# Top padding for the status bar
-bspc config top_padding                 42
 
 # Colors
 bspc config normal_border_color         "#444444"
@@ -46,8 +40,8 @@ bspc config focus_follows_pointer       true
 # Window rules
 bspc rule -a Gimp desktop='^8' state=floating follow=on
 bspc rule -a Alacritty:Popup sticky=on state=floating
-bspc rule -a Alacritty:FileManager sticky=on state=floating
-bspc rule -a Alacritty:Scratchpad sticky=on state=floating
+bspc rule -a Alacritty:Scratchpad_1 sticky=on state=floating
+bspc rule -a Alacritty:Scratchpad_2 sticky=on state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a Zathura state=tiled

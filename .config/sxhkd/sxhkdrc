@@ -15,6 +15,7 @@ super + Tab
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
+
 # volume control
 XF86AudioRaiseVolume
         amixer set Master 5%+
@@ -28,20 +29,27 @@ super + b
         brave
 
 # Open the screenshot utility
-super + cedilla
+@Print
         flameshot gui
-
-# Open file manager
-super + f
-        $HOME/.config/sxhkd/toggle_window.sh FileManager "alacritty --class FileManager -t FileManager -e ranger"
 
 #Pulsemixer
 super + v
-        $HOME/.config/sxhkd/toggle_window.sh Popup "alacritty --class Popup -t Pulsemixer -e pulsemixer"
+        $HOME/.config/sxhkd/toggle_window.sh -w Popup \
+        -c "alacritty --config-file=$HOME/.config/alacritty/alternative.yml --class Popup -t Pulsemixer -e pulsemixer" \
+        -p center
 
-# Scratchpad
+# Scratchpad 1
 super + w
-        $HOME/.config/sxhkd/toggle_window.sh Scratchpad "alacritty --class Scratchpad -t Scratchpad"
+        $HOME/.config/sxhkd/toggle_window.sh -w Scratchpad_1 \
+        -c "alacritty --config-file=$HOME/.config/alacritty/alternative.yml --class Scratchpad_1 -t Left-Scratchpad" \
+        -p left
+
+# Scratchpad 2
+super + e
+        $HOME/.config/sxhkd/toggle_window.sh -w Scratchpad_2 \
+        -c "alacritty --config-file=$HOME/.config/alacritty/alternative.yml --class Scratchpad_2 -t Right-Scratchpad" \
+        -p right
+
 
 ### bspwm hotkeys ###
 

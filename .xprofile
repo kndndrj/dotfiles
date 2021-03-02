@@ -1,8 +1,5 @@
-
-# Status bar
-while true; do
-   dwmblocks 
-done &
+# Detect monitor setup
+autorandr --change
 
 # Bluetooth applet (tray icon)
 blueman-applet &
@@ -12,12 +9,6 @@ nm-applet &
 
 # Screenshot utility in the background
 flameshot &
-
-# Detect monitor setup
-autorandr --change && /home/andrej/.fehbg
-
-# Run notification daemon
-dunst &
 
 # Composite manager
 picom &
