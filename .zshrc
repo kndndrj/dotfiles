@@ -15,7 +15,7 @@ export EDITOR=nvim;
 # Enable colors and change prompt - add git prompt to the right:
 autoload -U colors && colors
 source $HOME/.config/zsh/git-prompt.zsh
-PROMPT='%B%{$fg[green]%}%n%{$fg[white]%}@%M: %{$fg[blue]%}%c%{$fg[white]%}$%b%{$reset_color%} '
+PROMPT='%B%{$fg[green]%}%n%f@%M: %{$fg[blue]%}%c%f$%{$reset_color%} '
 RPROMPT='$(gitprompt)'
 
 # Alisases
@@ -23,6 +23,13 @@ alias ls='ls --color=auto'
 alias vim='nvim'
 alias fm='source ranger'
 alias get_idf='. $HOME/esp/esp-idf/export.sh'
+
+# For invoking commands on startup
+if [[ $1 == eval ]]
+then
+    "$@"
+set --
+fi
 
 # History in cache directory:
 HISTSIZE=10000

@@ -18,11 +18,7 @@ WINDOW_ID=$(xdotool search --classname $WINDOW_CLASS)
 if [ -z $WINDOW_ID ]; then
     $COMMAND &
     while true; do
-        if [ -z $(xdotool search --classname $WINDOW_CLASS) ]; then
-            : 
-        else
-            break
-        fi
+        [ -z $(xdotool search --classname $WINDOW_CLASS) ] || break
     done
 
     WINDOW_ID=$(xdotool search --classname $WINDOW_CLASS)

@@ -35,19 +35,19 @@ super + b
 #Pulsemixer
 super + v
         $HOME/.config/sxhkd/toggle_window.sh -w Popup \
-        -c "alacritty --config-file=$HOME/.config/alacritty/alternative.yml --class Popup -t Pulsemixer -e pulsemixer" \
+        -c "alacritty --class Popup -t Pulsemixer -e pulsemixer" \
         -p center
 
 # Scratchpad 1
 super + w
         $HOME/.config/sxhkd/toggle_window.sh -w Scratchpad_1 \
-        -c "alacritty --config-file=$HOME/.config/alacritty/alternative.yml --class Scratchpad_1 -t Left-Scratchpad" \
+        -c "alacritty --config-file=$HOME/.config/alacritty/alternative.yml --class Scratchpad_1 -t Left-Scratchpad -e $HOME/.config/sxhkd/scratchpad_startup.sh" \
         -p left
 
 # Scratchpad 2
 super + e
         $HOME/.config/sxhkd/toggle_window.sh -w Scratchpad_2 \
-        -c "alacritty --config-file=$HOME/.config/alacritty/alternative.yml --class Scratchpad_2 -t Right-Scratchpad" \
+        -c "alacritty --config-file=$HOME/.config/alacritty/alternative.yml --class Scratchpad_2 -t Right-Scratchpad -e $HOME/.config/sxhkd/scratchpad_startup.sh" \
         -p right
 
 
