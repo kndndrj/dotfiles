@@ -4,6 +4,10 @@
 ###### AUTOSTART #####
 ######################
 
+# Run a custom script depending on the detected "autorandr" setup
+DETECTED_MONITOR=$(autorandr | awk '/current/ {print $1}')
+$HOME/.config/autorandr/$DETECTED_MONITOR/postswitch
+
 # Cursor shape
 xsetroot -cursor_name left_ptr
 
@@ -13,10 +17,6 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 ### MONITORS ###
 
 bspc monitor -d 1 2 3 4 5 6 7 8 9 10
-
-# Run a custom script depending on the detected "autorandr" setup
-DETECTED_MONITOR=$(autorandr | awk '/current/ {print $1}')
-$HOME/.config/autorandr/$DETECTED_MONITOR/postswitch
 
 ######################
 ###### SETTINGS ######
@@ -46,3 +46,4 @@ bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a Zathura state=tiled
 bspc rule -a com-st-microxplorer-maingui-STM32CubeMX state=floating
+bspc rule -a Slack desktop='^5'
