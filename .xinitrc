@@ -1,5 +1,5 @@
 # Set keyboard layout for xserver, remap caps_lock to escape
-setxkbmap si -option caps:escape
+setxkbmap si
 
 # Merge .Xresources
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
@@ -9,4 +9,4 @@ setxkbmap si -option caps:escape
 [ -f ~/.xprofile ] && . ~/.xprofile
 
 # Start the window manager
-exec bspwm
+bspwm

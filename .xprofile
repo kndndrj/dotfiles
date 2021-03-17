@@ -1,17 +1,5 @@
 # Detect monitor setup
 autorandr --change
 
-# Bluetooth applet (tray icon)
-blueman-applet &
-
-# Network Manager applet (tray icon)
-nm-applet &
-
-# Screenshot utility in the background
-flameshot &
-
 # Composite manager
 picom &
-
-# Programs autostart
-slack &

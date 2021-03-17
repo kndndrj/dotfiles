@@ -22,6 +22,7 @@ RPROMPT='$(gitprompt)'
 alias ls='ls --color=auto'
 alias ll='ls --color=auto -al'
 alias vim='nvim'
+alias diff='diff -c --color'
 alias fm='source ranger'
 alias get_idf='. $HOME/esp/esp-idf/export.sh'
 
