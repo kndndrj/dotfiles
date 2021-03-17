@@ -5,7 +5,7 @@ super + Return
 	alacritty
 
 # program launcher
-super + d
+super + c
         rofi -show drun -show-icons -display-drun Run
 
 # Window preview
@@ -25,7 +25,7 @@ XF86AudioMute
         amixer set Master toggle
 
 # Open the browser
-super + u
+super + b
         brave
 
 # Open the screenshot utility
@@ -33,19 +33,19 @@ super + u
         flameshot gui
 
 #Pulsemixer
-super + p
+super + v
         $HOME/.config/sxhkd/toggle_window.sh -w Popup \
         -c "alacritty --class Popup -t Pulsemixer -e pulsemixer" \
         -p center
 
 # Scratchpad 1
-super + w
+super + s
         $HOME/.config/sxhkd/toggle_window.sh -w Scratchpad_1 \
         -c "alacritty --config-file=$HOME/.config/alacritty/alternative.yml --class Scratchpad_1 -t Left-Scratchpad -e $HOME/.config/sxhkd/scratchpad_startup.sh" \
         -p left
 
 # Scratchpad 2
-super + e
+super + d
         $HOME/.config/sxhkd/toggle_window.sh -w Scratchpad_2 \
         -c "alacritty --config-file=$HOME/.config/alacritty/alternative.yml --class Scratchpad_2 -t Right-Scratchpad -e $HOME/.config/sxhkd/scratchpad_startup.sh" \
         -p right
@@ -54,11 +54,11 @@ super + e
 ### bspwm hotkeys ###
 
 # quit/restart bspwm
-super + shift + {e,r}
+super + shift + {s,d}
 	bspc {quit,wm -r}
 
 # close and kill
-super + {_,shift + }q
+super + {_,shift + }a
 	bspc node -{c,k}
 
 # alternate between the tiled and monocle layout
@@ -78,7 +78,7 @@ super + shift + Return
 #
 
 # set the window state
-super + {t,shift + t,s,f}
+super + {comma,shift + comma,period,minus}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # set the node flags
@@ -106,13 +106,13 @@ super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
 
 # focus the older or newer node in the focus history
-super + {o,i}
+super + ctrl + {o,i}
 	bspc wm -h off; \
 	bspc node {older,newer} -f; \
 	bspc wm -h on
 
 # focus or send to the given desktop
-super + {_,shift + }{y,x,c,v,b,n,m,comma,period,minus}
+super + {_,shift + }{q,w,e,r,t,z,u,i,o,p}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
 #
