@@ -9,4 +9,4 @@ setxkbmap si
 [ -f ~/.xprofile ] && . ~/.xprofile
 
 # Start the window manager
-bspwm
+exec bspwm

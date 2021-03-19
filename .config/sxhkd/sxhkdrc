@@ -54,7 +54,7 @@ super + d
 ### bspwm hotkeys ###
 
 # quit/restart bspwm
-super + shift + {s,d}
+super + shift + {d,f}
 	bspc {quit,wm -r}
 
 # close and kill

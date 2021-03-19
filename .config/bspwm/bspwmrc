@@ -15,6 +15,9 @@ xsetroot -cursor_name left_ptr
 # Launch schkd
 pgrep -x sxhkd > /dev/null || sxhkd &
 
+# Set Window manager name to something else (gtk apps are broken otherwise)
+wmname compiz
+
 ### MONITORS ###
 
 bspc monitor -d 1 2 3 4 5 6 7 8 9 10
@@ -39,12 +42,10 @@ bspc config gapless_monocle             true
 bspc config focus_follows_pointer       true
 
 # Window rules
-bspc rule -a Gimp desktop='^8' state=floating follow=on
 bspc rule -a Alacritty:Popup sticky=on state=floating
 bspc rule -a Alacritty:Scratchpad_1 sticky=on state=floating
 bspc rule -a Alacritty:Scratchpad_2 sticky=on state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a Zathura state=tiled
-bspc rule -a com-st-microxplorer-maingui-STM32CubeMX state=floating
 bspc rule -a Slack desktop='^5'
