@@ -39,7 +39,6 @@ bspc config focused_border_color        "#18815f"
 bspc config split_ratio                 0.52
 bspc config borderless_monocle          true
 bspc config gapless_monocle             true
-bspc config focus_follows_pointer       true
 
 # Window rules
 bspc rule -a Alacritty:Popup sticky=on state=floating

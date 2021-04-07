@@ -9,6 +9,9 @@
 export VISUAL=nvim;
 export EDITOR=nvim;
 
+# Set bat as the man pager
+export MANPAGER="sh -c 'col -bx | bat --theme OneHalfDark -l man -p'"
+
 # Source fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -21,6 +24,7 @@ RPROMPT='$(gitprompt)'
 # Alisases
 alias ls='ls --color=auto'
 alias ll='ls --color=auto -al'
+alias cat='bat --theme OneHalfDark'
 alias vim='nvim'
 alias diff='diff -c --color'
 alias fm='source ranger'
