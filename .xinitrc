@@ -1,8 +1,11 @@
-# Set keyboard layout for xserver, remap caps_lock to escape
+# Set keyboard layout for xserver
 setxkbmap si
 
 # Merge .Xresources
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
+
+# Source xmodmap table
+[[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
 
 # Source the .xprofile
 [ -f /etc/xprofile ] && . /etc/xprofile
