@@ -1,5 +1,5 @@
 # Set keyboard layout for xserver
-setxkbmap si
+setxkbmap si -option caps:escape
 
 # Merge .Xresources
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
