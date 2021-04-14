@@ -16,7 +16,7 @@ window:
   # Window dimensions in character columns and lines
   # (changes require restart)
   dimensions:
-    columns: 110
+    columns: 102
     lines: 32
 
   # Window padding (changes require restart)
@@ -61,7 +61,7 @@ font:
     family: "FiraCode Nerd Font Mono"
     style: Bold Italic
 
-  size: 8
+  size: 10
 
   offset:
     x: -1
