@@ -15,9 +15,7 @@ bspc config top_padding                 82
 # and put "heavy" programs at the end
 PROGRAMS=(
     "dunst" \
-    "polybar left" \
-    "polybar center" \
-    "polybar right" \
+    "polybar 240dpi_bar" \
     )
 
 #### Auto(re)start script ####

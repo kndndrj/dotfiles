@@ -15,9 +15,7 @@ bspc config top_padding                 44
 # and put "heavy" programs at the end
 PROGRAMS=(
     "dunst -geom 500x0-4+35" \
-    "polybar left_96dpi" \
-    "polybar center_96dpi" \
-    "polybar right_96dpi" \
+    "polybar 96dpi_bar" \
     )
 
 #### Auto(re)start script ####
