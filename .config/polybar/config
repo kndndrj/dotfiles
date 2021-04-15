@@ -17,7 +17,7 @@
 ;==========================================================
 
 [config]
-scale-240dpi = 200
+scale-200dpi = 200
 scale-96dpi = 96
 
 [colors]
@@ -77,18 +77,18 @@ cursor-scroll = ns-resize
 
 
 ;#############################
-;## 240 dpi version ##########
+;## 200 dpi version ##########
 ;#############################
 
-[bar/240dpi_bar]
+[bar/200dpi_bar]
 width = 100%
-height = 30
+height = 60
 fixed-center = false
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 3
+line-size = 6
 line-color = #f00
 
 border-size = 0
@@ -100,19 +100,19 @@ padding-right = 1
 module-margin-left = 1
 module-margin-right = 1
 
-dpi-x = ${config.scale-240dpi}
-dpi-y = ${config.scale-240dpi}
+dpi-x = ${config.scale-200dpi}
+dpi-y = ${config.scale-200dpi}
 
-font-0 = FiraCode Nerd Font:style=Bold:pixelsize=11;1:antialias=true
-font-1 = FiraCode Nerd Font:style=Bold:pixelsize=11;1:antialias=true
-font-2 = FiraCode Nerd Font:style=Bold:pixelsize=11;1:antialias=true
+font-0 = ${bar/96dpi_bar.font-0}
+font-1 = ${bar/96dpi_bar.font-1}
+font-2 = ${bar/96dpi_bar.font-2}
 
 modules-left = bspwm
 modules-center = xwindow
 modules-right = battery pulseaudio temperature date
 
 tray-position = left
-tray-offset-x = 280
+tray-offset-x = 560
 tray-detached = true
 
 wm-restack = bspwm

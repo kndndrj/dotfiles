@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "Xft.dpi: 240" | xrdb -merge
+echo "Xft.dpi: 200" | xrdb -merge
 
 # Reset the background
 $HOME/.fehbg &
@@ -15,7 +15,7 @@ bspc config top_padding                 82
 # and put "heavy" programs at the end
 PROGRAMS=(
     "dunst" \
-    "polybar 240dpi_bar" \
+    "polybar 200dpi_bar" \
     )
 
 #### Auto(re)start script ####
