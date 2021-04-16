@@ -7,15 +7,15 @@ $HOME/.fehbg &
 
 # bspwm border settings
 bspc config border_width                6
-bspc config window_gap                  -6
-bspc config top_padding                 82
+bspc config window_gap                  6
+bspc config top_padding                 74
 
 # List of programs to start
 # Add multiple instances of the same program next to eachother
 # and put "heavy" programs at the end
 PROGRAMS=(
     "dunst" \
-    "polybar 200dpi_bar" \
+    "polybar hidpi_fixed" \
     )
 
 #### Auto(re)start script ####

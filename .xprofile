@@ -3,5 +3,6 @@ autorandr --change
 
 # Set a smaller keyrate
 xset r rate 300 &
+
 # Composite manager
 picom &

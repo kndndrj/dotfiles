@@ -28,7 +28,7 @@ bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 
 # Only outter gaps
 for side in right bottom left ; do
-	bspc config ${side}_padding     16
+	bspc config ${side}_padding     10
 done
 
 # Colors

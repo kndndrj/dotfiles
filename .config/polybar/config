@@ -7,18 +7,40 @@
 ;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
 ;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
 ;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
-;
-;
-;   To learn more about how to configure Polybar
-;   go to https://github.com/polybar/polybar
-;
-;   The README contains a lot of information
+;   CONFIG
 ;
 ;==========================================================
 
-[config]
-scale-200dpi = 200
-scale-96dpi = 96
+;=============================
+;==== Global settings ========
+;=============================
+
+[section/base]
+include-file = /home/andrej/.config/polybar/modules.conf
+include-file = /home/andrej/.config/polybar/floating.conf
+include-file = /home/andrej/.config/polybar/fixed.conf
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+hidpi-scale = 200
+hidpi-height = 60
+hidpi-line-size = 6
+hidpi-radius = 12
+
+lodpi-scale = 96
+lodpi-height = 30
+lodpi-line-size = 3
+lodpi-radius = 6
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
 
 [colors]
 background = #bb282c34
@@ -29,19 +51,17 @@ primary = #18815f
 secondary = #e60053
 alert = #bd2c40
 
-;#############################
-;## 96 dpi version ###########
-;#############################
+;=============================
+;==== Default bar ============
+;=============================
 
-[bar/96dpi_bar]
+[bar/default]
 width = 100%
 height = 30
-fixed-center = false
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 3
 line-color = #f00
 
 border-size = 0
@@ -52,212 +72,12 @@ padding-right = 1
 
 module-margin-left = 1
 module-margin-right = 1
-
-dpi-x = ${config.scale-96dpi}
-dpi-y = ${config.scale-96dpi}
 
 font-0 = FiraCode Nerd Font:style=Bold:pixelsize=11;1:antialias=true
 font-1 = FiraCode Nerd Font:style=Bold:pixelsize=11;1:antialias=true
 font-2 = FiraCode Nerd Font:style=Bold:pixelsize=11;1:antialias=true
 
-modules-left = bspwm
-modules-center = xwindow
-modules-right = battery pulseaudio temperature date
-
-tray-position = left
-tray-offset-x = 280
-tray-detached = true
-
 wm-restack = bspwm
-
 override-redirect = true
-
 cursor-click = pointer
 cursor-scroll = ns-resize
-
-
-;#############################
-;## 200 dpi version ##########
-;#############################
-
-[bar/200dpi_bar]
-width = 100%
-height = 60
-fixed-center = false
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 6
-line-color = #f00
-
-border-size = 0
-border-color = #00000000
-
-padding-left = 0
-padding-right = 1
-
-module-margin-left = 1
-module-margin-right = 1
-
-dpi-x = ${config.scale-200dpi}
-dpi-y = ${config.scale-200dpi}
-
-font-0 = ${bar/96dpi_bar.font-0}
-font-1 = ${bar/96dpi_bar.font-1}
-font-2 = ${bar/96dpi_bar.font-2}
-
-modules-left = bspwm
-modules-center = xwindow
-modules-right = battery pulseaudio temperature date
-
-tray-position = left
-tray-offset-x = 560
-tray-detached = true
-
-wm-restack = bspwm
-
-override-redirect = true
-
-cursor-click = pointer
-cursor-scroll = ns-resize
-
-
-;#############################
-;## Modules ##################
-;#############################
-
-[module/xwindow]
-type = internal/xwindow
-label = "     %title:0:40:...%     "
-label-empty = "   "
-
-[module/bspwm]
-type = internal/bspwm
-
-label-focused = %index%
-label-focused-background = ${colors.primary}
-label-focused-padding = 1
-
-label-occupied = %index%
-label-occupied-background = ${colors.background-alt}
-label-occupied-underline= ${colors.primary}
-label-occupied-padding = 1
-
-label-urgent = %index%!
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 1
-
-label-empty = %index%
-label-empty-foreground = ${colors.foreground-alt}
-label-empty-padding = 1
-
-; Separator in between workspaces
-; label-separator = |
-
-[module/date]
-type = internal/date
-interval = 5
-
-date = "%d.%m.%Y"
-
-time = %H:%M
-
-format-prefix = "  "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.primary}
-
-label = %date% %time%
-
-[module/pulseaudio]
-type = internal/pulseaudio
-
-format-volume = <label-volume> <bar-volume>
-label-volume = 墳 %percentage%%
-label-volume-foreground = ${root.foreground}
-
-label-muted = "婢     muted     "
-label-muted-foreground = #666
-
-bar-volume-width = 10
-bar-volume-foreground-0 = ${colors.primary}
-bar-volume-foreground-1 = ${colors.primary}
-bar-volume-foreground-2 = ${colors.primary}
-bar-volume-foreground-3 = ${colors.primary}
-bar-volume-foreground-4 = ${colors.primary}
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
-
-[module/battery]
-type = internal/battery
-battery = BAT0
-adapter = ADP1
-full-at = 98
-
-format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
-
-format-discharging = <animation-discharging> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
-
-format-full-prefix = "  "
-format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${colors.primary}
-
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-foreground = ${colors.foreground-alt}
-
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
-animation-charging-framerate = 750
-
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-animation-discharging-foreground = ${colors.foreground-alt}
-animation-discharging-framerate = 750
-
-[module/temperature]
-type = internal/temperature
-thermal-zone = 0
-warn-temperature = 60
-
-format = <ramp> <label>
-format-underline = ${colors.primary}
-format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
-
-label = %temperature-c%
-label-warn = %temperature-c%
-label-warn-foreground = ${colors.secondary}
-
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
-
-[settings]
-screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
-;pseudo-transparency = false
-
-[global/wm]
-margin-top = 5
-margin-bottom = 5
-
-; vim:ft=dosini
