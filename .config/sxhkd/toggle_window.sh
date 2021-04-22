@@ -8,9 +8,11 @@ while getopts w:c:p: option; do
     esac
 done
 
-HELP="Usage: \n $0 -w <window class> -c <command to run> [-p left/right/center]"
+HELP="$0 -w <window class> -c <command to run> [-p left/right/center]"
+
 if [ -z "$WINDOW_CLASS" ] || [ -z "$COMMAND" ]; then
-    echo -e $HELP
+    echo Usage:
+    echo $HELP
     exit 1
 fi
 
@@ -25,7 +27,8 @@ if [ -z $WINDOW_ID ]; then
 
     if [ -z $POSITION ]; then
         echo "If you also wanted to position the window, add a [-p] argument:"
-        echo -e $HELP
+        echo Usage:
+        echo $HELP
     else
         # command output: window geometry $13 x $14, display size: $15 x $16:
         LEFT=$(xdotool getwindowgeometry $WINDOW_ID getdisplaygeometry | awk -F "[ ,x\n]" 'BEGIN {RS=""} END {print ($15/2)-$13-3, ($16-$14)/2}')

@@ -7,7 +7,7 @@
 # Run a custom script depending on the detected "autorandr" setup
 DETECTED_MONITOR=$(autorandr | awk '/current/ {print $1}')
 $HOME/.config/autorandr/$DETECTED_MONITOR/postswitch &
-$HOME/.config/autorandr/postswitch.d/programs_autorestart &
+$HOME/.config/autorandr/postswitch.d/restart_programs.sh &
 
 # Cursor shape
 xsetroot -cursor_name left_ptr

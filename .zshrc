@@ -47,7 +47,7 @@ autoload -Uz compinit
 compinit
 
 # autocomplete - case insensitive
-zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|?=** r:|?=**'
+zstyle ':completion:*' matcher-list ''m:{a-z}={A-Z}''
 
 # Enable alias completion
 setopt COMPLETE_ALIASES
