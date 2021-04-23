@@ -49,4 +49,5 @@ bspc rule -a Alacritty:Scratchpad_2 sticky=on state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a Zathura state=tiled
-bspc rule -a Slack desktop='^5'
+bspc rule -a Slack desktop='^10'
+bspc rule -a "Microsoft Teams - Preview" desktop ='^9'
