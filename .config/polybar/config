@@ -48,7 +48,7 @@ background-alt = #444
 foreground = #c5c8c6
 foreground-alt = #999
 primary = #18815f
-secondary = #e60053
+secondary = #0d5941
 alert = #bd2c40
 
 ;=============================

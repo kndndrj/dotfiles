@@ -5,8 +5,14 @@
 ######################
 
 # Run a custom script depending on the detected "autorandr" setup
-DETECTED_MONITOR=$(autorandr | awk '/current/ {print $1}')
-$HOME/.config/autorandr/$DETECTED_MONITOR/postswitch &
+DETECTED_MONITOR=$(autorandr --detected)
+if [ "$DETECTED_MONITOR" != "" ]; then
+    $HOME/.config/autorandr/$DETECTED_MONITOR/postswitch &
+else
+    $HOME/.config/autorandr/fallback.sh &
+fi
+
+# Start programs
 $HOME/.config/autorandr/postswitch.d/restart_programs.sh &
 
 # Cursor shape
@@ -17,10 +23,6 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 
 # Set Window manager name to something else (gtk apps are broken otherwise)
 wmname compiz
-
-### MONITORS ###
-
-bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 
 ######################
 ###### SETTINGS ######
