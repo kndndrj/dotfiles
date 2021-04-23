@@ -1,12 +1,5 @@
 #!/bin/sh
 
-# List of programs to start
-# Add multiple instances of the same program next to eachother
-#set --      "nm-applet"
-#set -- "$@" "blueman-applet"
-#set -- "$@" "flameshot"
-#set -- "$@" "slack -u"
-
 # Colors for prettier output
 RED='\033[0;31m'
 GREEN='\033[0;32m'

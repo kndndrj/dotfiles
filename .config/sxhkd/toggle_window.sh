@@ -45,5 +45,3 @@ if [ -z $WINDOW_ID ]; then
 else
     bspc node $WINDOW_ID --flag hidden -f
 fi
-
-

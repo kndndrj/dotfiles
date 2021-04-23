@@ -8,11 +8,9 @@
 DETECTED_MONITOR=$(autorandr --detected)
 if [ "$DETECTED_MONITOR" != "" ]; then
     $HOME/.config/autorandr/$DETECTED_MONITOR/postswitch &
-else
-    $HOME/.config/autorandr/fallback.sh &
 fi
 
-# Start programs
+# Other programs to start
 $HOME/.config/autorandr/postswitch.d/restart_programs.sh &
 
 # Cursor shape

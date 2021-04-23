@@ -1,5 +1,5 @@
 # Detect the current monitor setup and change to that profile
-autorandr --change
+autorandr --change --default homepc
 
 # Set keyboard layout for xserver
 setxkbmap si -option caps:escape
