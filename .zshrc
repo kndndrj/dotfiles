@@ -18,7 +18,7 @@ export MANPAGER="sh -c 'col -bx | bat --theme OneHalfDark -l man -p'"
 # Enable colors and change prompt - add git prompt to the right:
 autoload -U colors && colors
 source $HOME/.config/zsh/git-prompt.zsh
-PROMPT='%B%{$fg[green]%}%n%f@%M: %{$fg[blue]%}%c%f$%{$reset_color%} '
+PROMPT='%B%{$fg[blue]%}%n%f@%M: %{$fg[blue]%}%c%f$%{$reset_color%} '
 RPROMPT='$(gitprompt)'
 
 # Alisases

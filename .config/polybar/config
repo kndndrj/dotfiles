@@ -45,10 +45,10 @@ margin-bottom = 5
 [colors]
 background = #bb282c34
 background-alt = #444
-foreground = #c5c8c6
+foreground = #efefef
 foreground-alt = #999
-primary = #18815f
-secondary = #0d5941
+primary = #8bbaed
+secondary = #456f9b
 alert = #bd2c40
 
 ;=============================
