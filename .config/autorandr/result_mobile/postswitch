@@ -3,7 +3,7 @@
 echo "Xft.dpi: 96" | xrdb -merge
 
 # Reset the background
-$HOME/.fehbg &
+feh --no-fehbg --randomize --bg-fill $(xdg-user-dir PICTURES)/Ozadja/* &
 
 ### MONITORS ###
 bspc monitor DP-2-1 -d 1 2 3 4 5 # screen
