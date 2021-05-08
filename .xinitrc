@@ -1,14 +1,14 @@
 # Detect the current monitor setup and change to that profile
 autorandr --change --default homepc
 
-# Set keyboard layout for xserver
-setxkbmap si -option caps:escape
-
 # Merge .Xresources
 [ -f ~/.Xresources ] && xrdb -merge -I$HOME ~/.Xresources
 
 # Source xmodmap table
 [ -f ~/.Xmodmap ] && xmodmap ~/.Xmodmap
+
+# Set keyboard layout for xserver
+setxkbmap si -option caps:escape
 
 # Set a smaller keyrate
 xset r rate 300 50 &
