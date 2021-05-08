@@ -11,7 +11,7 @@ setxkbmap si -option caps:escape
 [ -f ~/.Xmodmap ] && xmodmap ~/.Xmodmap
 
 # Set a smaller keyrate
-xset r rate 300 &
+xset r rate 300 50 &
 
 # Composite manager
 picom &

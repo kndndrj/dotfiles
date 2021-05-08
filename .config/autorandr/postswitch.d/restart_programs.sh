@@ -7,4 +7,4 @@ $HOME/.config/autorandr/programs_autorestart.sh \
 "nm-applet" \
 "blueman-applet" \
 "flameshot" \
-"slack -u"
+"rambox"
