@@ -33,7 +33,7 @@ alias get_idf='. $HOME/esp/esp-idf/export.sh'
 # For invoking commands on startup (if calling shell with custom parameters
 if [[ $1 == eval ]]
 then
-    "$@"
+  "$@"
 set --
 fi
 
@@ -60,6 +60,7 @@ zmodload zsh/complist
 # Enable vi mode
 bindkey -v
 bindkey -v '^?' backward-delete-char
+bindkey '^r' history-incremental-search-backward
 
 function zle-keymap-select zle-line-init zle-line-finish {
   case $KEYMAP in
@@ -85,39 +86,39 @@ export PATH=$PATH:$HOME/.cargo/bin
 
 # Handler if command not found
 command_not_found_handler() {
-	local pkgs cmd="$1" files=()
-	printf 'zsh: command not found: %s' "$cmd" # print command not found asap, then search for packages
-	files=(${(f)"$(pacman -F --machinereadable -- "/usr/bin/${cmd}")"})
-	if (( ${#files[@]} )); then
-		printf '\r%s may be found in the following packages:\n' "$cmd"
-		local res=() repo package version file
-		for file in "$files[@]"; do
-			res=("${(0)file}")
-			repo="$res[1]"
-			package="$res[2]"
-			version="$res[3]"
-			file="$res[4]"
-			printf '  %s/%s %s: /%s\n' "$repo" "$package" "$version" "$file"
-		done
-	else
-		printf '\n'
-	fi
-	return 127
+  local pkgs cmd="$1" files=()
+  printf 'zsh: command not found: %s' "$cmd" # print command not found asap, then search for packages
+  files=(${(f)"$(pacman -F --machinereadable -- "/usr/bin/${cmd}")"})
+  if (( ${#files[@]} )); then
+    printf '\r%s may be found in the following packages:\n' "$cmd"
+    local res=() repo package version file
+    for file in "$files[@]"; do
+      res=("${(0)file}")
+      repo="$res[1]"
+      package="$res[2]"
+      version="$res[3]"
+      file="$res[4]"
+      printf '  %s/%s %s: /%s\n' "$repo" "$package" "$version" "$file"
+    done
+  else
+    printf '\n'
+  fi
+  return 127
 }
 
 # Display terminal window as: "user@machine..."
 autoload -Uz add-zsh-hook
 function xterm_title_precmd () {
-	print -Pn -- '\e]2;%n@%m %~\a'
-	[[ "$TERM" == 'screen'* ]] && print -Pn -- '\e_\005{g}%n\005{-}@\005{m}%m\005{-} \005{B}%~\005{-}\e\\'
+  print -Pn -- '\e]2;%n@%m %~\a'
+  [[ "$TERM" == 'screen'* ]] && print -Pn -- '\e_\005{g}%n\005{-}@\005{m}%m\005{-} \005{B}%~\005{-}\e\\'
 }
 function xterm_title_preexec () {
-	print -Pn -- '\e]2;%n@%m %~ %# ' && print -n -- "${(q)1}\a"
-	[[ "$TERM" == 'screen'* ]] && { print -Pn -- '\e_\005{g}%n\005{-}@\005{m}%m\005{-} \005{B}%~\005{-} %# ' && print -n -- "${(q)1}\e\\"; }
+  print -Pn -- '\e]2;%n@%m %~ %# ' && print -n -- "${(q)1}\a"
+  [[ "$TERM" == 'screen'* ]] && { print -Pn -- '\e_\005{g}%n\005{-}@\005{m}%m\005{-} \005{B}%~\005{-} %# ' && print -n -- "${(q)1}\e\\"; }
 }
 if [[ "$TERM" == (alacritty*|gnome*|konsole*|putty*|rxvt*|screen*|tmux*|xterm*) ]]; then
-	add-zsh-hook -Uz precmd xterm_title_precmd
-	add-zsh-hook -Uz preexec xterm_title_preexec
+  add-zsh-hook -Uz precmd xterm_title_precmd
+  add-zsh-hook -Uz preexec xterm_title_preexec
 fi
 
 # Source syntax highlighting and autosuggestions
