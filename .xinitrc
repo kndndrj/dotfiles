@@ -4,11 +4,11 @@ autorandr --change --default homepc
 # Merge .Xresources
 [ -f ~/.Xresources ] && xrdb -merge -I$HOME ~/.Xresources
 
+# Set keyboard layout for xserver
+setxkbmap si
+
 # Source xmodmap table
 [ -f ~/.Xmodmap ] && xmodmap ~/.Xmodmap
-
-# Set keyboard layout for xserver
-setxkbmap si -option caps:escape
 
 # Set a smaller keyrate
 xset r rate 300 50 &
