@@ -1,21 +1,34 @@
 #!/bin/sh
 
-while getopts w:c:p: option; do
+# Help message
+HELP="$0 -w <window class> -c <command to run> [-p left/right/center]"
+
+# Parse arguments
+while getopts ":w:c:p:" option; do
     case "${option}" in
-        w) WINDOW_CLASS=${OPTARG};;
-        c) COMMAND=${OPTARG};;
-        p) POSITION=${OPTARG};;
+        w) 
+            WINDOW_CLASS=${OPTARG};;
+        c) 
+            COMMAND=${OPTARG};;
+        p) 
+            POSITION=${OPTARG};;
+        :)
+            printf "Error: -${OPTARG} requires an argument.\nUsage:\n${HELP}\n"
+            exit;;
+        *)  printf "Error: invalid argument: \"-${OPTARG}\".\nUsage:\n${HELP}\n"
+            exit;;
     esac
 done
 
 HELP="$0 -w <window class> -c <command to run> [-p left/right/center]"
 
 if [ -z "$WINDOW_CLASS" ] || [ -z "$COMMAND" ]; then
-    echo Usage:
-    echo $HELP
+    printf "Not enough arguments provided!\n"
+    printf "Usage:\n${HELP}\n"
     exit 1
 fi
 
+# Search for a window
 WINDOW_ID=$(xdotool search --classname $WINDOW_CLASS)
 if [ -z $WINDOW_ID ]; then
     $COMMAND &
@@ -25,21 +38,22 @@ if [ -z $WINDOW_ID ]; then
 
     WINDOW_ID=$(xdotool search --classname $WINDOW_CLASS)
 
-    if [ -z $POSITION ]; then
-        echo "If you also wanted to position the window, add a [-p] argument:"
-        echo Usage:
-        echo $HELP
-    else
-        # command output: window geometry $13 x $14, display size: $15 x $16:
-        LEFT=$(xdotool getwindowgeometry $WINDOW_ID getdisplaygeometry | awk -F "[ ,x\n]" 'BEGIN {RS=""} END {print ($15/2)-$13-3, ($16-$14)/2}')
-        RIGHT=$(xdotool getwindowgeometry $WINDOW_ID getdisplaygeometry | awk -F "[ ,x\n]" 'BEGIN {RS=""} END {print ($15/2)+3, ($16-$14)/2}')
-        CENTER=$(xdotool getwindowgeometry $WINDOW_ID getdisplaygeometry | awk -F "[ ,x\n]" 'BEGIN {RS=""} END {print ($15-$13)/2, ($16-$14)/2}')
-
+    # Apply position if specified
+    if [ ! -z $POSITION ]; then
+        # POS command output: window geometry $13 x $14, display size: $15 x $16:
         case "$POSITION" in
-            left) xdotool windowmove $WINDOW_ID $LEFT;;
-            center) xdotool windowmove $WINDOW_ID $CENTER;;
-            right) xdotool windowmove $WINDOW_ID $RIGHT;;
+            left)
+                POS=$(xdotool getwindowgeometry $WINDOW_ID getdisplaygeometry \
+                    | awk -F "[ ,x\n]" 'BEGIN {RS=""} END {print ($15/2)-$13-3, ($16-$14)/2}');;
+            center)
+                POS=$(xdotool getwindowgeometry $WINDOW_ID getdisplaygeometry \
+                    | awk -F "[ ,x\n]" 'BEGIN {RS=""} END {print ($15-$13)/2, ($16-$14)/2}');;
+            right)
+                POS=$(xdotool getwindowgeometry $WINDOW_ID getdisplaygeometry \
+                    | awk -F "[ ,x\n]" 'BEGIN {RS=""} END {print ($15/2)+3, ($16-$14)/2}');;
         esac
+        # Move the window to the location
+        xdotool windowmove $WINDOW_ID $POS
     fi
 
 else
