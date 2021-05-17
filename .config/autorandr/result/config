@@ -8,13 +8,17 @@ output DP-2
 off
 output HDMI-2
 off
-output DP-2-2
-off
 output DP-2-3
 off
 output DP-2-1
 crtc 0
-mode 1920x1200
+mode 2560x1440
 pos 0x0
 primary
 rate 59.95
+output DP-2-2
+crtc 2
+mode 1920x1080
+pos 2560x0
+rate 60.00
+transform 1.199997,0.000000,0.000000,0.000000,1.199997,0.000000,0.000000,0.000000,1.000000
