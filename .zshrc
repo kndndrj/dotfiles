@@ -12,18 +12,26 @@ export EDITOR=nvim;
 # Set bat as the man pager
 export MANPAGER="sh -c 'col -bx | bat --theme OneHalfDark -l man -p'"
 
-# Source fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Set ssh-agent to the terminal
+eval $(ssh-agent) > /dev/null
 
 # Enable colors and change prompt - add git prompt to the right:
 autoload -U colors && colors
 source $HOME/.config/zsh/git-prompt.zsh
-PROMPT='%B%{$fg[blue]%}%n%f@%M: %{$fg[blue]%}%c%f$%{$reset_color%} '
+
+# Random prompt color
+case $(shuf -e 1 2 3 4 | head -n 1) in
+  1) usercol='red';;
+  2) usercol='yellow';;
+  3) usercol='blue';;
+  4) usercol='green';;
+esac
+PROMPT='%B%{$fg[${usercol}]%}%n%f@%M: %{$fg[blue]%}%c%f$%{$reset_color%} '
 RPROMPT='$(gitprompt)'
 
 # Alisases
 alias ls='ls --color=auto'
-alias ll='ls --color=auto -al'
+alias ll='ls --color=auto -alh'
 alias cat='bat --theme OneHalfDark'
 alias vi='nvim'
 alias diff='diff -c --color'
