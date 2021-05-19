@@ -21,17 +21,26 @@ source $HOME/.config/zsh/git-prompt.zsh
 
 # Random prompt color
 case $(shuf -e 1 2 3 4 | head -n 1) in
-  1) usercol='red';;
-  2) usercol='yellow';;
+  1) usercol='yellow';;
+  2) usercol='green';;
   3) usercol='blue';;
-  4) usercol='green';;
+  4) usercol='red';;
 esac
-PROMPT='%B%{$fg[${usercol}]%}%n%f@%M: %{$fg[blue]%}%c%f$%{$reset_color%} '
-RPROMPT='$(gitprompt)'
+
+case "$HOST" in
+  "miamithinkpad")
+    PROMPT='%B╭ %(?.%F{green}✓.%F{red}🗴) %F{${usercol}}%n%f@%M: %F{blue}%c%f $(gitprompt)%B
+╰─>%f%b ';;
+  "endru-pc")
+    PROMPT='%B%F{blue}%c%f|%F{${usercol}}%n %f%b$(gitprompt)%(?.%F{blue}❯%F{cyan}❯%F{green}❯.%F{red}❯❯❯)%f ';;
+  *)
+    PROMPT='%B%F{${usercol}}%n%f@%M: %F{blue}%c%f%(?..%F{red})$%f%b '
+    RPROMPT='$(gitprompt)';;
+esac
 
 # Alisases
 alias ls='ls --color=auto'
-alias ll='ls --color=auto -alh'
+alias ll='ls --color=auto -Alh'
 alias cat='bat --theme OneHalfDark'
 alias vi='nvim'
 alias vim='nvim'
