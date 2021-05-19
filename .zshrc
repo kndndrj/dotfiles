@@ -34,15 +34,15 @@ alias ls='ls --color=auto'
 alias ll='ls --color=auto -alh'
 alias cat='bat --theme OneHalfDark'
 alias vi='nvim'
+alias vim='nvim'
 alias diff='diff -c --color'
 alias fm='source ranger'
 alias get_idf='. $HOME/esp/esp-idf/export.sh'
 
 # For invoking commands on startup (if calling shell with custom parameters
-if [[ $1 == eval ]]
-then
+if [[ $1 == eval ]]; then
   "$@"
-set --
+  set --
 fi
 
 # History in cache directory:
