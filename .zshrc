@@ -20,23 +20,23 @@ autoload -U colors && colors
 source $HOME/.config/zsh/git-prompt.zsh
 
 # Random prompt color
-case $(shuf -e 1 2 3 4 | head -n 1) in
+case $(shuf -e 1 2 3 4 5 6 | head -n 1) in
   1) usercol='yellow';;
   2) usercol='green';;
   3) usercol='blue';;
   4) usercol='red';;
+  5) usercol='magenta';;
+  6) usercol='cyan';;
 esac
 
-case "$HOST" in
-  "miamithinkpad")
-    PROMPT='%B╭ %(?.%F{green}✓.%F{red}🗴) %F{${usercol}}%n%f@%M: %F{blue}%c%f $(gitprompt)%B
-╰─>%f%b ';;
-  "endru-pc")
-    PROMPT='%B%F{blue}%c%f|%F{${usercol}}%n %f%b$(gitprompt)%(?.%F{blue}❯%F{cyan}❯%F{green}❯.%F{red}❯❯❯)%f ';;
-  *)
-    PROMPT='%B%F{${usercol}}%n%f@%M: %F{blue}%c%f%(?..%F{red})$%f%b '
-    RPROMPT='$(gitprompt)';;
-esac
+# Simple prompt
+PROMPT='%B%F{${usercol}}%n%f@%M: %F{blue}%c%f%(?..%F{red})$%f%b '
+RPROMPT='$(gitprompt)'
+# Two row prompt
+#PROMPT='%B╭ %(?.%F{green}✓.%F{red}🗴) %F{${usercol}}%n%f@%M: %F{blue}%c%f%b $(gitprompt)%B
+#╰─>%f%b '
+# Funny prompt
+#PROMPT='%B%F{${usercol}}%n%f:%F{blue}%c%f%b $(gitprompt)%(?.%F{blue}❯%F{cyan}❯%F{green}❯.%F{red}❯❯❯)%f '
 
 # Alisases
 alias ls='ls --color=auto'

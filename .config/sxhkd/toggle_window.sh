@@ -57,5 +57,6 @@ if [ -z $WINDOW_ID ]; then
     fi
 
 else
-    bspc node $WINDOW_ID --flag hidden -f
+    # Toggle visibility, put to the focused monitor and focus the scrathcpad
+    bspc node $WINDOW_ID --flag hidden --to-monitor focused --focus
 fi
