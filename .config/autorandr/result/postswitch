@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "Xft.dpi: 110" | xrdb -merge
+echo "Xft.dpi: 96" | xrdb -merge
 
 ### MONITORS ###
 bspc monitor DP-2-1 -d 1 2 3 4 5 # primary

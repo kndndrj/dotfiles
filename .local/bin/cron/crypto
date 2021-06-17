@@ -1,0 +1,54 @@
+#!/bin/sh
+
+# Script for checking prices of cryptocurrencies.
+# Meant to be used as a cronjob
+#
+# Sample crontab usage (don't forget to set these variables):
+# 15 * * * * DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus DISPLAY=":0.0" crypto -v monero -v wanchain -c eur
+
+api_base="https://api.coingecko.com/api/v3"
+inspection_url="https://www.coingecko.com/en/coins"
+
+# Check if jq and dunstify are installed
+jq -h >/dev/null 2>&1
+[ $? -ne 0 ] && printf "Please install \"jq\" first!\n" && exit 1
+
+dunstify -\? >/dev/null 2>&1
+[ $? -ne 0 ] && messenger="notify-send -t 60000" || messenger="dunstify -t 60000 --action=default,reply"
+
+# Function for sending notifications (and opening browser pages)
+send_notification () {
+    action=$($messenger "$1 price today" "$2")
+    [ "$action" = "default" ] && xdg-open "$inspection_url/$1" >/dev/null 2>&1
+    exit
+}
+
+# Parse arguments
+while getopts ":c:v:" option; do
+    case "${option}" in
+    c)
+        currency=${OPTARG};;
+    v)
+        coins="$coins ${OPTARG}";;
+    :)
+        printf "Please provide a currency!\n"
+        exit 1;;
+    *)
+        printf "Invalid option: \"${OPTARG}\"\n"
+        exit 1;;
+    esac
+done
+
+# Get coin prices for each coin
+for coin in $coins; do
+    # Get price and change
+    info=$(curl -sf "${api_base}/simple/price?ids=${coin}&vs_currencies=${currency}&include_24hr_change=true" | jq -r ".${coin}[]")
+    price=$(printf "$info" | head -n 1)
+    change=$(printf "$info" | tail -n 1)
+    # Set change color
+    [ ${change%%.*} -gt 0 ] && change_color="#426609" || change_color="#70120d"
+
+    # Create a message and send a notification
+    message=$(printf "<b>%.2f€ / <span color='${change_color}'>%.2f%%</span></b>" "$price" "$change")
+    send_notification $coin "$message" &
+done

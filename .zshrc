@@ -41,6 +41,7 @@ RPROMPT='$(gitprompt)'
 # Alisases
 alias ls='ls --color=auto'
 alias ll='ls --color=auto -Alh'
+alias mv='mv -i'
 alias cat='bat --theme OneHalfDark'
 alias vi='nvim'
 alias vim='nvim'
@@ -92,14 +93,6 @@ function zle-keymap-select zle-line-init zle-line-finish {
 zle -N zle-line-init
 zle -N zle-line-finish
 zle -N zle-keymap-select
-
-# default GOPATH and seperate path for working directory
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-export GOPATH=$GOPATH:$HOME/Repos/gocode
-
-# add Cargo path to path
-export PATH=$PATH:$HOME/.cargo/bin
 
 # Handler if command not found
 command_not_found_handler() {
