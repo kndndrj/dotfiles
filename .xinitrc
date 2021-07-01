@@ -14,8 +14,8 @@ setxkbmap si
 xset r rate 300 50 &
 
 # Enable touchpad tap-click and natural scrolling
-xinput set-prop 13 345 1
-xinput set-prop 13 353 1
+xinput set-prop 13 322 1
+xinput set-prop 13 330 1
 
 # Composite manager
 picom -b
