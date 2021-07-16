@@ -16,6 +16,6 @@ output HDMI-1-3
 off
 output HDMI-4
 crtc 0
-mode 1920x1080
+mode 3840x2160
 pos 0x0
-rate 60.00
+rate 30.00

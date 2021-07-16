@@ -28,15 +28,21 @@ screenchange-reload = true
 ;compositing-border = over
 ;pseudo-transparency = false
 
+lodpi-scale = 96
+lodpi-height = 30
+lodpi-line-size = 3
+lodpi-radius = 6
+
+middpi-scale = 144
+middpi-height = 50
+middpi-line-size = 5
+middpi-radius = 8
+
 hidpi-scale = 200
 hidpi-height = 60
 hidpi-line-size = 6
 hidpi-radius = 12
 
-lodpi-scale = 96
-lodpi-height = 30
-lodpi-line-size = 3
-lodpi-radius = 6
 
 [global/wm]
 margin-top = 5
