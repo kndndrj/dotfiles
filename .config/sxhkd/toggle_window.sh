@@ -20,8 +20,6 @@ while getopts ":w:c:p:" option; do
     esac
 done
 
-HELP="$0 -w <window class> -c <command to run> [-p left/right/center]"
-
 if [ -z "$WINDOW_CLASS" ] || [ -z "$COMMAND" ]; then
     printf "Not enough arguments provided!\n"
     printf "Usage:\n${HELP}\n"
