@@ -3,8 +3,8 @@
 echo "Xft.dpi: 96" | xrdb -merge
 
 ### MONITORS ###
-bspc monitor DP-2-1 -d 1 2 3 4 5 # primary
-bspc monitor DP-2-2 -d 6 7 8 9 10 # secondary
+bspc monitor DP2-1 -d 1 2 3 4 5 # primary
+bspc monitor DP2-2 -d 6 7 8 9 10 # secondary
 
 # bspwm border settings
 bspc config border_width                3
@@ -16,5 +16,5 @@ bspc config top_padding                 40
 # and put "heavy" programs at the end
 $HOME/.config/autorandr/programs_autorestart.sh \
 "dunst -geom 500x0-4+35" \
-"polybar lodpi_fixed" \
+"polybar fixed" \
 "polybar external_fixed"

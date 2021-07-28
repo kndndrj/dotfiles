@@ -15,4 +15,4 @@ bspc config top_padding                 74
 # and put "heavy" programs at the end
 $HOME/.config/autorandr/programs_autorestart.sh \
 "dunst" \
-"polybar hidpi_fixed"
+"polybar fixed"
