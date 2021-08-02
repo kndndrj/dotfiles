@@ -2,7 +2,7 @@
 
 echo "Xft.dpi: 96" | xrdb -merge
 
-### MONITORS ###
+### BSPWM ###
 bspc monitor DP2-1 -d 1 2 3 4 5 # primary
 bspc monitor DP2-2 -d 6 7 8 9 10 # secondary
 
@@ -11,10 +11,14 @@ bspc config border_width                3
 bspc config window_gap                  -3
 bspc config top_padding                 40
 
+### i3 ######
+i3-msg gaps top all plus 40
+
 # List of programs to start
 # Add multiple instances of the same program next to eachother
 # and put "heavy" programs at the end
 $HOME/.config/autorandr/programs_autorestart.sh \
 "dunst -geom 500x0-4+35" \
-"polybar fixed" \
-"polybar external_fixed"
+"polybar floating_left" \
+"polybar floating_right" \
+"polybar external_floating"

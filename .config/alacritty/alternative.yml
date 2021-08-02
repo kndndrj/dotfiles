@@ -37,7 +37,7 @@ window:
   # - none: neither borders nor title bar
   # - transparent: title bar, transparent background and title bar buttons
   # - buttonless: title bar, transparent background, but no title bar buttons
-  decorations: none
+  #decorations: none
 
   # Allow terminal applications to change Alacritty's window title.
   dynamic_title: true

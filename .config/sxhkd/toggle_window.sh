@@ -35,6 +35,10 @@ if [ -z $WINDOW_ID ]; then
     done
 
     WINDOW_ID=$(xdotool search --classname $WINDOW_CLASS)
+    sleep .1
+    i3-msg "[id=$WINDOW_ID]" move scratchpad
+    i3-msg "[id=$WINDOW_ID]" scratchpad show
+    i3-msg "[id=$WINDOW_ID]" border pixel 2
 
     # Apply position if specified
     if [ ! -z $POSITION ]; then
@@ -42,13 +46,13 @@ if [ -z $WINDOW_ID ]; then
         case "$POSITION" in
             left)
                 POS=$(xdotool getwindowgeometry $WINDOW_ID getdisplaygeometry \
-                    | awk -F "[ ,x\n]" 'BEGIN {RS=""} END {print ($15/2)-$13-3, ($16-$14)/2}');;
+                    | awk -F "[ ,x\n]" 'BEGIN {RS=""} END {print ($15/2)-$13, ($16-$14)/2}');;
             center)
                 POS=$(xdotool getwindowgeometry $WINDOW_ID getdisplaygeometry \
                     | awk -F "[ ,x\n]" 'BEGIN {RS=""} END {print ($15-$13)/2, ($16-$14)/2}');;
             right)
                 POS=$(xdotool getwindowgeometry $WINDOW_ID getdisplaygeometry \
-                    | awk -F "[ ,x\n]" 'BEGIN {RS=""} END {print ($15/2)+3, ($16-$14)/2}');;
+                    | awk -F "[ ,x\n]" 'BEGIN {RS=""} END {print ($15/2), ($16-$14)/2}');;
         esac
         # Move the window to the location
         xdotool windowmove $WINDOW_ID $POS
@@ -56,5 +60,5 @@ if [ -z $WINDOW_ID ]; then
 
 else
     # Toggle visibility, put to the focused monitor and focus the scrathcpad
-    bspc node $WINDOW_ID --flag hidden --to-monitor focused --focus
+    i3-msg "[id=$WINDOW_ID]" scratchpad show
 fi

@@ -20,9 +20,12 @@ xinput set-prop 13 330 1
 # Composite manager
 picom -b
 
+# Launch schkd
+pgrep -x sxhkd > /dev/null || sxhkd &
+
 # Source the .xprofile
 [ -f /etc/xprofile ] && . /etc/xprofile
 [ -f ~/.xprofile ] && . ~/.xprofile
 
 # Start the window manager
-exec bspwm
+exec i3
