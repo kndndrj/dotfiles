@@ -11,9 +11,6 @@ bspc config border_width                3
 bspc config window_gap                  -3
 bspc config top_padding                 40
 
-### i3 ######
-i3-msg gaps top all plus 40
-
 # List of programs to start
 # Add multiple instances of the same program next to eachother
 # and put "heavy" programs at the end

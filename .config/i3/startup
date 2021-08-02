@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Run a custom script depending on the detected "autorandr" setup
+DETECTED_MONITOR=$(autorandr --detected)
+if [ "$DETECTED_MONITOR" != "" ]; then
+    $HOME/.config/autorandr/$DETECTED_MONITOR/postswitch &
+fi
+
+# Other programs to start
+$HOME/.config/autorandr/postswitch.d/restart_programs.sh &
+
+
+# i3 stuff
+#i3-msg gaps inner all plus 4
+#i3-msg gaps outer all plus 2
+
+
