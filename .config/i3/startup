@@ -8,10 +8,3 @@ fi
 
 # Other programs to start
 $HOME/.config/autorandr/postswitch.d/restart_programs.sh &
-
-
-# i3 stuff
-#i3-msg gaps inner all plus 4
-#i3-msg gaps outer all plus 2
-
-

@@ -24,6 +24,10 @@ XF86AudioMute
 super + b
         brave
 
+# Toggle bar
+super + o
+	polybar-msg cmd toggle
+
 # Open the screenshot utility
 @Print
         flameshot gui
@@ -66,7 +70,7 @@ super + {comma,period,minus}
 	i3-msg layout {toggle split,tabbed,stacking}
 
 super + {m,n}
-	i3-msg {fullscreen toggle,floating toggle}
+	i3-msg {fullscreen toggle; polybar-msg cmd toggle,floating toggle}
 
 #
 # focus/swap

@@ -31,11 +31,12 @@ WINDOW_ID=$(xdotool search --classname $WINDOW_CLASS)
 if [ -z $WINDOW_ID ]; then
     $COMMAND &
     while true; do
-        [ -z $(xdotool search --classname $WINDOW_CLASS) ] || break
+        WINDOW_ID=$(xdotool search --classname $WINDOW_CLASS)
+        [ -z $WINDOW_ID ] || break
     done
 
-    WINDOW_ID=$(xdotool search --classname $WINDOW_CLASS)
     sleep .1
+    i3-msg "[id=$WINDOW_ID]" floating enable
     i3-msg "[id=$WINDOW_ID]" move scratchpad
     i3-msg "[id=$WINDOW_ID]" scratchpad show
     i3-msg "[id=$WINDOW_ID]" border pixel 2
@@ -46,13 +47,13 @@ if [ -z $WINDOW_ID ]; then
         case "$POSITION" in
             left)
                 POS=$(xdotool getwindowgeometry $WINDOW_ID getdisplaygeometry \
-                    | awk -F "[ ,x\n]" 'BEGIN {RS=""} END {print ($15/2)-$13, ($16-$14)/2}');;
+                    | awk -F "[ ,x\n]" 'BEGIN {RS=""} END {print ($15/2)-$13-3, ($16-$14)/2}');;
             center)
                 POS=$(xdotool getwindowgeometry $WINDOW_ID getdisplaygeometry \
                     | awk -F "[ ,x\n]" 'BEGIN {RS=""} END {print ($15-$13)/2, ($16-$14)/2}');;
             right)
                 POS=$(xdotool getwindowgeometry $WINDOW_ID getdisplaygeometry \
-                    | awk -F "[ ,x\n]" 'BEGIN {RS=""} END {print ($15/2), ($16-$14)/2}');;
+                    | awk -F "[ ,x\n]" 'BEGIN {RS=""} END {print ($15/2)+3, ($16-$14)/2}');;
         esac
         # Move the window to the location
         xdotool windowmove $WINDOW_ID $POS
