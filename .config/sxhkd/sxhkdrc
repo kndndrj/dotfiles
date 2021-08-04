@@ -25,7 +25,7 @@ super + b
         brave
 
 # Toggle bar
-super + o
+super + x
 	polybar-msg cmd toggle
 
 # Open the screenshot utility

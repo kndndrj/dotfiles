@@ -8,6 +8,7 @@ feh --no-fehbg --randomize --bg-fill $(xdg-user-dir PICTURES)/Ozadja/* &
 # and put "heavy" programs at the end
 $HOME/.config/autorandr/programs_autorestart.sh \
 "nm-applet" \
+"conky" \
 "blueman-applet" \
 "flameshot" \
 "rambox"
