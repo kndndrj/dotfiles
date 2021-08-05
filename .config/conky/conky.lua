@@ -21,9 +21,9 @@ end
 
 function draw_line ()
     local red, green, blue, alpha = 1, 1, 1, 1
-    local startx = 100
+    local startx = 180
     local starty = 140
-    local endx = 600 - startx
+    local endx = 711 - startx
     local endy = starty
 
     cairo_set_line_width (cr, 10)

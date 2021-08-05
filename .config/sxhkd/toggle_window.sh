@@ -31,15 +31,10 @@ WINDOW_ID=$(xdotool search --classname $WINDOW_CLASS)
 if [ -z $WINDOW_ID ]; then
     $COMMAND &
     while true; do
-        WINDOW_ID=$(xdotool search --classname $WINDOW_CLASS)
-        [ -z $WINDOW_ID ] || break
+        [ -z $(xdotool search --classname $WINDOW_CLASS) ] || break
     done
 
-    sleep .1
-    i3-msg "[id=$WINDOW_ID]" floating enable
-    i3-msg "[id=$WINDOW_ID]" move scratchpad
-    i3-msg "[id=$WINDOW_ID]" scratchpad show
-    i3-msg "[id=$WINDOW_ID]" border pixel 2
+    WINDOW_ID=$(xdotool search --classname $WINDOW_CLASS)
 
     # Apply position if specified
     if [ ! -z $POSITION ]; then
@@ -61,5 +56,5 @@ if [ -z $WINDOW_ID ]; then
 
 else
     # Toggle visibility, put to the focused monitor and focus the scrathcpad
-    i3-msg "[id=$WINDOW_ID]" scratchpad show
+    bspc node $WINDOW_ID --flag hidden --to-monitor focused --focus
 fi

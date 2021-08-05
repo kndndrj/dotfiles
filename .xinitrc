@@ -28,4 +28,4 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 [ -f ~/.xprofile ] && . ~/.xprofile
 
 # Start the window manager
-exec i3
+exec bspwm
