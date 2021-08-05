@@ -51,3 +51,6 @@ bspc rule -a Zathura state=tiled
 bspc rule -a Slack desktop='^10'
 bspc rule -a "Microsoft Teams - Preview" desktop ='^9'
 bspc rule -a "Rambox" desktop='^10'
+
+# External rules
+bspc config external_rules_command "$HOME/.config/bspwm/external_rules/fullscreen_floats.sh"
