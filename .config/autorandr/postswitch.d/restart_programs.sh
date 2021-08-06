@@ -3,6 +3,9 @@
 # Reset the background
 feh --no-fehbg --randomize --bg-fill $(xdg-user-dir PICTURES)/Ozadja/* &
 
+# Refresh the polybar
+$HOME/.config/polybar/polybar_launch.sh
+
 # List of programs to start
 # Add multiple instances of the same program next to eachother
 # and put "heavy" programs at the end

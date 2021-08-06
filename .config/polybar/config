@@ -46,10 +46,10 @@ alert = #bd2c40
 ;=============================
 
 [bar/default]
-
 width = 100%
 height = 3%
 dpi = ${xrdb:Xft.dpi:-1}
+monitor = ${env:MONITOR}
 
 background = ${colors.background}
 foreground = ${colors.foreground}

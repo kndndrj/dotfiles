@@ -15,7 +15,4 @@ bspc config top_padding                 40
 # Add multiple instances of the same program next to eachother
 # and put "heavy" programs at the end
 $HOME/.config/autorandr/programs_autorestart.sh \
-"dunst -geom 500x0-4+35" \
-"polybar floating_left" \
-"polybar floating_right" \
-"polybar external_floating"
+"dunst -geom 500x0-4+35"
