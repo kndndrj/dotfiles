@@ -76,6 +76,10 @@ bspc subscribe node_focus node_remove desktop_focus | while read -r _; do
 
         # print out the window names to files for use in a bar
         echo "$windows_print" > "${cache_path}/bspwm_windows.$monitor"
+
+        # Wake up polybar
+        polybar-msg hook windowlist 1
+
         unset curr_wins
 
     done
