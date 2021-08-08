@@ -4,7 +4,7 @@ cache_path="/tmp/"
 
 icon_map=$( cat "$( dirname "$( readlink -f "$0" )" )/bspwm_window_titles_icon_map.txt" )
 
-ignore_list="Left-Scratchpad Right-Scratchpad"
+ignore_list="Left-Scratchpad Right-Scratchpad Pulsemixer"
 
 name_cut=15
 total_cut=75
@@ -28,17 +28,13 @@ bspc subscribe node_focus node_remove node_stack desktop_focus | while read -r _
             # get icon for class name
             window_icon=$(echo "$icon_map" | grep "$window_class")
             # fallback icon if class not found
-            if [ -z "$window_icon" ]; then
-                window_icon=$(echo "$icon_map" | grep "Fallback")
-            fi
+            [ -z "$window_icon" ] && window_icon=$(echo "$icon_map" | grep "Fallback")
             # color the active window differently and put it at the begining
             if [ "$window_id" = "$window_focused_id" ]; then
                 curr_wins="%{F$foreground_color}%{B$background_color} ${window_icon#* } ${window_class} %{F-}%{B-}${curr_wins}"
             else
                 curr_wins="${curr_wins} ${window_icon#* } ${window_class} "
             fi
-        else
-            num_of_windows=$((num_of_windows - 1))
         fi
     done
     [ -z "$curr_wins" ] && curr_wins="..."
