@@ -43,10 +43,10 @@ bspc subscribe node_focus node_remove node_stack desktop_focus | while read -r _
     window_focused_id=$(bspc query -N -n focused)
 
     for window_id in $window_ids; do
-        window_name=$(xdotool getwindowname $window_id)
+        window_name=$(xdotool getwindowname "$window_id")
 
-        if [ -z "$(echo "$ignore_list" | grep "$window_name")" ]; then
-            window_class=$(xdotool getwindowclassname $window_id)
+        if ! echo "$ignore_list" | grep -q "$window_name"; then
+            window_class=$(xdotool getwindowclassname "$window_id")
 
             # Cut the window name
             if [ "$display_name" = "name" ]; then
