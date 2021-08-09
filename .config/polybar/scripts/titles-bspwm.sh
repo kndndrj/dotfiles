@@ -32,7 +32,9 @@ foreground_unfocused="#999"
 background_unfocused="-"
 underline_color="#8bbaed"
 
+# Enable underline
 [ "$underline_enabled" = "true" ] && underline="%{u$underline_color}%{+u}"
+
 # Subscribe to events on which the window title will get updated
 bspc subscribe node_focus node_remove node_stack desktop_focus | while read -r _; do
     # Get active monitor, all windows and the focused window
@@ -56,7 +58,7 @@ bspc subscribe node_focus node_remove node_stack desktop_focus | while read -r _
             # Get icon for class name
             window_icon=$(echo "$icon_map" | grep "$window_class")
 
-            # Color the active window differently and put it at the begining
+            # Assemble the bar, put focused window to the begining
             if [ "$window_id" = "$window_focused_id" ]; then
                 curr_wins="%{F$foreground_focused B$background_focused}$underline %{A3:bspc node $window_id --close:}${window_icon#* } ${window} %{A}%{-u}%{F$foreground_unfocused B$background_unfocused}${curr_wins}"
             else
@@ -68,7 +70,7 @@ bspc subscribe node_focus node_remove node_stack desktop_focus | while read -r _
     # Print to temp file and trigger the polybar hook
     [ -z "$curr_wins" ] && curr_wins=$empty_message
     echo "$curr_wins" > "/tmp/bspwm_windows.${monitor}"
-    polybar-msg hook windowtitles-bspwm 1
+    polybar-msg hook titles-bspwm 1
 
     unset curr_wins
 done
