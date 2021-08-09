@@ -1,20 +1,38 @@
 #!/bin/sh
 
-cache_path="/tmp/"
+# Put the class name and its icon here
+icon_map="
+Google-chrome 
+Brave-browser 
+Firefox 
+Code ﬏
+Slack 
+kitty 
+Alacritty 
+Nautilus 
+"
 
-icon_map=$( cat "$( dirname "$( readlink -f "$0" )" )/bspwm_window_titles_icon_map.txt" )
+# Put the names of windows you want to ignore here
+ignore_list="
+Left-Scratchpad
+Right-Scratchpad
+Pulsemixer
+"
 
-ignore_list="Left-Scratchpad Right-Scratchpad Pulsemixer"
-
+# Presets
+display_name="class" # valid: name/class
 name_cut=15
-total_cut=75
-foreground_color="-"
-background_color="#8bbaed"
+# Use colors as in polybar config (e.g. "#efefef"),
+# must be "-" if there is no color specified.
+foreground_focused="-"
+background_focused="#444"
+foreground_unfocused="#999"
+background_unfocused="-"
 
-# subscribe to events on which the window title list will get updated
+# Subscribe to events on which the window title will get updated
 bspc subscribe node_focus node_remove node_stack desktop_focus | while read -r _; do
+    # Get active monitor, all windows and the focused window
     monitor=$(bspc query -M -d focused --names)
-    # get windows from focused desktop on given monitor
     window_ids=$(bspc query -N -n .window -m .focused -d .active)
     window_focused_id=$(bspc query -N -n focused)
 
@@ -23,25 +41,30 @@ bspc subscribe node_focus node_remove node_stack desktop_focus | while read -r _
 
         if [ -z "$(echo "$ignore_list" | grep "$window_name")" ]; then
             window_class=$(xdotool getwindowclassname $window_id)
-            # cut the window name
-            window_name=$( echo "$window_name" | cut -c-"$name_cut" )
-            # get icon for class name
-            window_icon=$(echo "$icon_map" | grep "$window_class")
-            # fallback icon if class not found
-            [ -z "$window_icon" ] && window_icon=$(echo "$icon_map" | grep "Fallback")
-            # color the active window differently and put it at the begining
-            if [ "$window_id" = "$window_focused_id" ]; then
-                curr_wins="%{F$foreground_color}%{B$background_color} ${window_icon#* } ${window_class} %{F-}%{B-}${curr_wins}"
+
+            # Cut the window name
+            if [ "$display_name" = "name" ]; then
+                window=$(echo "$window_name" | cut -c-"$name_cut")
             else
-                curr_wins="${curr_wins} ${window_icon#* } ${window_class} "
+                window=$(echo "$window_class" | cut -c-"$name_cut")
+            fi
+
+            # Get icon for class name
+            window_icon=$(echo "$icon_map" | grep "$window_class")
+
+            # Color the active window differently and put it at the begining
+            if [ "$window_id" = "$window_focused_id" ]; then
+                curr_wins="%{F$foreground_focused B$background_focused} %{A3:bspc node $window_id --close:}${window_icon#* } ${window} %{A}%{F$foreground_unfocused B$background_unfocused}${curr_wins}"
+            else
+                curr_wins="${curr_wins} %{A1:bspc node $window_id --focus:}%{A3:bspc node $window_id --close:}${window_icon#* } ${window} %{A}%{A}"
             fi
         fi
     done
+
+    # Print to temp file and trigger the polybar hook
     [ -z "$curr_wins" ] && curr_wins="..."
-    # print out the window names to files for use in a bar
-    echo "$curr_wins" | cut -c-$total_cut > "${cache_path}/bspwm_windows.${monitor}"
-    # Wake up polybar
-    polybar-msg hook windowlist 1
+    echo "$curr_wins" > "/tmp/bspwm_windows.${monitor}"
+    polybar-msg hook windowtitles-bspwm 1
 
     unset curr_wins
 done

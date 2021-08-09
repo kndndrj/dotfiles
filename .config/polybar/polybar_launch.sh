@@ -1,18 +1,18 @@
 #!/bin/sh
 
-# restart window titles daemon
-while pgrep -f "bspwm_window_titles.sh" >/dev/null; do pkill -f bspwm_window_titles.sh; done
+# Terminate already running bar instances
+killall -q polybar
+killall -q bspwm_window_titles.sh
+
+# Wait until the processes have been shut down
+while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
+while pgrep -u $UID -f "bspwm_window_titles.sh" >/dev/null; do sleep 1; done
+
+# Start window titles daemon
 $HOME/.config/polybar/scripts/bspwm_window_titles.sh &
 
-CPID=$(pgrep -x polybar)
-
-if [ -n "${CPID}" ] ; then
-  kill -TERM ${CPID}
-fi
-
-# add window titles
-# using bspc query here to get monitors in the same order bspwm sees them
-for m in $( bspc query -M --names ); do
+# Start polybar on all monitors
+for m in $(bspc query -M --names); do
   index=$((index + 1))
 
   if [ $index -eq 1 ]; then
