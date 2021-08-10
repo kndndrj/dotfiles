@@ -30,7 +30,7 @@ foreground_focused="-"
 background_focused="-"
 foreground_unfocused="$COL_SYSTEM_FOREGROUND_ALT"
 background_unfocused="-"
-underline_color="$COL_SYSTEM_PRIMARY"
+underline_color="$COL_SYSTEM_BACKGROUND_ALT"
 
 # Enable underline
 [ "$underline_enabled" = "true" ] && underline="%{u$underline_color}%{+u}"

@@ -9,7 +9,7 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 while pgrep -u $UID -f "titles-bspwm.sh" >/dev/null; do sleep 1; done
 
 # Start window titles daemon
-$HOME/.config/polybar/scripts/titles-bspwm.sh &
+$HOME/.config/polybar/scripts/titles-bspwm.sh >/dev/null &
 
 # Start polybar on all monitors
 for m in $(bspc query -M --names); do
