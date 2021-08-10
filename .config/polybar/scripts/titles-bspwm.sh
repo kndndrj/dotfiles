@@ -28,9 +28,9 @@ underline_enabled="true"
 # must be "-" if there is no color specified.
 foreground_focused="-"
 background_focused="-"
-foreground_unfocused="#999"
+foreground_unfocused="$COL_SYSTEM_FOREGROUND_ALT"
 background_unfocused="-"
-underline_color="#8bbaed"
+underline_color="$COL_SYSTEM_PRIMARY"
 
 # Enable underline
 [ "$underline_enabled" = "true" ] && underline="%{u$underline_color}%{+u}"

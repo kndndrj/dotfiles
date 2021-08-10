@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "Xft.dpi: 96" | xrdb -merge
+echo "Xft.dpi: 110" | xrdb -merge
 
 ### BSPWM ###
 bspc monitor DP2-1 -d 1 2 3 4 5 # primary
@@ -9,7 +9,7 @@ bspc monitor DP2-2 -d 6 7 8 9 10 # secondary
 # bspwm border settings
 bspc config border_width                3
 bspc config window_gap                  -3
-bspc config top_padding                 40
+bspc config top_padding                 50
 
 # List of programs to start
 # Add multiple instances of the same program next to eachother

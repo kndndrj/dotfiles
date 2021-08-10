@@ -33,13 +33,13 @@ margin-top = 5
 margin-bottom = 4%
 
 [colors]
-background = #bb282c34
-background-alt = #444
-foreground = #efefef
-foreground-alt = #999
-primary = #8bbaed
-secondary = #456f9b
-alert = #bd2c40
+background = ${env:COL_SYSTEM_BACKGROUND_TRANSPARENT}
+background-alt = ${env:COL_SYSTEM_BACKGROUND_ALT}
+foreground = ${env:COL_SYSTEM_FOREGROUND}
+foreground-alt = ${env:COL_SYSTEM_FOREGROUND_ALT}
+primary = ${env:COL_SYSTEM_PRIMARY}
+secondary = ${env:COL_SYSTEM_SECONDARY}
+alert = ${env:COL_SYSTEM_ALERT}
 
 ;=============================
 ;==== Default bar ============

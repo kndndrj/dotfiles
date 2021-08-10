@@ -32,8 +32,8 @@ for side in right bottom left ; do
 done
 
 # Colors
-bspc config normal_border_color         "#444444"
-bspc config focused_border_color        "#8bbaed"
+bspc config normal_border_color         "$COL_SYSTEM_BACKGROUND_ALT"
+bspc config focused_border_color        "$COL_SYSTEM_PRIMARY"
 
 # Misc
 bspc config split_ratio                 0.52
