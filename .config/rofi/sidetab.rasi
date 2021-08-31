@@ -90,6 +90,14 @@ element {
   padding:  8px;
 }
 
+element-text {
+  background-color: inherit;
+}
+
+element-icon {
+  background-color: inherit;
+}
+
 entry {
   expand:           false;
   text-color:       @normal-foreground;

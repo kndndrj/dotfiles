@@ -40,13 +40,12 @@ RPROMPT='$(gitprompt)'
 
 # Alisases
 alias ls='ls --color=auto'
-alias ll='ls --color=auto -Alh'
+alias ll='ls --color=auto -alh'
 alias mv='mv -i'
 alias grep='grep --color=auto'
-alias cat='bat --theme OneHalfDark'
 alias vi='nvim'
 alias vim='nvim'
-alias diff='diff -c --color'
+alias diff='colordiff'
 alias fm='source ranger'
 alias get_idf='. $HOME/esp/esp-idf/export.sh'
 
