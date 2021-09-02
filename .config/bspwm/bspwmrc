@@ -48,9 +48,11 @@ bspc rule -a Alacritty:Scratchpad_2 sticky=on state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a Zathura state=tiled
-bspc rule -a Slack desktop='^10'
-bspc rule -a "Microsoft Teams - Preview" desktop ='^9'
-bspc rule -a "Rambox" desktop='^10'
+# All chat stuff to the last monitor
+last_monitor="$(bspc query -D --names | sort -n | tail -n 1)"
+bspc rule -a "Slack" desktop=${last_monitor}
+bspc rule -a "Microsoft Teams - Preview" desktop=${last_monitor}
+bspc rule -a "Rambox" desktop=${last_monitor}
 
 # External rules
 bspc config external_rules_command "$HOME/.config/bspwm/external_rules/fullscreen_floats.sh"

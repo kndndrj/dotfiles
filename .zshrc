@@ -9,9 +9,6 @@
 export VISUAL=nvim;
 export EDITOR=nvim;
 
-# Set bat as the man pager
-export MANPAGER="sh -c 'col -bx | bat --theme OneHalfDark -l man -p'"
-
 # Set ssh-agent to the terminal
 eval $(ssh-agent) > /dev/null
 

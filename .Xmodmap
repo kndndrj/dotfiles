@@ -15,3 +15,11 @@ keycode  21 = plus asterisk plus asterisk cedilla dead_cedilla dead_cedilla
 ! Set CapsLock to Escape
 clear    lock
 keycode  66 = Escape NoSymbol Escape
+
+! Switch Alt and Super
+remove mod1 = Alt_L
+remove mod4 = Super_L
+keycode 133 = Alt_L
+keycode 64 = Super_L
+add mod1 = Alt_L  
+add mod4 = Super_L

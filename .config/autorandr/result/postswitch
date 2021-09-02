@@ -3,8 +3,11 @@
 echo "Xft.dpi: 110" | xrdb -merge
 
 ### BSPWM ###
-bspc monitor DP2-1 -d 1 2 3 4 5 # primary
-bspc monitor DP2-2 -d 6 7 8 9 10 # secondary
+# DP2-2 is the primary monitor
+bspc monitor -s DP2-2 DP2-1 eDP1
+bspc monitor DP2-1 -d 1 2 3 4 5
+bspc monitor DP2-2 -d 6 7 8 9 10
+bspc monitor eDP1 -d 11
 
 # bspwm border settings
 bspc config border_width                3
