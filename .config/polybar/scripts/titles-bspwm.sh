@@ -10,6 +10,9 @@ Slack 
 kitty 
 Alacritty 
 Nautilus 
+Microsoft Teams - Preview 
+jetbrains-pycharm 
+jetbrains-goland ﳑ
 "
 
 # Put the names of windows you want to ignore here
@@ -21,7 +24,7 @@ Pulsemixer
 
 # Presets
 display_name="class" # valid: name/class
-name_cut=15
+name_cut=18
 empty_message="..."
 underline_enabled="true"
 # Use colors as in polybar config (e.g. "#efefef"),
@@ -60,9 +63,9 @@ bspc subscribe node_focus node_remove node_stack desktop_focus | while read -r _
 
             # Assemble the bar, put focused window to the begining
             if [ "$window_id" = "$window_focused_id" ]; then
-                curr_wins="%{F$foreground_focused B$background_focused}$underline %{A3:bspc node $window_id --close:}${window_icon#* } ${window} %{A}%{-u}%{F$foreground_unfocused B$background_unfocused}${curr_wins}"
+                curr_wins="%{F$foreground_focused B$background_focused}$underline %{A3:bspc node $window_id --close:}${window_icon##* } ${window} %{A}%{-u}%{F$foreground_unfocused B$background_unfocused}${curr_wins}"
             else
-                curr_wins="${curr_wins} %{A1:bspc node $window_id --focus:}%{A3:bspc node $window_id --close:}${window_icon#* } ${window} %{A}%{A}"
+                curr_wins="${curr_wins} %{A1:bspc node $window_id --focus:}%{A3:bspc node $window_id --close:}${window_icon##* } ${window} %{A}%{A}"
             fi
         fi
     done

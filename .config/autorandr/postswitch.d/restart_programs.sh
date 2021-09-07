@@ -14,4 +14,4 @@ $HOME/.config/autorandr/programs_autorestart.sh \
 "conky" \
 "blueman-applet" \
 "flameshot" \
-"rambox"
+"slack -u"
