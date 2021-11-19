@@ -1,0 +1,112 @@
+{
+    "layer": "top",
+    "position": "left",
+    "height": 35,
+    "spacing": 10,
+    "width": 45,
+
+    // Modules
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": [
+        "tray",
+        "custom/icon#updates",      "custom/updates",
+        "custom/icon#pulseaudio",   "pulseaudio",
+        "custom/icon#cpu",          "cpu",
+        "custom/icon#temperature",  "temperature",
+        "custom/icon#battery",      "battery",
+        "custom/icon#battery",      "battery#bat2"
+    ],
+
+    // Modules configuration
+    "sway/workspaces": {
+        "all-outputs": false,
+    },
+    "tray": {
+        "spacing": 8
+    },
+    "clock": {
+        "format": "{:%-H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%d.%m.}"
+    },
+    "custom/icon#cpu": {
+        "format": " "
+    },
+    "cpu": {
+        "format": "{usage}%",
+        "tooltip": false
+    },
+    "custom/icon#temperature": {
+        "format": ""
+    },
+    "temperature": {
+        "critical-threshold": 80,
+        "format": "{temperatureC}°C",
+    },
+    "custom/icon#battery": {
+        "format": ""
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "full-at": 95,
+        "format": "{capacity}%",
+        "format-charging": "{capacity}%",
+        "format-plugged": "{capacity}%",
+        "format-alt": "{time}",
+    },
+    "battery#bat2": {
+        "bat": "BAT1",
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "full-at": 95,
+        "format": "{capacity}%",
+        "format-charging": "{capacity}%",
+        "format-plugged": "{capacity}%",
+        "format-alt": "{time}",
+    },
+    "custom/icon#pulseaudio": {
+        "format": "墳"
+    },
+    "pulseaudio": {
+        "scroll-step": 5,
+        "format": "{icon}",
+        "format-bluetooth": "{icon}",
+        "format-bluetooth-muted": "||||||||||||",
+        "format-muted": "||||||||||||",
+        "format-icons": {
+            "default": [
+                "||---------|",
+                "|-|--------|",
+                "|--|-------|",
+                "|---|------|",
+                "|----|-----|",
+                "|-----|----|",
+                "|------|---|",
+                "|-------|--|",
+                "|--------|-|",
+                "|---------||" 
+            ]
+        },
+        "rotate": 90,
+        "on-click": "amixer -q set Master toggle"
+    },
+    "custom/icon#updates": {
+        "format": " "
+    },
+    "custom/updates": {
+        "format": "{}",
+        "interval": 600,
+        "exec": "echo $(checkupdates 2> /dev/null | wc -l)'|'$(paru -Qum 2> /dev/null | wc -l)",
+        "exec-if": "exit 0",
+        "on-click": "pkill -SIGRTMIN+8 waybar",
+        "signal": 8
+    }
+}
+
+// vim: ft=javascript

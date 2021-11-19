@@ -1,0 +1,88 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 35,
+    "spacing": 10,
+
+    // Modules
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["tray", "custom/updates", "pulseaudio", "cpu", "temperature", "battery", "battery#bat2"],
+
+    // Modules configuration
+    "sway/workspaces": {
+        "all-outputs": false,
+    },
+    "tray": {
+        "spacing": 8
+    },
+    "clock": {
+        "format": "{:%-H:%M | %-d.%-m.%Y}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+    "cpu": {
+        "format": " {usage}%",
+        "tooltip": false
+    },
+    "temperature": {
+        "critical-threshold": 80,
+        "format": "{icon} {temperatureC}°C",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{icon} {time}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "battery#bat2": {
+        "bat": "BAT1",
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{icon} {time}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "pulseaudio": {
+        "scroll-step": 5,
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}% ",
+        "format-bluetooth-muted": "婢     muted      ",
+        "format-muted": "婢     muted     ",
+        "format-icons": {
+            "default": [
+                "奄 |---------",
+                "奄 -|--------",
+                "奄 --|-------",
+                "奔 ---|------",
+                "奔 ----|-----",
+                "奔 -----|----",
+                "奔 ------|---",
+                "墳 -------|--",
+                "墳 --------|-",
+                "墳 ---------|" 
+            ]
+        },
+        "on-click": "amixer -q set Master toggle"
+    },
+    "custom/updates": {
+        "format": " {}",
+        "interval": 600,
+        "exec": "echo $(checkupdates 2> /dev/null | wc -l) '|' $(paru -Qum 2> /dev/null | wc -l)",
+        "exec-if": "exit 0",
+        "on-click": "pkill -SIGRTMIN+8 waybar",
+        "signal": 8
+    }
+}
+
+// vim: ft=javascript

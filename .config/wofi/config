@@ -1,0 +1,7 @@
+# Maintained in linux-config.org
+dynamic_lines=true
+gtk_dark=true
+terminal=alacritty
+allow_images=true
+width=35%
+height=25%

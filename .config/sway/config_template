@@ -1,0 +1,266 @@
+# Default config for sway
+#
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
+
+### Variables
+set $mod Mod4
+
+set $left h
+set $down j
+set $up k
+set $right l
+
+set $term alacritty
+
+set $menu "wofi --show drun"
+
+# Startup
+# Detect monitor setup and apply
+exec --no-startup-id kanshi
+
+exec --no-startup-id "nm-applet --indicator"
+
+# start the blueman-appletm which manages bluetooth connections (corner icon)
+exec --no-startup-id blueman-applet
+
+# Statusbar
+exec --no-startup-id waybar
+
+# Notification daemon
+exec --no-startup-id dunst
+
+# Slack
+exec --no-startup-id "slack -u --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
+
+# font
+font pango:Iosevka Nerd Font 9
+
+
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+output * bg $(ls -d $(xdg-user-dir PICTURES)/Ozadja/* | shuf -n 1) fill
+
+
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+#          before-sleep 'swaylock -f -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+### Input configuration
+#
+# Keyboard
+#
+input "type:keyboard" {
+    xkb_layout "si"
+    xkb_numlock enable
+    repeat_rate 50
+    repeat_delay 300
+}
+#
+# Touchpad:
+#
+input "type:touchpad" {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+}
+
+# set workspaces per monitor
+workspace 1 output DP-3
+workspace 2 output DP-3
+workspace 3 output DP-3
+workspace 4 output DP-3
+workspace 5 output DP-3
+
+workspace 6 output DP-4
+workspace 7 output DP-4
+workspace 8 output DP-4
+workspace 9 output DP-4
+workspace 10 output DP-4
+
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+### Key bindings
+#
+# Basics:
+#
+    # Start the browser
+    bindsym $mod+b exec "brave --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
+    # Start a terminal
+    bindsym $mod+Return exec $term
+
+    # Notification daemon
+    bindsym $mod+n exec "dunstctl close"
+    bindsym $mod+Shift+n exec "dunstctl close-all"
+
+    # Screenshots
+    bindsym Print exec grim -g "$(slurp && notify-send 'Screenshot coppied to clipboard')" - | wl-copy
+
+
+    # Kill focused window
+    bindsym $mod+a kill
+
+    # Start your launcher
+    bindsym $mod+c exec $menu
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Shift+f reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+d exec swaynag -t warning -m 'Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+#
+# Sound:
+#
+    # change volume or toggle mute
+    bindsym XF86AudioRaiseVolume  exec "amixer -q set Master 5%+"
+    bindsym XF86AudioLowerVolume  exec "amixer -q set Master 5%-"
+    bindsym XF86AudioMute         exec "amixer -q set Master toggle"
+
+    bindsym XF86MonBrightnessUp   exec "echo $(($(cat /sys/class/backlight/intel_backlight/brightness) + 500)) | sudo tee /sys/class/backlight/intel_backlight/brightness >/dev/null 2>&1"
+    bindsym XF86MonBrightnessDown exec "echo $(($(cat /sys/class/backlight/intel_backlight/brightness) - 500)) | sudo tee /sys/class/backlight/intel_backlight/brightness >/dev/null 2>&1"
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+#
+# Workspaces:
+#
+    # Switch to workspace
+    bindsym $mod+q workspace number 1
+    bindsym $mod+w workspace number 2
+    bindsym $mod+e workspace number 3
+    bindsym $mod+r workspace number 4
+    bindsym $mod+t workspace number 5
+    bindsym $mod+z workspace number 6
+    bindsym $mod+u workspace number 7
+    bindsym $mod+i workspace number 8
+    bindsym $mod+o workspace number 9
+    bindsym $mod+p workspace number 10
+    # Move focused container to workspace
+    bindsym $mod+Shift+q move container to workspace number 1
+    bindsym $mod+Shift+w move container to workspace number 2
+    bindsym $mod+Shift+e move container to workspace number 3
+    bindsym $mod+Shift+r move container to workspace number 4
+    bindsym $mod+Shift+t move container to workspace number 5
+    bindsym $mod+Shift+z move container to workspace number 6
+    bindsym $mod+Shift+u move container to workspace number 7
+    bindsym $mod+Shift+i move container to workspace number 8
+    bindsym $mod+Shift+o move container to workspace number 9
+    bindsym $mod+Shift+p move container to workspace number 10
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    # bindsym $mod+c splith
+    # bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    # bindsym $mod+s layout stacking
+    # bindsym $mod+w layout tabbed
+    # bindsym $mod+e layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+minus fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+comma floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # Move focus to the parent container
+    #bindsym $mod+a focus parent
+#
+# Scratchpads:
+#
+for_window [app_id="scratchpad*"] opacity 0.95
+
+for_window [app_id="scratchpad*"] move scratchpad
+for_window [app_id="scratchpad*"] scratchpad show
+for_window [app_id="scratchpad*"] resize set 45ppt 60ppt
+
+for_window [app_id="scratchpad1"] move position 5ppt 30ppt
+bindsym $mod+s exec 'swaymsg [app_id="scratchpad1"] scratchpad show || exec $term --class scratchpad1'
+
+for_window [app_id="scratchpad2"] move position 50ppt 30ppt
+bindsym $mod+d exec 'swaymsg [app_id="scratchpad2"] scratchpad show || exec $term --class scratchpad2'
+
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+#bindsym $mod+r mode "resize"
+
+# Window rules
+assign [app_id="Slack"] 10
+assign [class="Microsoft Teams - Preview"] 10
+
+## Colors and gaps
+gaps outer 10
+default_border pixel 3
+
+# Colorscheme for Sway
+# class                 border      bground                 text            indicator               child_border
+client.focused          #1FA97D     ${COL_SYSTEM_PRIMARY}   #FFFFFF         ${COL_SYSTEM_PRIMARY}   ${COL_SYSTEM_PRIMARY}
+client.focused_inactive #333333     #5F676A                 #FFFFFF         #484E50                 #5F676A
+client.unfocused        #333333     #222222                 #888888         #292D2E                 #222222
+client.urgent           #2F343A     #900000                 #FFFFFF         #900000                 #900000
+client.placeholder      #000000     #0C0C0C                 #FFFFFF         #000000                 #0C0C0C
+
+# GTK themes
+set $gnome-schema org.gnome.desktop.interface
+
+exec_always {
+    gsettings set $gnome-schema gtk-theme 'Arc-Dark'
+    gsettings set $gnome-schema icon-theme 'Papirus-Dark'
+    # gsettings set $gnome-schema cursor-theme 'Your cursor Theme'
+    # gsettings set $gnome-schema font-name 'Your font name'
+}
+
+# Systemd import some X11 Variables
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK
