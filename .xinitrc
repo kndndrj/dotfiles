@@ -1,14 +1,8 @@
 # Detect the current monitor setup and change to that profile
 autorandr --change --default homepc
 
-# Merge .Xresources
-[ -f ~/.Xresources ] && xrdb -merge -I$HOME ~/.Xresources
-
 # Set keyboard layout for xserver
 setxkbmap si
-
-# Source xmodmap table
-[ -f ~/.Xmodmap ] && xmodmap ~/.Xmodmap
 
 # Set a smaller keyrate
 xset r rate 300 50 &
@@ -24,5 +18,12 @@ picom -b
 [ -f /etc/xprofile ] && . /etc/xprofile
 [ -f ~/.xprofile ] && . ~/.xprofile
 
+# Misc
+wmname compiz
+export _JAVA_AWT_WM_NONREPARENTING=1
+envsubst < ~/.config/dunst/dunstrc_template > ~/.config/dunst/dunstrc
+
 # Start the window manager
 exec bspwm
+
+# vim: ft=sh

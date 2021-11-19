@@ -29,7 +29,7 @@ fi
 # Search for a window
 WINDOW_ID=$(xdotool search --classname $WINDOW_CLASS)
 if [ -z $WINDOW_ID ]; then
-    $COMMAND &
+    $COMMAND >/dev/null 2>&1 &
     while true; do
         [ -z $(xdotool search --classname $WINDOW_CLASS) ] || break
     done
@@ -50,8 +50,10 @@ if [ -z $WINDOW_ID ]; then
                 POS=$(xdotool getwindowgeometry $WINDOW_ID getdisplaygeometry \
                     | awk -F "[ ,x\n]" 'BEGIN {RS=""} END {print ($15/2)+3, ($16-$14)/2}');;
         esac
+        X_POS=${POS%% *}
+        Y_POS=${POS##* }
         # Move the window to the location
-        xdotool windowmove $WINDOW_ID $POS
+        xdotool windowmove $WINDOW_ID $X_POS $Y_POS
     fi
 
 else

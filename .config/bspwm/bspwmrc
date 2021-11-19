@@ -19,9 +19,6 @@ xsetroot -cursor_name left_ptr
 # Launch schkd
 pgrep -x sxhkd > /dev/null || sxhkd &
 
-# Set Window manager name to something else (gtk apps are broken otherwise)
-wmname compiz
-
 ######################
 ###### SETTINGS ######
 ######################
@@ -45,6 +42,7 @@ bspc config focus_follows_pointer       true
 bspc rule -a Alacritty:Popup sticky=on state=floating
 bspc rule -a Alacritty:Scratchpad_1 sticky=on state=floating
 bspc rule -a Alacritty:Scratchpad_2 sticky=on state=floating
+bspc rule -a Signal sticky=on state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a Zathura state=tiled

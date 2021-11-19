@@ -13,5 +13,6 @@ $HOME/.config/autorandr/programs_autorestart.sh \
 "nm-applet" \
 "conky" \
 "blueman-applet" \
+"dunst" \
 "flameshot" \
 "slack -u"

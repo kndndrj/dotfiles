@@ -27,7 +27,7 @@ case $(shuf -e 1 2 3 4 5 6 | head -n 1) in
 esac
 
 # Simple prompt
-PROMPT='%B%F{${usercol}}%n%f@%M: %F{blue}%c%f%(?..%F{red})$%f%b '
+PROMPT='%B%F{${usercol}}%n%f@%M: %F{blue}%25<..<%c%f%(?..%F{red})$%f%b '
 RPROMPT='$(gitprompt)'
 # Two row prompt
 #PROMPT='%B╭ %(?.%F{green}✓.%F{red}🗴) %F{${usercol}}%n%f@%M: %F{blue}%c%f%b $(gitprompt)%B
@@ -76,6 +76,8 @@ zmodload zsh/complist
 bindkey -v
 bindkey -v '^?' backward-delete-char
 bindkey '^r' history-incremental-search-backward
+bindkey '^n' expand-or-complete
+bindkey '^p' reverse-menu-complete
 
 function zle-keymap-select zle-line-init zle-line-finish {
   case $KEYMAP in

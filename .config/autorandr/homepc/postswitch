@@ -9,9 +9,3 @@ bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 bspc config border_width                4
 bspc config window_gap                  -4
 bspc config top_padding                 80
-
-# List of programs to start
-# Add multiple instances of the same program next to eachother
-# and put "heavy" programs at the end
-$HOME/.config/autorandr/programs_autorestart.sh \
-"dunst"

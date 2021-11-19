@@ -16,10 +16,8 @@ for m in $(bspc query -M --names); do
   index=$((index + 1))
 
   if [ $index -eq 1 ]; then
-    MONITOR=$m polybar floating_right &
-    MONITOR=$m polybar floating_left &
-    MONITOR=$m polybar floating_center &
+    MONITOR=$m polybar fixed &
   else
-    MONITOR=$m polybar floating_external &
+    MONITOR=$m polybar fixed_external &
   fi
 done
