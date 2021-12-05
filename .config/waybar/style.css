@@ -15,46 +15,45 @@ window#waybar {
 }
 
 #workspaces button {
-    padding: 10px 5px;
+    padding: 5px 0px;
+    border: 5px solid transparent;
+    border-radius: 5px;
     background-color: transparent;
     color: #EFEFEF;
 }
 
 #workspaces button:hover {
     background-color: #444444;
+    border: 5px solid #444444;
 }
 
 #workspaces button.visible {
     background-color: #444444;
+    border: 5px solid #444444;
 }
 
 #workspaces button.focused {
     background-color: #7FBBB3;
-    box-shadow: none;
+    border: 5px solid #7FBBB3;
 }
 
 #workspaces button.urgent {
     background-color: #BD2C40;
+    border: 5px solid #BD2C40;
 }
 
 #battery,
 #cpu,
 #temperature,
 #pulseaudio,
+#tray,
 #custom-updates {
-    padding-top: 0px;
-    padding-bottom: 10px;
+    border: 5px solid #7FBBB3;
+    border-radius: 5px;
+    padding: 5px;
     color: #EFEFEF;
     background-color: #7FBBB3;
     margin-bottom: 5px;
-}
-
-
-#custom-icon {
-    padding-top: 10px;
-    padding-bottom: 0px;
-    background-color: #7FBBB3;
-    margin-bottom: 0px;
 }
 
 #window {
@@ -66,12 +65,14 @@ window#waybar {
 }
 
 #battery.charging, #battery.plugged {
-    box-shadow: inset 0 -10px #45756f;
+    background-color: #45756f;
+    border: 5px solid #45756f;
 }
 
 @keyframes blink {
     to {
         background-color: #ffffff;
+        border: 5px solid #ffffff;
         color: black;
     }
 }
@@ -82,7 +83,8 @@ window#waybar {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
-    box-shadow: inset 0 -3px #BD2C40;
+    background-color: #BD2C40;
+    border: 5px solid #BD2C40;
 }
 
 label:focus {
@@ -91,15 +93,18 @@ label:focus {
 
 
 #pulseaudio.muted {
-    box-shadow: inset 0 -10px #45756f;
+    background-color: #45756f;
+    border: 5px solid #45756f;
 }
 
 
 #temperature.critical {
-    box-shadow: inset 0 -10px #BD2C40;
+    background-color: #BD2C40;
+    border: 5px solid #BD2C40;
 }
 
 #tray {
+    border: none;
     background-color: transparent;
     margin-bottom: 10px;
 }

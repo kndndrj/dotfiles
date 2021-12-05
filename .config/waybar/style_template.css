@@ -15,46 +15,45 @@ window#waybar {
 }
 
 #workspaces button {
-    padding: 10px 5px;
+    padding: 5px 0px;
+    border: 5px solid transparent;
+    border-radius: 5px;
     background-color: transparent;
     color: $COL_SYSTEM_FOREGROUND;
 }
 
 #workspaces button:hover {
     background-color: $COL_SYSTEM_BACKGROUND_ALT;
+    border: 5px solid $COL_SYSTEM_BACKGROUND_ALT;
 }
 
 #workspaces button.visible {
     background-color: $COL_SYSTEM_BACKGROUND_ALT;
+    border: 5px solid $COL_SYSTEM_BACKGROUND_ALT;
 }
 
 #workspaces button.focused {
     background-color: $COL_SYSTEM_PRIMARY;
-    box-shadow: none;
+    border: 5px solid $COL_SYSTEM_PRIMARY;
 }
 
 #workspaces button.urgent {
     background-color: $COL_SYSTEM_ALERT;
+    border: 5px solid $COL_SYSTEM_ALERT;
 }
 
 #battery,
 #cpu,
 #temperature,
 #pulseaudio,
+#tray,
 #custom-updates {
-    padding-top: 0px;
-    padding-bottom: 10px;
+    border: 5px solid $COL_SYSTEM_PRIMARY;
+    border-radius: 5px;
+    padding: 5px;
     color: $COL_SYSTEM_FOREGROUND;
     background-color: $COL_SYSTEM_PRIMARY;
     margin-bottom: 5px;
-}
-
-
-#custom-icon {
-    padding-top: 10px;
-    padding-bottom: 0px;
-    background-color: $COL_SYSTEM_PRIMARY;
-    margin-bottom: 0px;
 }
 
 #window {
@@ -66,12 +65,14 @@ window#waybar {
 }
 
 #battery.charging, #battery.plugged {
-    box-shadow: inset 0 -10px $COL_SYSTEM_SECONDARY;
+    background-color: $COL_SYSTEM_SECONDARY;
+    border: 5px solid $COL_SYSTEM_SECONDARY;
 }
 
 @keyframes blink {
     to {
         background-color: #ffffff;
+        border: 5px solid #ffffff;
         color: black;
     }
 }
@@ -82,7 +83,8 @@ window#waybar {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
-    box-shadow: inset 0 -3px $COL_SYSTEM_ALERT;
+    background-color: $COL_SYSTEM_ALERT;
+    border: 5px solid $COL_SYSTEM_ALERT;
 }
 
 label:focus {
@@ -91,15 +93,18 @@ label:focus {
 
 
 #pulseaudio.muted {
-    box-shadow: inset 0 -10px $COL_SYSTEM_SECONDARY;
+    background-color: $COL_SYSTEM_SECONDARY;
+    border: 5px solid $COL_SYSTEM_SECONDARY;
 }
 
 
 #temperature.critical {
-    box-shadow: inset 0 -10px $COL_SYSTEM_ALERT;
+    background-color: $COL_SYSTEM_ALERT;
+    border: 5px solid $COL_SYSTEM_ALERT;
 }
 
 #tray {
+    border: none;
     background-color: transparent;
     margin-bottom: 10px;
 }
