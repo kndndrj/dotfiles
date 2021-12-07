@@ -32,7 +32,7 @@
     "temperature": {
         "critical-threshold": 75,
         "format": "{icon}{temperatureC}°C",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": [" ", " ", " ", " ", " "]
     },
     "battery": {
         "states": {
@@ -43,6 +43,7 @@
         "format": "{icon}{capacity}%",
         "format-charging": " {capacity}%",
         "format-plugged": " {capacity}%",
+        "format-full": "",
         "format-alt": "{icon}{time}",
         "format-icons": ["", "", "", "", ""]
     },
@@ -56,6 +57,7 @@
         "format": "{icon}{capacity}%",
         "format-charging": " {capacity}%",
         "format-plugged": " {capacity}%",
+        "format-full": "",
         "format-alt": "{icon}{time}",
         "format-icons": ["", "", "", "", ""]
     },

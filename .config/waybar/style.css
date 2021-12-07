@@ -33,13 +33,13 @@ window#waybar {
 }
 
 #workspaces button.focused {
-    background-color: #7FBBB3;
-    border: 5px solid #7FBBB3;
+    background-color: #6CC15A;
+    border: 5px solid #6CC15A;
 }
 
 #workspaces button.urgent {
-    background-color: #BD2C40;
-    border: 5px solid #BD2C40;
+    background-color: #FE737C;
+    border: 5px solid #FE737C;
 }
 
 #battery,
@@ -48,11 +48,11 @@ window#waybar {
 #pulseaudio,
 #tray,
 #custom-updates {
-    border: 5px solid #7FBBB3;
+    border: 5px solid #6CC15A;
     border-radius: 5px;
     padding: 5px;
     color: #EFEFEF;
-    background-color: #7FBBB3;
+    background-color: #6CC15A;
     margin-bottom: 5px;
 }
 
@@ -65,8 +65,9 @@ window#waybar {
 }
 
 #battery.charging, #battery.plugged {
-    background-color: #45756f;
-    border: 5px solid #45756f;
+    color: #999999;
+    background-color: #CBE453;
+    border: 5px solid #CBE453;
 }
 
 @keyframes blink {
@@ -83,30 +84,30 @@ window#waybar {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
-    background-color: #BD2C40;
-    border: 5px solid #BD2C40;
+    background-color: #FE737C;
+    border: 5px solid #FE737C;
+}
+
+#battery.warning:not(.charging) {
+    background-color: #F9D66B;
+    border: 5px solid #F9D66B;
 }
 
 label:focus {
-    background-color: #282C34;
+    background-color: #1F1E1C;
 }
 
 
 #pulseaudio.muted {
-    background-color: #45756f;
-    border: 5px solid #45756f;
+    color: #999999;
+    background-color: #CBE453;
+    border: 5px solid #CBE453;
 }
 
 
 #temperature.critical {
-    background-color: #BD2C40;
-    border: 5px solid #BD2C40;
-}
-
-#tray {
-    border: none;
-    background-color: transparent;
-    margin-bottom: 10px;
+    background-color: #FE737C;
+    border: 5px solid #FE737C;
 }
 
 #tray > .passive {
@@ -115,10 +116,11 @@ label:focus {
 
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
-    background-color: #BD2C40;
+    background-color: #FE737C;
+    border: 5px solid #FE737C;
 }
 
 #tray menu {
-    background-color: #282C34;
+    background-color: #1F1E1C;
     color: #EFEFEF;
 }

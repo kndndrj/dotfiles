@@ -65,6 +65,7 @@ window#waybar {
 }
 
 #battery.charging, #battery.plugged {
+    color: $COL_SYSTEM_FOREGROUND_ALT;
     background-color: $COL_SYSTEM_SECONDARY;
     border: 5px solid $COL_SYSTEM_SECONDARY;
 }
@@ -87,12 +88,18 @@ window#waybar {
     border: 5px solid $COL_SYSTEM_ALERT;
 }
 
+#battery.warning:not(.charging) {
+    background-color: $COL_SYSTEM_WARN;
+    border: 5px solid $COL_SYSTEM_WARN;
+}
+
 label:focus {
     background-color: $COL_SYSTEM_BACKGROUND;
 }
 
 
 #pulseaudio.muted {
+    color: $COL_SYSTEM_FOREGROUND_ALT;
     background-color: $COL_SYSTEM_SECONDARY;
     border: 5px solid $COL_SYSTEM_SECONDARY;
 }
@@ -103,12 +110,6 @@ label:focus {
     border: 5px solid $COL_SYSTEM_ALERT;
 }
 
-#tray {
-    border: none;
-    background-color: transparent;
-    margin-bottom: 10px;
-}
-
 #tray > .passive {
     -gtk-icon-effect: dim;
 }
@@ -116,6 +117,7 @@ label:focus {
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
     background-color: $COL_SYSTEM_ALERT;
+    border: 5px solid $COL_SYSTEM_ALERT;
 }
 
 #tray menu {
