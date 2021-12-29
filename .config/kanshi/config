@@ -8,9 +8,14 @@ profile t570_mobile {
     output eDP-1 enable scale 2
 }
 
-profile t570_home {
+profile t570_home1 {
     output eDP-1 disable
     output HDMI-A-2 mode 2560x1440 position 0,0
+}
+
+profile t570_home2 {
+    output eDP-1 disable
+    output DP-1 mode 2560x1440 position 0,0
 }
 
 profile homepc1 {

@@ -63,23 +63,23 @@
     },
     "pulseaudio": {
         "scroll-step": 5,
-        "format": "{icon}",
-        "format-bluetooth": "{icon}",
-        "format-bluetooth-muted": "—————————— 遼",
+        "format": "{icon}蓼",
+        "format-bluetooth": "{icon}",
+        "format-bluetooth-muted": "—————————— ",
         "format-muted": "—————————— 遼",
         "rotate": 90,
         "format-icons": {
             "default": [
-                "█          蓼",
-                "██         蓼",
-                "███        蓼",
-                "████       蓼",
-                "█████      蓼",
-                "██████     蓼",
-                "███████    蓼",
-                "████████   蓼",
-                "█████████  蓼",
-                "██████████ 蓼" 
+                "█          ",
+                "██         ",
+                "███        ",
+                "████       ",
+                "█████      ",
+                "██████     ",
+                "███████    ",
+                "████████   ",
+                "█████████  ",
+                "██████████ " 
             ]
         },
         "on-click": "amixer -q set Master toggle"
