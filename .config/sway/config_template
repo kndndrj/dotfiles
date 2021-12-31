@@ -32,7 +32,7 @@ exec --no-startup-id waybar
 exec --no-startup-id dunst
 
 # Slack
-exec --no-startup-id "slack -u --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
+exec --no-startup-id "slack -u --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland --disable-gpu"
 
 # font
 font pango:Iosevka Nerd Font 9
@@ -95,7 +95,7 @@ workspace 10 output DP-4
 # Basics:
 #
     # Start the browser
-    bindsym $mod+b exec "brave --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
+    bindsym $mod+b exec "brave --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland --disable-gpu"
     # Start a terminal
     bindsym $mod+Return exec $term
 

@@ -108,5 +108,8 @@ while [ -e "/proc/$cp_pid" ]; do
   sleep 0.5
 done 2>/dev/null
 
+# print 100% (fix for smaller files)
+shload_update $sources_size
+
 # Exit message
 printf "\nDone!\n"
