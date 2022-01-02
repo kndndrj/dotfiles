@@ -30,8 +30,8 @@ esac
 #PROMPT='%B%F{${usercol}}%n%f@%M: %F{blue}%25<..<%c%f%(?..%F{red})$%f%b '
 #RPROMPT='$(gitprompt)'
 # Two row prompt
-PROMPT='%B%(?.%F{green}.%F{red})╭ %F{${usercol}}%n%f@%M: %F{blue}%c%f%b $(gitprompt)%B
-%(?.%F{green}.%F{red})╰─>%f%b '
+PROMPT='%B%F{${usercol}}%n%f@%M: %F{blue}%c%f%b $(gitprompt)%B
+%(?..%F{red})╰─>%f%b '
 # Funny prompt
 #PROMPT='%B%F{${usercol}}%n%f:%F{blue}%c%f%b $(gitprompt)%(?.%F{blue}❯%F{cyan}❯%F{green}❯.%F{red}❯❯❯)%f '
 
