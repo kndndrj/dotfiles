@@ -95,7 +95,7 @@ workspace 10 output DP-4
 # Basics:
 #
     # Start the browser
-    bindsym $mod+b exec "brave --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland --disable-gpu"
+    bindsym $mod+b exec "brave --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
     # Start a terminal
     bindsym $mod+Return exec $term
 

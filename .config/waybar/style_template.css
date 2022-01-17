@@ -53,7 +53,6 @@ window#waybar {
     padding: 5px;
     color: $COL_SYSTEM_FOREGROUND;
     background-color: $COL_SYSTEM_PRIMARY;
-    margin-bottom: 5px;
 }
 
 #window {

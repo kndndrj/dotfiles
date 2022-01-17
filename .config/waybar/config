@@ -2,7 +2,7 @@
     "layer": "top",
     "position": "left",
     "height": 35,
-    "spacing": 10,
+    "spacing": 5,
     "width": 55,
 
     // Modules
