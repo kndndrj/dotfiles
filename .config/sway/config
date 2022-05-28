@@ -1,8 +1,7 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
+# Config for sway
+
+# Systemd import some X11 Variables
+include /etc/sway/config.d/*
 
 ### Variables
 set $mod Mod4
@@ -20,9 +19,8 @@ set $menu "wofi --show drun"
 # Detect monitor setup and apply
 exec --no-startup-id kanshi
 
+# Applets
 exec --no-startup-id "nm-applet --indicator"
-
-# start the blueman-appletm which manages bluetooth connections (corner icon)
 exec --no-startup-id blueman-applet
 
 # Statusbar
@@ -32,7 +30,7 @@ exec --no-startup-id waybar
 exec --no-startup-id dunst
 
 # Slack
-exec --no-startup-id "slack -u --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland --disable-gpu"
+exec --no-startup-id "slack -u"
 
 # font
 font pango:Iosevka Nerd Font 9
@@ -45,8 +43,8 @@ output * bg $(ls -d $(xdg-user-dir PICTURES)/Ozadja/* | shuf -n 1) fill
 
 
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
-         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+         timeout 600 'swaylock -f -c 000000' \
+         timeout 605 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
          before-sleep 'swaylock -f -c 000000'
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -74,17 +72,17 @@ input "type:touchpad" {
 }
 
 # set workspaces per monitor
-workspace 1 output DP-3
-workspace 2 output DP-3
-workspace 3 output DP-3
-workspace 4 output DP-3
-workspace 5 output DP-3
+workspace 1 output DP-4
+workspace 2 output DP-4
+workspace 3 output DP-4
+workspace 4 output DP-4
+workspace 5 output DP-4
 
-workspace 6 output DP-4
-workspace 7 output DP-4
-workspace 8 output DP-4
-workspace 9 output DP-4
-workspace 10 output DP-4
+workspace 6 output DP-3
+workspace 7 output DP-3
+workspace 8 output DP-3
+workspace 9 output DP-3
+workspace 10 output DP-3
 
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
@@ -104,7 +102,7 @@ workspace 10 output DP-4
     bindsym $mod+Shift+n exec "dunstctl close-all"
 
     # Screenshots
-    bindsym Print exec grim -g "$(slurp && notify-send 'Screenshot coppied to clipboard')" - | wl-copy
+    bindsym Print exec pgrep "\<slurp\>" || grim -g "$(slurp && notify-send 'Screenshot coppied to clipboard')" - | wl-copy
 
 
     # Kill focused window
@@ -239,6 +237,8 @@ mode "resize" {
 # Window rules
 assign [app_id="Slack"] 10
 assign [class="Microsoft Teams - Preview"] 10
+for_window [class=".*"] inhibit_idle fullscreen
+for_window [app_id=".*"] inhibit_idle fullscreen
 
 ## Colors and gaps
 gaps outer 10
@@ -256,11 +256,8 @@ client.placeholder      #000000     #0C0C0C                 #FFFFFF         #000
 set $gnome-schema org.gnome.desktop.interface
 
 exec_always {
-    gsettings set $gnome-schema gtk-theme 'Arc-Dark'
+    gsettings set $gnome-schema gtk-theme 'Arc'
     gsettings set $gnome-schema icon-theme 'Papirus-Dark'
     # gsettings set $gnome-schema cursor-theme 'Your cursor Theme'
     # gsettings set $gnome-schema font-name 'Your font name'
 }
-
-# Systemd import some X11 Variables
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK

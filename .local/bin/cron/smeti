@@ -1,0 +1,71 @@
+#!/bin/sh
+
+# Script for sending notifications about upcomming garbage pickups from komunala kranj
+# Meant to be used as a cronjob
+
+# Args:
+# -v  - garbage type:
+#           EMB - Embalaža
+#           MKO - Mešani komunalni odpadki
+#           BIO - Biološki odpadki
+# -d  - number of days in the future: int - max 30
+#
+# Sample crontab usage (don't forget to set these variables):
+# 15 * * * * DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus DISPLAY=":0.0" smeti -d 5 -v "EMB MKO"
+
+# Check if jq is installed
+jq -h >/dev/null 2>&1
+[ $? -ne 0 ] && printf "Please install \"jq\" first!\n" && exit 1
+
+# Function for sending notifications (and opening browser pages)
+send_notification () {
+    title=$1
+    body=$2
+    color=$3
+    notify-send -i trash -h "string:bgcolor:$color" -h "string:frcolor:$color" "$title" "$body"
+    exit
+}
+
+# Parse Arguments
+while getopts ":v:d:h" option; do
+    case "${option}" in
+        v) 
+            garbage_type_list=${OPTARG};;
+        d) 
+            future_days=${OPTARG};;
+        h)
+            echo "${HELP}";;
+        :)
+            printf "Error: -${OPTARG} requires an argument.\nUsage:\n${HELP}\n"
+            exit;;
+        *)  printf "Error: invalid argument: \"-${OPTARG}\".\nUsage:\n${HELP}\n"
+            exit;;
+    esac
+done
+
+# Defaults
+[ -z "$garbage_type_list" ] && garbage_type_list="EMB BIO MKO"
+[ -z "$future_days" ] && future_days=5
+
+# Get json response
+response=$(curl -s --request GET \
+    --url "https://gis.komunala-kranj.si/ddmoduli/EkoloskiOtoki.asmx/GetKoledarOdvozov?a=komunalakranj&hsMid=12287780&stDni=30&_=1653564071405" \
+    --header "Content-type: application/json")
+
+# Filters
+garbage_filter=$(echo ".VrstaZabojnika==\"$(echo "$garbage_type_list" | sed 's/ /\" or \.VrstaZabojnika==\"/g')\"")
+days_filter=$(echo ".OdmikDni<=${future_days}")
+
+results=$(echo $response | jq ".d[] | select((${days_filter}) and (${garbage_filter}))")
+
+# Format and send notifications
+echo $results | jq -c | while read result; do
+    # Format
+    full_name=$(echo $result | jq -r ".VrstaOdpadka")
+    date=$(echo $result | jq -r ".Datum")
+    day=$(echo $result | jq -r ".Dan")
+    color=$(echo $result | jq -r ".BarvaZabojnika")
+
+    # Send notification
+    send_notification "Odvoz: $full_name" "$day, $date" "$color" &
+done

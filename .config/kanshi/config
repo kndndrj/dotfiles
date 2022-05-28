@@ -17,7 +17,3 @@ profile t570_home2 {
     output eDP-1 disable
     output DP-1 mode 2560x1440 position 0,0
 }
-
-profile homepc {
-    output DP-1 mode 3840x2160 scale 1.3
-}

@@ -11,7 +11,6 @@ $HOME/.config/polybar/polybar_launch.sh
 # and put "heavy" programs at the end
 $HOME/.config/autorandr/programs_autorestart.sh \
 "nm-applet" \
-"conky" \
 "blueman-applet" \
 "dunst" \
 "flameshot" \

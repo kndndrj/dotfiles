@@ -1,14 +1,14 @@
 {
     "layer": "top",
     "position": "left",
-    "height": 35,
+    "height": 0,
     "spacing": 5,
-    "width": 55,
+    "width": 0,
 
     // Modules
     "modules-left": ["sway/workspaces"],
     "modules-center": ["clock", "clock#date"],
-    "modules-right": ["tray", "custom/updates", "pulseaudio", "cpu", "temperature", "battery", "battery#bat2"],
+    "modules-right": ["tray", "pulseaudio", "custom/updates", "cpu", "temperature", "battery", "battery#bat2"],
 
     // Modules configuration
     "sway/workspaces": {
@@ -18,7 +18,7 @@
         "spacing": 8
     },
     "clock": {
-        "format": "{:%-H:%M}",
+        "format": "{:%H:%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "clock#date": {

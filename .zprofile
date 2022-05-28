@@ -1,4 +1,4 @@
 # Start X-server when I log in
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-  $HOME/.config/sway/swaystart
+  exec $HOME/.config/sway/swaystart
 fi
