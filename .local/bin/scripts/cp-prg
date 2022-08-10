@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/dash
 
 
 # Loading bar functions - reffer to https://github.com/Kndndrj/shload
@@ -42,6 +42,12 @@ shload_update() {
 # Start of script
 #
 
+BLUE='\033[1;34m'
+NC='\033[0m'
+
+sep="
+"
+
 arguments="$@"
 [ -z "$arguments" ] && exit
 
@@ -56,42 +62,57 @@ while [ $# -gt 0 ]; do
       destination="${1##*=}"
       shift;;
     -S)
+      args="$args -S $2"
       shift 2;;
     -*)
       args="$args $1"
       shift;;
     *)
-      sources="$sources $1"
+      if [ -z "$sources" ]; then
+        sources="$1"
+      else
+        sources="$sources$sep$1"
+      fi
       shift;;
   esac
 done
 
+OIFS=$IFS
+IFS="$sep"
 # Get sources and destination 
 if [ -z "$destination" ]; then
-  destination="${sources##* }"
-  sources="${sources% *}"
+  destination="${sources##*$sep}"
+  sources="${sources%$sep*}"
 fi
 
-printf "Copy: $sources\n"
-printf "To:   $destination\n"
+printf "${BLUE}Copy${NC}:\n$sources\n"
+printf "${BLUE}To${NC}:\n$destination\n"
 
 # Append source to destination for file size info later
 if [ -d "$destination" ]; then
   for i in $sources; do
-    new_destination="$new_destination $destination/$(basename $i)"
+    if [ -z "$new_destination" ]; then
+      new_destination="$destination/$(basename $i)"
+    else
+      new_destination="$new_destination$sep$destination/$(basename $i)"
+    fi
   done
-  destination=$new_destination
 fi
+IFS=$OIFS
+
+sources="$(printf "$sources" | awk '{ printf "\"%s\" ", $0 }')"
+destination="\"$destination\""
 
 # Perform a normal copy operation and get the pid
-cp $arguments &
+cmd="cp $args $sources $destination"
+eval "$cmd &"
 cp_pid=$!
 
 # Get sources size
-sources_size=$(du -cd 0 $sources | tail -n 1 | awk '{print $1}')
+sources_size=$(eval "du -cd 0 "$sources"" | tail -n 1 | awk '{print $1}')
 
 # One more safety
-if [ ! -e "/proc/$cp_pid" ]; then
+if [ $sources_size -eq 0 ]; then
   printf "=====\n"
   exit 0
 fi
@@ -103,13 +124,11 @@ shload_setup $sources_size "="
 # Kill the process if interrupt signal is recieved
 trap "kill $cp_pid; exit" 2
 while [ -e "/proc/$cp_pid" ]; do
-  destination_size=$(du -cd 0 $destination | tail -n 1 | awk '{print $1}')
+  destination_size=$(eval "du -cd 0 "$destination"" | tail -n 1 | awk '{print $1}')
   shload_update $destination_size
   sleep 0.5
 done 2>/dev/null
 
 # print 100% (fix for smaller files)
 shload_update $sources_size
-
-# Exit message
-printf "\nDone!\n"
+printf "\n"

@@ -36,10 +36,10 @@ nerd-fonts-fira-code
 ## Usage
 1. Clone this repository
 2. Install GNU stow:
-```bash
-pacman -S stow
+```sh
+# pacman -S stow
 ```
 3. Run ```stow``` (the following command assumes that you are one level above *this* directory)
-```bash
-stow -t $HOME/ dotfiles
+```sh
+$ stow -t $HOME/ dotfiles
 ```

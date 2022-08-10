@@ -38,6 +38,7 @@ PROMPT='%B%F{${usercol}}%n%f@%M: %F{blue}%c%f%b $(gitprompt)%B
 # Alisases
 alias ls='ls --color=auto'
 alias ll='ls --color=auto -alh'
+alias tree='tree -C'
 alias mv='mv -i'
 alias grep='grep --color=auto'
 alias vi='nvim'
@@ -105,21 +106,6 @@ function command_not_found_handler {
     done
   fi
 }
-
-# Display terminal window as: "user@machine..."
-autoload -Uz add-zsh-hook
-function xterm_title_precmd () {
-  print -Pn -- '\e]2;%n@%m %~\a'
-  [[ "$TERM" == 'screen'* ]] && print -Pn -- '\e_\005{g}%n\005{-}@\005{m}%m\005{-} \005{B}%~\005{-}\e\\'
-}
-function xterm_title_preexec () {
-  print -Pn -- '\e]2;%n@%m %~ %# ' && print -n -- "${(q)1}\a"
-  [[ "$TERM" == 'screen'* ]] && { print -Pn -- '\e_\005{g}%n\005{-}@\005{m}%m\005{-} \005{B}%~\005{-} %# ' && print -n -- "${(q)1}\e\\"; }
-}
-if [[ "$TERM" == (alacritty*|gnome*|konsole*|putty*|rxvt*|screen*|tmux*|xterm*) ]]; then
-  add-zsh-hook -Uz precmd xterm_title_precmd
-  add-zsh-hook -Uz preexec xterm_title_preexec
-fi
 
 # Source syntax highlighting and autosuggestions
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
