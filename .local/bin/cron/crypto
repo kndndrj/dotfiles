@@ -46,9 +46,9 @@ for coin in $coins; do
     price=$(printf "$info" | head -n 1)
     change=$(printf "$info" | tail -n 1)
     # Set change color
-    [ $(printf " ${change}\n" | sed "s/\.//g") -lt 0 ] && change_color="#70120d" || change_color="#426609"
+    [ $(printf " ${change}\n" | sed "s/\.//g") -lt 0 ] && change_color="red" || change_color="green"
 
     # Create a message and send a notification
-    message=$(LC_ALL=C printf "<b>%.2f ${currency} / <span color='${change_color}'>%.2f%%</span></b>" "$price" "$change")
+    message=$(LC_ALL=C printf "<b>%.6f ${currency} / <span color='${change_color}'>%.2f%%</span></b>" "$price" "$change")
     send_notification $coin "$message" &
 done

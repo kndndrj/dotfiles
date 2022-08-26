@@ -1,4 +1,4 @@
-# River start script
+# Sway start script
 
 # Environment variables
 
@@ -26,14 +26,14 @@ export PYLINTHOME="$XDG_CACHE_HOME"/pylint
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 
 # System color settings
-export COL_SYSTEM_PRIMARY="#6CC15A"
-export COL_SYSTEM_SECONDARY="#CBE453"
-export COL_SYSTEM_ALERT="#FE737C"
-export COL_SYSTEM_WARN="#F9D66B"
-export COL_SYSTEM_FOREGROUND="#EFEFEF"
-export COL_SYSTEM_BACKGROUND="#1F1E1C"
-export COL_SYSTEM_FOREGROUND_ALT="#999999"
-export COL_SYSTEM_BACKGROUND_ALT="#444444"
+export COL_SYSTEM_PRIMARY="#D5AD18"
+export COL_SYSTEM_SECONDARY="#DCC080"
+export COL_SYSTEM_ALERT="#FF4545"
+export COL_SYSTEM_WARN="#FF875A"
+export COL_SYSTEM_FOREGROUND="#E9E8E8"
+export COL_SYSTEM_BACKGROUND="#444444"
+export COL_SYSTEM_FOREGROUND_ALT="#AAAAAA"
+export COL_SYSTEM_BACKGROUND_ALT="#1F1E1C"
 export COL_SYSTEM_BACKGROUND_TRANSPARENT="#bb${COL_SYSTEM_BACKGROUND#\#}"
 
 # Misc
@@ -51,6 +51,6 @@ envsubst '$COL_SYSTEM_PRIMARY $COL_SYSTEM_SECONDARY $COL_SYSTEM_ALERT $COL_SYSTE
 export XDG_CURRENT_DESKTOP=sway
 
 # Start sway
-sway --unsupported-gpu
+sway --unsupported-gpu > /var/log/sway.log 2>&1
 
 # vim: ft=sh

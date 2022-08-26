@@ -1,9 +1,12 @@
 # Config for sway
+# The real file is generated via envsubst in ~/.config/sway/wrapper.sh
 
 # Systemd import some X11 Variables
 include /etc/sway/config.d/*
 
-### Variables
+#
+# Variables
+#
 set $mod Mod4
 
 set $left h
@@ -11,38 +14,36 @@ set $down j
 set $up k
 set $right l
 
-set $term kitty
+set $term alacritty
 
 set $menu "wofi --show drun"
 
+#
 # Startup
-# Detect monitor setup and apply
-exec --no-startup-id kanshi
-
-# Applets
-exec --no-startup-id "nm-applet --indicator"
-exec --no-startup-id blueman-applet
+#
+# Detect monitor setup and apply it
+exec kanshi
 
 # Statusbar
-exec --no-startup-id waybar
+exec waybar
 
 # Notification daemon
-exec --no-startup-id dunst
+exec dunst
 
-# font
-font pango:Iosevka Nerd Font 9
+# Applets
+exec "nm-applet --indicator"
+exec blueman-applet
 
-
-### Output configuration
+#
+# Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg $(ls -d $(xdg-user-dir PICTURES)/Ozadja/* | shuf -n 1) fill
 
-
 exec swayidle -w \
-         timeout 600 'swaylock -f -c 000000' \
+         timeout 600 'swaylock -f -c ${COL_SYSTEM_FOREGROUND}' \
          timeout 605 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c 000000'
+         before-sleep 'swaylock -f -c ${COL_SYSTEM_FOREGROUND}'
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -101,7 +102,6 @@ workspace 10 output DP-3
     # Screenshots
     bindsym Print exec pgrep "\<slurp\>" || grim -g "$(slurp && notify-send 'Screenshot coppied to clipboard')" - | wl-copy
 
-
     # Kill focused window
     bindsym $mod+a kill
 
@@ -120,6 +120,9 @@ workspace 10 output DP-3
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+d exec swaynag -t warning -m 'Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+    # Lock screen
+    bindsym $mod+Shift+x exec swaylock -c '${COL_SYSTEM_FOREGROUND}'
 
 #
 # Sound:
@@ -141,10 +144,10 @@ workspace 10 output DP-3
     bindsym $mod+$right focus right
 
     # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
+    bindsym $mod+Shift+$left move left 20
+    bindsym $mod+Shift+$down move down 20
+    bindsym $mod+Shift+$up move up 20
+    bindsym $mod+Shift+$right move right 20
 #
 # Workspaces:
 #
@@ -200,8 +203,6 @@ workspace 10 output DP-3
 #
 # Scratchpads:
 #
-for_window [app_id="scratchpad*"] opacity 0.95
-
 for_window [app_id="scratchpad*"] move scratchpad
 for_window [app_id="scratchpad*"] scratchpad show
 for_window [app_id="scratchpad*"] resize set 45ppt 60ppt
@@ -220,34 +221,38 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
+    bindsym h resize shrink width 15px
+    bindsym j resize grow height 15px
+    bindsym k resize shrink height 15px
+    bindsym l resize grow width 15px
 
     # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-#bindsym $mod+r mode "resize"
+bindsym $mod+m mode "resize"
 
 # Window rules
 assign [app_id="Slack"] 10
-assign [class="Microsoft Teams - Preview"] 10
 for_window [class=".*"] inhibit_idle fullscreen
 for_window [app_id=".*"] inhibit_idle fullscreen
 
-## Colors and gaps
+#
+# Colors
+#
 gaps outer 10
-default_border pixel 3
+default_border pixel 2
 
 # Colorscheme for Sway
-# class                 border      bground                 text            indicator               child_border
-client.focused          #1FA97D     ${COL_SYSTEM_PRIMARY}   #FFFFFF         ${COL_SYSTEM_PRIMARY}   ${COL_SYSTEM_PRIMARY}
-client.focused_inactive #333333     #5F676A                 #FFFFFF         #484E50                 #5F676A
-client.unfocused        #333333     #222222                 #888888         #292D2E                 #222222
-client.urgent           #2F343A     #900000                 #FFFFFF         #900000                 #900000
-client.placeholder      #000000     #0C0C0C                 #FFFFFF         #000000                 #0C0C0C
+# class                 border                       bground                      text                         indicator                    child_border
+client.focused          ${COL_SYSTEM_PRIMARY}        ${COL_SYSTEM_PRIMARY}        ${COL_SYSTEM_FOREGROUND}     ${COL_SYSTEM_PRIMARY}        ${COL_SYSTEM_PRIMARY}
+client.focused_inactive ${COL_SYSTEM_BACKGROUND}     ${COL_SYSTEM_BACKGROUND}     ${COL_SYSTEM_FOREGROUND}     ${COL_SYSTEM_FOREGROUND}     ${COL_SYSTEM_FOREGROUND_ALT}
+client.unfocused        ${COL_SYSTEM_BACKGROUND}     ${COL_SYSTEM_BACKGROUND}     ${COL_SYSTEM_FOREGROUND_ALT} ${COL_SYSTEM_BACKGROUND}     ${COL_SYSTEM_BACKGROUND_ALT}
+client.urgent           ${COL_SYSTEM_BACKGROUND}     ${COL_SYSTEM_ALERT}          ${COL_SYSTEM_FOREGROUND}     ${COL_SYSTEM_ALERT}          ${COL_SYSTEM_ALERT}
+client.placeholder      ${COL_SYSTEM_BACKGROUND_ALT} ${COL_SYSTEM_BACKGROUND_ALT} ${COL_SYSTEM_FOREGROUND}     ${COL_SYSTEM_BACKGROUND_ALT} ${COL_SYSTEM_BACKGROUND_ALT}
+
+# Font
+font pango:Iosevka Nerd Font 9
 
 # GTK themes
 set $gnome-schema org.gnome.desktop.interface
@@ -258,3 +263,5 @@ exec_always {
     # gsettings set $gnome-schema cursor-theme 'Your cursor Theme'
     # gsettings set $gnome-schema font-name 'Your font name'
 }
+
+# vim:ft=i3config

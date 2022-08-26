@@ -37,21 +37,16 @@ PROMPT='%B%F{${usercol}}%n%f@%M: %F{blue}%c%f%b $(gitprompt)%B
 
 # Alisases
 alias ls='ls --color=auto'
-alias ll='ls --color=auto -alh'
-alias tree='tree -C'
+command -v exa &> /dev/null && alias l='exa' || alias l='ls --color=auto'
+command -v exa &> /dev/null && alias ll='exa -al --git' || alias ll='ls --color=auto -alh'
+command -v exa &> /dev/null && alias tree='exa -Ta' || alias tree='tree -Ca'
+command -v colordiff &> /dev/null && alias diff='colordiff'
+command -v bat &> /dev/null && alias cat='bat --theme=OneHalfDark --paging=never --style=plain'
+command -v bat &> /dev/null && export MANPAGER="sh -c 'col -bx | bat --theme=OneHalfDark -l man -p'"
+command -v fd &> /dev/null || alias fd='find -iname'
 alias mv='mv -i'
 alias grep='grep --color=auto'
-alias vi='nvim'
 alias vim='nvim'
-alias diff='colordiff'
-alias fm='source ranger'
-alias get_idf='. $HOME/esp/esp-idf/export.sh'
-
-# For invoking commands on startup (if calling shell with custom parameters
-if [[ $1 == eval ]]; then
-  "$@"
-  set --
-fi
 
 # History in cache directory:
 HISTSIZE=10000

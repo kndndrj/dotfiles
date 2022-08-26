@@ -1,13 +1,12 @@
 {
     "layer": "top",
-    "position": "left",
-    "height": 0,
+    "position": "bottom",
+    "height": 30,
     "spacing": 5,
-    "width": 0,
 
     // Modules
     "modules-left": ["sway/workspaces"],
-    "modules-center": ["clock", "clock#date"],
+    "modules-center": ["clock"],
     "modules-right": ["tray", "pulseaudio", "custom/updates", "cpu", "temperature", "battery", "battery#bat2"],
 
     // Modules configuration
@@ -18,12 +17,9 @@
         "spacing": 8
     },
     "clock": {
-        "format": "{:%H:%M}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
-    },
-    "clock#date": {
-        "format": "{:%d.%m}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+        "format": "{:%H:%M | %d.%m.%Y}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
         "format": " {usage}%",
@@ -39,11 +35,10 @@
             "warning": 30,
             "critical": 15
         },
-        "full-at": 97,
-        "format": "{icon}{capacity}%",
+        "full-at": 95,
+        "format": "{icon} {capacity}%",
         "format-charging": " {capacity}%",
         "format-plugged": " {capacity}%",
-        "format-full": "",
         "format-alt": "{icon}{time}",
         "format-icons": ["", "", "", "", ""]
     },
@@ -53,33 +48,31 @@
             "warning": 30,
             "critical": 15
         },
-        "full-at": 97,
-        "format": "{icon}{capacity}%",
+        "full-at": 95,
+        "format": "{icon} {capacity}%",
         "format-charging": " {capacity}%",
         "format-plugged": " {capacity}%",
-        "format-full": "",
         "format-alt": "{icon}{time}",
         "format-icons": ["", "", "", "", ""]
     },
     "pulseaudio": {
         "scroll-step": 5,
-        "format": "{icon}蓼",
-        "format-bluetooth": "{icon}",
-        "format-bluetooth-muted": "—————————— ",
-        "format-muted": "—————————— 遼",
-        "rotate": 90,
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}% ",
+        "format-bluetooth-muted": "婢     muted      ",
+        "format-muted": "婢     muted     ",
         "format-icons": {
             "default": [
-                "█          ",
-                "██         ",
-                "███        ",
-                "████       ",
-                "█████      ",
-                "██████     ",
-                "███████    ",
-                "████████   ",
-                "█████████  ",
-                "██████████ " 
+                "奄 |---------",
+                "奄 -|--------",
+                "奄 --|-------",
+                "奔 ---|------",
+                "奔 ----|-----",
+                "奔 -----|----",
+                "奔 ------|---",
+                "墳 -------|--",
+                "墳 --------|-",
+                "墳 ---------|"
             ]
         },
         "on-click": "amixer -q set Master toggle"
