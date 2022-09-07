@@ -7,14 +7,14 @@ include /etc/sway/config.d/*
 #
 # Variables
 #
-set $mod Mod4
+set $mod Mod1
 
 set $left h
 set $down j
 set $up k
 set $right l
 
-set $term alacritty
+set $term kitty
 
 set $menu "wofi --show drun"
 
@@ -38,7 +38,7 @@ exec blueman-applet
 # Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg $(ls -d $(xdg-user-dir PICTURES)/Ozadja/* | shuf -n 1) fill
+output * bg $(ls -d $(xdg-user-dir PICTURES)/wallpapers/* | shuf -n 1) fill
 
 exec swayidle -w \
          timeout 600 'swaylock -f -c ${COL_SYSTEM_FOREGROUND}' \
@@ -208,10 +208,10 @@ for_window [app_id="scratchpad*"] scratchpad show
 for_window [app_id="scratchpad*"] resize set 45ppt 60ppt
 
 for_window [app_id="scratchpad1"] move position 5ppt 30ppt
-bindsym $mod+s exec 'swaymsg [app_id="scratchpad1"] scratchpad show || exec $term --class scratchpad1'
+bindsym $mod+s exec '(swaymsg [app_id="scratchpad1"] scratchpad show && (swaymsg [app_id="scratchpad1"] resize set 45ppt 60ppt || true) && (swaymsg [app_id="scratchpad1"] move position 5ppt 30ppt || true)) || exec $term --class scratchpad1'
 
 for_window [app_id="scratchpad2"] move position 50ppt 30ppt
-bindsym $mod+d exec 'swaymsg [app_id="scratchpad2"] scratchpad show || exec $term --class scratchpad2'
+bindsym $mod+d exec '(swaymsg [app_id="scratchpad2"] scratchpad show && (swaymsg [app_id="scratchpad2"] resize set 45ppt 60ppt || true) && (swaymsg [app_id="scratchpad2"] move position 50ppt 30ppt || true)) || exec $term --class scratchpad2'
 
 #
 # Resizing containers:
@@ -257,10 +257,11 @@ font pango:Iosevka Nerd Font 9
 # GTK themes
 set $gnome-schema org.gnome.desktop.interface
 
+seat seat0 xcursor_theme breeze_cursors 24
 exec_always {
     gsettings set $gnome-schema gtk-theme 'Arc'
     gsettings set $gnome-schema icon-theme 'Papirus-Dark'
-    # gsettings set $gnome-schema cursor-theme 'Your cursor Theme'
+    gsettings set $gnome-schema cursor-theme 'breeze_cursors'
     # gsettings set $gnome-schema font-name 'Your font name'
 }
 
