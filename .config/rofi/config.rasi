@@ -1,7 +1,0 @@
-configuration {
-  theme:          "sidetab.rasi";
-  terminal:       "alacritty";
-  kb-mode-next:   "Super+Tab,Super+c";
-  kb-cancel:      "Escape,Super+Escape";
-  modi:           "drun,window,ssh,run";
-}
