@@ -35,12 +35,6 @@ zstyle ':completion:*' menu select
 _comp_options+=(globdots)
 zmodload zsh/complist
 
-# Enable vi mode
-bindkey -v
-bindkey -v '^?' backward-delete-char
-bindkey '^r' history-incremental-search-backward
-bindkey '^n' expand-or-complete
-bindkey '^p' reverse-menu-complete
 
 #
 # Alisases
@@ -58,34 +52,6 @@ alias grep='grep --color=auto'
 alias vim='nvim'
 alias vi='nvim'
 
-#
-# Handler if command not found
-#
-function command_not_found_handler {
-  local purple='\e[1;35m' bright='\e[0;1m' green='\e[1;32m' reset='\e[0m'
-  printf 'zsh: command not found: %s\n' "$1"
-  local entries=(
-    ${(f)"$(/usr/bin/pacman -F --machinereadable -- "/usr/bin/$1")"}
-  )
-  if (( ${#entries[@]} ))
-  then
-    printf "${bright}$1${reset} may be found in the following packages:\n"
-    local pkg
-    for entry in "${entries[@]}"
-    do
-      # (repo package version file)
-      local fields=(
-        ${(0)entry}
-      )
-      if [[ "$pkg" != "${fields[2]}" ]]
-      then
-        printf "${purple}%s/${bright}%s ${green}%s${reset}\n" "${fields[1]}" "${fields[2]}" "${fields[3]}"
-      fi
-      printf '    /%s\n' "${fields[4]}"
-      pkg="${fields[2]}"
-    done
-  fi
-}
 
 #
 # Plugins
@@ -97,8 +63,10 @@ source "$ZPLUG_HOME"/init.zsh
 
 # Plugin list
 zplug "woefe/git-prompt.zsh", use:"{git-prompt.zsh,examples/default.zsh}"
+zplug "jeffreytse/zsh-vi-mode"
 zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-syntax-highlighting", defer:3
+zplug "plugins/command-not-found", from:oh-my-zsh
+zplug "zdharma-continuum/fast-syntax-highlighting", defer:3
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -110,6 +78,7 @@ fi
 
 # Load all plugins
 zplug load
+
 
 #
 # Prompt
