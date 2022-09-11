@@ -123,5 +123,6 @@ function zvm_after_select_vi_mode() {
   esac
 }
 
-PROMPT='%B%F{yellow}%n%f@%M: %F{blue}%c%f%b $(gitprompt)
+PROMPT='%B%F{yellow}%n%f@%M: %F{blue}%c%f%b
 %B%F{${vimodecol}}${vimode}%f%(?..%F{red})❯❯%f%b '
+RPROMPT='$(gitprompt)'
