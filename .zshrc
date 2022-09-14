@@ -62,9 +62,9 @@ export ZPLUG_HOME="$HOME/.local/share/zsh/zplug"
 if [ ! -d "$ZPLUG_HOME" ]; then
     printf "First time setup. Install zplug? [y/N]: "
     if read -q; then
-        echo
-        curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-        sleep 1
+      echo; echo "Installing zplug..."
+      git clone https://github.com/zplug/zplug $ZPLUG_HOME || return 1
+      echo "Successfully installed zplug!"
     else
       echo
       echo "Proceeding with minimal config."
