@@ -19,7 +19,8 @@
     "clock": {
         "format": "{:%H:%M | %d.%m.%Y}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format-alt": "{:%Y-%m-%d}",
+        "locale": "sl_SI.UTF-8"
     },
     "cpu": {
         "format": " {usage}%",
