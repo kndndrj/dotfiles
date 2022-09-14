@@ -19,8 +19,8 @@ window:
   # Window dimensions in character columns and lines
   # (changes require restart)
   dimensions:
-    columns: 115
-    lines: 32
+    columns: 120
+    lines: 45
 
   # Window padding (changes require restart)
   #
@@ -31,7 +31,7 @@ window:
   #   y: 5
 
   # Spread additional padding evenly around the terminal content.
-  dynamic_padding: false
+  dynamic_padding: true
 
   # Window decorations
   #
@@ -49,22 +49,22 @@ window:
 # Font settings
 font:
   normal:
-    family: Iosevka Nerd Font
-    style: Medium
+    family: FantasqueSansMono Nerd Font
+    style: Regular
 
   bold:
-    family: Iosevka Nerd Font
-    style: Heavy
+    family: FantasqueSansMono Nerd Font
+    style: Bold
 
   italic:
-    family: Iosevka Nerd Font
-    style: Medium Italic
+    family: FantasqueSansMono Nerd Font
+    style: Italic
 
   bold_italic:
-    family: Iosevka Nerd Font
-    style: Heavy Italic
+    family: FantasqueSansMono Nerd Font
+    style: Bold Italic
 
-  size: 11
+  size: 12
 
 
 # Colors (One Dark)
@@ -76,21 +76,21 @@ colors:
 
   cursor:
     text:       CellBackground
-    cursor:     '#528bff' # syntax-cursor-color
+    cursor:     '#528bff'
 
   selection:
     text:       CellForeground
-    background: '#3e4451' # syntax-selection-color
+    background: '#3e4451'
 
   normal:
-    black:      '#5c6370' # mono-3
-    red:        '#e06c75' # red 1
+    black:      '#5c6370'
+    red:        '#e06c75'
     green:      '#98c379'
-    yellow:     '#e5c07b' # orange 2
+    yellow:     '#e5c07b'
     blue:       '#61afef'
     magenta:    '#c678dd'
     cyan:       '#56b6c2'
-    white:      '#828997' # mono-2
+    white:      '#828997'
 
   bright:
     black:   '#5c6370'

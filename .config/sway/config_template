@@ -7,14 +7,14 @@ include /etc/sway/config.d/*
 #
 # Variables
 #
-set $mod Mod4
+set $mod Mod1
 
 set $left h
 set $down j
 set $up k
 set $right l
 
-set $term alacritty
+set $term kitty
 
 set $menu "wofi --show drun"
 
@@ -38,7 +38,7 @@ exec blueman-applet
 # Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg $(ls -d $(xdg-user-dir PICTURES)/Ozadja/* | shuf -n 1) fill
+output * bg $(ls -d $(xdg-user-dir PICTURES)/wallpapers/* | shuf -n 1) fill
 
 exec swayidle -w \
          timeout 600 'swaylock -f -c ${COL_SYSTEM_FOREGROUND}' \
@@ -132,8 +132,8 @@ workspace 10 output DP-3
     bindsym XF86AudioLowerVolume  exec "amixer -q set Master 5%-"
     bindsym XF86AudioMute         exec "amixer -q set Master toggle"
 
-    bindsym XF86MonBrightnessUp   exec "echo $(($(cat /sys/class/backlight/intel_backlight/brightness) + 500)) | sudo tee /sys/class/backlight/intel_backlight/brightness >/dev/null 2>&1"
-    bindsym XF86MonBrightnessDown exec "echo $(($(cat /sys/class/backlight/intel_backlight/brightness) - 500)) | sudo tee /sys/class/backlight/intel_backlight/brightness >/dev/null 2>&1"
+    bindsym XF86MonBrightnessUp   exec "echo $(( $(cat /sys/class/backlight/*/brightness) + $(( $(cat /sys/class/backlight/*/max_brightness) / 20 )) ))  | sudo tee /sys/class/backlight/*/brightness >/dev/null 2>&1"
+    bindsym XF86MonBrightnessDown exec "echo $(( $(cat /sys/class/backlight/*/brightness) - $(( $(cat /sys/class/backlight/*/max_brightness) / 20 )) ))  | sudo tee /sys/class/backlight/*/brightness >/dev/null 2>&1"
 #
 # Moving around:
 #
@@ -152,27 +152,27 @@ workspace 10 output DP-3
 # Workspaces:
 #
     # Switch to workspace
-    bindsym $mod+q workspace number 1
-    bindsym $mod+w workspace number 2
-    bindsym $mod+e workspace number 3
-    bindsym $mod+r workspace number 4
-    bindsym $mod+t workspace number 5
-    bindsym $mod+z workspace number 6
-    bindsym $mod+u workspace number 7
-    bindsym $mod+i workspace number 8
-    bindsym $mod+o workspace number 9
-    bindsym $mod+p workspace number 10
+    bindsym $mod+1 workspace number 1
+    bindsym $mod+2 workspace number 2
+    bindsym $mod+3 workspace number 3
+    bindsym $mod+4 workspace number 4
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number 8
+    bindsym $mod+9 workspace number 9
+    bindsym $mod+0 workspace number 10
     # Move focused container to workspace
-    bindsym $mod+Shift+q move container to workspace number 1
-    bindsym $mod+Shift+w move container to workspace number 2
-    bindsym $mod+Shift+e move container to workspace number 3
-    bindsym $mod+Shift+r move container to workspace number 4
-    bindsym $mod+Shift+t move container to workspace number 5
-    bindsym $mod+Shift+z move container to workspace number 6
-    bindsym $mod+Shift+u move container to workspace number 7
-    bindsym $mod+Shift+i move container to workspace number 8
-    bindsym $mod+Shift+o move container to workspace number 9
-    bindsym $mod+Shift+p move container to workspace number 10
+    bindsym $mod+Shift+1 move container to workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
@@ -208,10 +208,10 @@ for_window [app_id="scratchpad*"] scratchpad show
 for_window [app_id="scratchpad*"] resize set 45ppt 60ppt
 
 for_window [app_id="scratchpad1"] move position 5ppt 30ppt
-bindsym $mod+s exec 'swaymsg [app_id="scratchpad1"] scratchpad show || exec $term --class scratchpad1'
+bindsym $mod+s exec '(swaymsg [app_id="scratchpad1"] scratchpad show && (swaymsg [app_id="scratchpad1"] resize set 45ppt 60ppt || true) && (swaymsg [app_id="scratchpad1"] move position 5ppt 30ppt || true)) || exec $term --class scratchpad1'
 
 for_window [app_id="scratchpad2"] move position 50ppt 30ppt
-bindsym $mod+d exec 'swaymsg [app_id="scratchpad2"] scratchpad show || exec $term --class scratchpad2'
+bindsym $mod+d exec '(swaymsg [app_id="scratchpad2"] scratchpad show && (swaymsg [app_id="scratchpad2"] resize set 45ppt 60ppt || true) && (swaymsg [app_id="scratchpad2"] move position 50ppt 30ppt || true)) || exec $term --class scratchpad2'
 
 #
 # Resizing containers:
@@ -257,10 +257,11 @@ font pango:Iosevka Nerd Font 9
 # GTK themes
 set $gnome-schema org.gnome.desktop.interface
 
+seat seat0 xcursor_theme breeze_cursors 24
 exec_always {
     gsettings set $gnome-schema gtk-theme 'Arc'
     gsettings set $gnome-schema icon-theme 'Papirus-Dark'
-    # gsettings set $gnome-schema cursor-theme 'Your cursor Theme'
+    gsettings set $gnome-schema cursor-theme 'breeze_cursors'
     # gsettings set $gnome-schema font-name 'Your font name'
 }
 
