@@ -57,14 +57,16 @@ alias vi='nvim'
 #
 # Plugins
 #
-# Install zplug if not present
-export ZPLUG_HOME="$HOME/.local/share/zsh/zplug"
-if [ ! -d "$ZPLUG_HOME" ]; then
-    printf "First time setup. Install zplug? [y/N]: "
+# zcomet home directory
+export ZCOMET_HOME="$HOME/.local/share/zsh/zcomet"
+zstyle ':zcomet:*' home-dir "$ZCOMET_HOME"
+# Install zcomet if not present
+if [ ! -d "$ZCOMET_HOME"/bin ]; then
+    printf "First time setup. Install zcomet? [y/N]: "
     if read -q; then
-      echo; echo "Installing zplug..."
-      git clone https://github.com/zplug/zplug $ZPLUG_HOME || return 1
-      echo "Successfully installed zplug!"
+      echo; echo "Installing zcomet..."
+      git clone https://github.com/agkozak/zcomet.git "$ZCOMET_HOME"/bin || return 1
+      echo "Successfully installed zcomet!"
     else
       echo
       echo "Proceeding with minimal config."
@@ -72,26 +74,18 @@ if [ ! -d "$ZPLUG_HOME" ]; then
     fi
 fi
 
-source "$ZPLUG_HOME"/init.zsh
+source "$ZCOMET_HOME"/bin/zcomet.zsh
 
 # Plugin list
-zplug "woefe/git-prompt.zsh", use:"{git-prompt.zsh,examples/compact.zsh}"
-zplug "jeffreytse/zsh-vi-mode"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "plugins/command-not-found", from:oh-my-zsh
-zplug "zdharma-continuum/fast-syntax-highlighting", defer:3
-zplug "joshskidmore/zsh-fzf-history-search"
+zcomet load "woefe/git-prompt.zsh" git-prompt.zsh examples/compact.zsh
+zcomet load "jeffreytse/zsh-vi-mode"
+zcomet load "zsh-users/zsh-autosuggestions"
+zcomet load "ohmyzsh" plugins/command-not-found
+zcomet load "joshskidmore/zsh-fzf-history-search"
+zcomet load "zdharma-continuum/fast-syntax-highlighting"
 
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-
-# Load all plugins
-zplug load
+# Load all plugins (install missing ones)
+zcomet compinit
 
 
 #

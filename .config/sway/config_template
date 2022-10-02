@@ -1,8 +1,12 @@
 # Config for sway
 # The real file is generated via envsubst in ~/.config/sway/wrapper.sh
 
-# Systemd import some X11 Variables
-include /etc/sway/config.d/*
+# Sway does not set DISPLAY/WAYLAND_DISPLAY in the systemd user environment
+# See FS#63021
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+
 
 #
 # Variables
@@ -17,6 +21,7 @@ set $right l
 set $term kitty
 
 set $menu "wofi --show drun"
+
 
 #
 # Startup
@@ -34,6 +39,7 @@ exec dunst
 exec "nm-applet --indicator"
 exec blueman-applet
 
+
 #
 # Output configuration
 #
@@ -49,19 +55,18 @@ exec swayidle -w \
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
-### Input configuration
+#
+# Input configuration
 #
 # Keyboard
-#
 input "type:keyboard" {
     xkb_layout "si_nodead"
     xkb_numlock enable
     repeat_rate 50
     repeat_delay 300
 }
-#
+
 # Touchpad:
-#
 input "type:touchpad" {
     dwt enabled
     tap enabled
@@ -69,27 +74,11 @@ input "type:touchpad" {
     middle_emulation enabled
 }
 
-# set workspaces per monitor
-workspace 1 output DP-4
-workspace 2 output DP-4
-workspace 3 output DP-4
-workspace 4 output DP-4
-workspace 5 output DP-4
-
-workspace 6 output DP-3
-workspace 7 output DP-3
-workspace 8 output DP-3
-workspace 9 output DP-3
-workspace 10 output DP-3
 
 #
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
-
-### Key bindings
+# Key bindings
 #
-# Basics:
-#
+# Basics
     # Start the browser
     bindsym $mod+b exec "brave --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
     # Start a terminal
@@ -124,9 +113,8 @@ workspace 10 output DP-3
     # Lock screen
     bindsym $mod+Shift+x exec swaylock -c '${COL_SYSTEM_FOREGROUND}'
 
-#
-# Sound:
-#
+
+# Sound and brightness
     # change volume or toggle mute
     bindsym XF86AudioRaiseVolume  exec "amixer -q set Master 5%+"
     bindsym XF86AudioLowerVolume  exec "amixer -q set Master 5%-"
@@ -134,9 +122,9 @@ workspace 10 output DP-3
 
     bindsym XF86MonBrightnessUp   exec "echo $(( $(cat /sys/class/backlight/*/brightness) + $(( $(cat /sys/class/backlight/*/max_brightness) / 20 )) ))  | sudo tee /sys/class/backlight/*/brightness >/dev/null 2>&1"
     bindsym XF86MonBrightnessDown exec "echo $(( $(cat /sys/class/backlight/*/brightness) - $(( $(cat /sys/class/backlight/*/max_brightness) / 20 )) ))  | sudo tee /sys/class/backlight/*/brightness >/dev/null 2>&1"
-#
-# Moving around:
-#
+
+
+# Moving around
     # Move your focus around
     bindsym $mod+$left focus left
     bindsym $mod+$down focus down
@@ -148,9 +136,8 @@ workspace 10 output DP-3
     bindsym $mod+Shift+$down move down 20
     bindsym $mod+Shift+$up move up 20
     bindsym $mod+Shift+$right move right 20
-#
-# Workspaces:
-#
+
+# Workspaces
     # Switch to workspace
     bindsym $mod+1 workspace number 1
     bindsym $mod+2 workspace number 2
@@ -173,22 +160,8 @@ workspace 10 output DP-3
     bindsym $mod+Shift+8 move container to workspace number 8
     bindsym $mod+Shift+9 move container to workspace number 9
     bindsym $mod+Shift+0 move container to workspace number 10
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
-#
-# Layout stuff:
-#
-    # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
-    # respectively.
-    # bindsym $mod+c splith
-    # bindsym $mod+v splitv
 
-    # Switch the current container between different layout styles
-    # bindsym $mod+s layout stacking
-    # bindsym $mod+w layout tabbed
-    # bindsym $mod+e layout toggle split
-
+# Layout stuff
     # Make the current focus fullscreen
     bindsym $mod+minus fullscreen
 
@@ -198,49 +171,72 @@ workspace 10 output DP-3
     # Swap focus between the tiling area and the floating area
     bindsym $mod+space focus mode_toggle
 
-    # Move focus to the parent container
-    #bindsym $mod+a focus parent
+# Scratchpads
+    for_window [app_id="scratchpad*"] move scratchpad
+    for_window [app_id="scratchpad*"] scratchpad show
+
+    bindsym $mod+s exec $HOME/.config/sway/scripts/scratchpad.sh scratchpad left $term
+
+    bindsym $mod+d exec $HOME/.config/sway/scripts/scratchpad.sh scratchpad right $term
+
+# Resizing containers
+    mode "resize" {
+        # left will shrink the containers width
+        # right will grow the containers width
+        # up will shrink the containers height
+        # down will grow the containers height
+        bindsym h resize shrink width 15px
+        bindsym j resize grow height 15px
+        bindsym k resize shrink height 15px
+        bindsym l resize grow width 15px
+
+        # Return to default mode
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+    }
+    bindsym $mod+m mode "resize"
+
+
 #
-# Scratchpads:
+# Layout
 #
-for_window [app_id="scratchpad*"] move scratchpad
-for_window [app_id="scratchpad*"] scratchpad show
-for_window [app_id="scratchpad*"] resize set 45ppt 60ppt
-
-for_window [app_id="scratchpad1"] move position 5ppt 30ppt
-bindsym $mod+s exec '(swaymsg [app_id="scratchpad1"] scratchpad show && (swaymsg [app_id="scratchpad1"] resize set 45ppt 60ppt || true) && (swaymsg [app_id="scratchpad1"] move position 5ppt 30ppt || true)) || exec $term --class scratchpad1'
-
-for_window [app_id="scratchpad2"] move position 50ppt 30ppt
-bindsym $mod+d exec '(swaymsg [app_id="scratchpad2"] scratchpad show && (swaymsg [app_id="scratchpad2"] resize set 45ppt 60ppt || true) && (swaymsg [app_id="scratchpad2"] move position 50ppt 30ppt || true)) || exec $term --class scratchpad2'
-
-#
-# Resizing containers:
-#
-mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
-    bindsym h resize shrink width 15px
-    bindsym j resize grow height 15px
-    bindsym k resize shrink height 15px
-    bindsym l resize grow width 15px
-
-    # Return to default mode
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+m mode "resize"
-
-# Window rules
 assign [app_id="Slack"] 10
 for_window [class=".*"] inhibit_idle fullscreen
 for_window [app_id=".*"] inhibit_idle fullscreen
 
+# set workspaces per monitor
+workspace 1 output DP-4
+workspace 2 output DP-4
+workspace 3 output DP-4
+workspace 4 output DP-4
+workspace 5 output DP-4
+
+workspace 6 output DP-3
+workspace 7 output DP-3
+workspace 8 output DP-3
+workspace 9 output DP-3
+workspace 10 output DP-3
+
+
+#
+# Scripts
+#
+# Dynamic gaps
+exec_always $HOME/.config/sway/scripts/gaps.py \
+                --default_gaps_cmd="gaps outer current set 10" \
+                --large_gaps_cmd="gaps outer current set 200" \
+                --screen_size_limit=16
+# Toggle effect of the previous script
+bindsym $mod+q exec 'echo "gaps: toggle_current"'
+
+exec_always $HOME/.config/sway/scripts/autotiling.py
+
+
 #
 # Colors
 #
-gaps outer 10
+# Borders
+smart_borders on
 default_border pixel 2
 
 # Colorscheme for Sway
@@ -257,11 +253,11 @@ font pango:Iosevka Nerd Font 9
 # GTK themes
 set $gnome-schema org.gnome.desktop.interface
 
-seat seat0 xcursor_theme breeze_cursors 24
+# seat seat0 xcursor_theme breeze_cursors 24
 exec_always {
     gsettings set $gnome-schema gtk-theme 'Arc'
     gsettings set $gnome-schema icon-theme 'Papirus-Dark'
-    gsettings set $gnome-schema cursor-theme 'breeze_cursors'
+    # gsettings set $gnome-schema cursor-theme 'breeze_cursors'
     # gsettings set $gnome-schema font-name 'Your font name'
 }
 
