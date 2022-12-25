@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# Search duckduckgo.com from cli
-
 search=$(echo $@ | sed "s/ /+/g")
 
 xdg-open "https://google.com/search?q=$search" >/dev/null 2>&1 &
