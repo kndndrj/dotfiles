@@ -60,7 +60,14 @@ window#waybar {
 }
 
 #clock {
+    color: ${COL_SYSTEM_FOREGROUND};
     box-shadow: none;
+}
+
+#clock:hover {
+    color: ${COL_SYSTEM_FOREGROUND};
+    box-shadow: none;
+    background-color: transparent;
 }
 
 #battery.charging, #battery.plugged {

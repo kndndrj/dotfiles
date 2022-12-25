@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/sh
 
 
 # Loading bar functions - reffer to https://github.com/Kndndrj/shload
