@@ -52,6 +52,7 @@ alias mv='mv -i'
 alias grep='grep --color=auto'
 alias vim='nvim'
 alias vi='nvim'
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
 
 #
