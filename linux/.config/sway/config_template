@@ -139,27 +139,27 @@ input "type:touchpad" {
 
 # Workspaces
     # Switch to workspace
-    bindsym $mod+1 workspace number 1
-    bindsym $mod+2 workspace number 2
-    bindsym $mod+3 workspace number 3
-    bindsym $mod+4 workspace number 4
-    bindsym $mod+5 workspace number 5
-    bindsym $mod+6 workspace number 6
-    bindsym $mod+7 workspace number 7
-    bindsym $mod+8 workspace number 8
-    bindsym $mod+9 workspace number 9
-    bindsym $mod+0 workspace number 10
+    bindsym $mod+q workspace number 1
+    bindsym $mod+w workspace number 2
+    bindsym $mod+e workspace number 3
+    bindsym $mod+r workspace number 4
+    bindsym $mod+t workspace number 5
+    bindsym $mod+z workspace number 6
+    bindsym $mod+u workspace number 7
+    bindsym $mod+i workspace number 8
+    bindsym $mod+o workspace number 9
+    bindsym $mod+p workspace number 10
     # Move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace number 1
-    bindsym $mod+Shift+2 move container to workspace number 2
-    bindsym $mod+Shift+3 move container to workspace number 3
-    bindsym $mod+Shift+4 move container to workspace number 4
-    bindsym $mod+Shift+5 move container to workspace number 5
-    bindsym $mod+Shift+6 move container to workspace number 6
-    bindsym $mod+Shift+7 move container to workspace number 7
-    bindsym $mod+Shift+8 move container to workspace number 8
-    bindsym $mod+Shift+9 move container to workspace number 9
-    bindsym $mod+Shift+0 move container to workspace number 10
+    bindsym $mod+Shift+q move container to workspace number 1
+    bindsym $mod+Shift+w move container to workspace number 2
+    bindsym $mod+Shift+e move container to workspace number 3
+    bindsym $mod+Shift+r move container to workspace number 4
+    bindsym $mod+Shift+t move container to workspace number 5
+    bindsym $mod+Shift+z move container to workspace number 6
+    bindsym $mod+Shift+u move container to workspace number 7
+    bindsym $mod+Shift+i move container to workspace number 8
+    bindsym $mod+Shift+o move container to workspace number 9
+    bindsym $mod+Shift+p move container to workspace number 10
 
 # Layout stuff
     # Make the current focus fullscreen
@@ -175,9 +175,9 @@ input "type:touchpad" {
     for_window [app_id="scratchpad*"] move scratchpad
     for_window [app_id="scratchpad*"] scratchpad show
 
-    bindsym $mod+s exec $HOME/.config/sway/scripts/scratchpad.sh scratchpad left $term
+    bindsym $mod+d exec $HOME/.config/sway/scripts/scratchpad.sh scratchpad left $term
 
-    bindsym $mod+d exec $HOME/.config/sway/scripts/scratchpad.sh scratchpad right $term
+    bindsym $mod+f exec $HOME/.config/sway/scripts/scratchpad.sh scratchpad right $term
 
 # Resizing containers
     mode "resize" {
@@ -227,7 +227,7 @@ exec_always $HOME/.config/sway/scripts/gaps.py \
                 --large_gaps_cmd="gaps outer current set 200" \
                 --screen_size_limit=16
 # Toggle effect of the previous script
-bindsym $mod+q exec 'echo "gaps: toggle_current"'
+bindsym $mod+g exec 'echo "gaps: toggle_current"'
 
 exec_always $HOME/.config/sway/scripts/autotiling.py
 
