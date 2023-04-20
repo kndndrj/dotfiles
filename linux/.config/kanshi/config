@@ -1,19 +1,8 @@
-profile t570_mobile {
-    output eDP-1 enable scale 2
+profile zenbook_mobile {
+    output eDP-1 mode 1920x1080 scale 1
 }
 
-profile t570_work {
+profile zenbook_home {
     output eDP-1 disable
-    output DP-3 mode 2560x1440 position 0,0
-    output DP-4 mode 2560x1440 position 2560,0
-}
-
-profile t570_home_HDMI {
-    output eDP-1 disable
-    output HDMI-A-2 mode 2560x1440 position 0,0
-}
-
-profile t570_home_DP {
-    output eDP-1 disable
-    output DP-1 mode 3840x2160 scale 1.25 position 0,0
+    output HDMI-A-1 mode 3840x2160 position 0,0 scale 1.25
 }
