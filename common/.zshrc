@@ -1,4 +1,4 @@
-#
+#!/bin/zsh
 # Basics
 #
 # If not running interactively, don't do anything
@@ -43,9 +43,9 @@ setopt COMPLETE_ALIASES
 alias ls='ls --color=auto'
 command -v exa &> /dev/null && alias l='exa' || alias l='ls --color=auto'
 command -v exa &> /dev/null && alias ll='exa -al --git' || alias ll='ls --color=auto -alh'
-command -v exa &> /dev/null && alias tree='exa -Ta' || alias tree='tree -Ca'
+command -v exa &> /dev/null && alias tree='exa -T' || alias tree='tree -C'
 command -v colordiff &> /dev/null && alias diff='colordiff'
-command -v bat &> /dev/null && alias cat='bat --theme=OneHalfDark --paging=never --style=plain'
+command -v bat &> /dev/null && alias cat='bat --theme=ansi --paging=never --style=plain'
 command -v bat &> /dev/null && export MANPAGER="sh -c 'col -bx | bat --theme=OneHalfDark -l man -p'"
 command -v fd &> /dev/null || alias fd='find -iname'
 alias mv='mv -i'
@@ -65,13 +65,13 @@ zstyle ':zcomet:*' home-dir "$ZCOMET_HOME"
 if [ ! -d "$ZCOMET_HOME"/bin ]; then
     printf "First time setup. Install zcomet? [y/N]: "
     if read -q; then
-      echo; echo "Installing zcomet..."
-      git clone https://github.com/agkozak/zcomet.git "$ZCOMET_HOME"/bin || return 1
-      echo "Successfully installed zcomet!"
+        echo; echo "Installing zcomet..."
+        git clone https://github.com/agkozak/zcomet.git "$ZCOMET_HOME"/bin || return 1
+        echo "Successfully installed zcomet!"
     else
-      echo
-      echo "Proceeding with minimal config."
-      return
+        echo
+        echo "Proceeding with minimal config."
+        return
     fi
 fi
 
@@ -92,32 +92,39 @@ zcomet compinit
 #
 # Extra keybindings
 #
+
+# Vim plugin config
+function zvm_config() {
+    ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+}
+
 # Vim plugin after init
 function zvm_after_init() {
-  bindkey -M main '^N' expand-or-complete
-  bindkey -M main '^P' reverse-menu-complete
+    bindkey -M main '^N' expand-or-complete
+    bindkey -M main '^P' reverse-menu-complete
 }
 
 # Vim plugin after lazy loading keybindings
 function zvm_after_lazy_keybindings() {
-  command -v fzf &> /dev/null && bindkey -M vicmd '/' fzf_history_search
+    command -v fzf &> /dev/null && bindkey -M vicmd '/' fzf_history_search
 }
 
 
 #
 # Prompt
 #
-# Prompt color for vi mode
-function zvm_after_select_vi_mode() {
-  case $ZVM_MODE in
-    $ZVM_MODE_NORMAL) vimodecol='green'; vimode='NORMAL';;
-    $ZVM_MODE_INSERT) vimodecol='blue'; vimode='INSERT';;
-    $ZVM_MODE_VISUAL) vimodecol='magenta'; vimode='VISUAL';;
-    $ZVM_MODE_VISUAL_LINE) vimodecol='magenta'; vimode='V-LINE';;
-    $ZVM_MODE_REPLACE) vimodecol='red'; vimode='REPLACE';;
-  esac
-}
-
 PROMPT='%B%F{yellow}%n%f@%M: %F{blue}%c%f%b
-%B%F{${vimodecol}}${vimode}%f%(?..%F{red})❯❯%f%b '
+%B%(?..%F{red})❯❯%f%b '
 RPROMPT='$(gitprompt)'
+
+
+#
+# Tmux
+#
+# Try attaching to tmux session or create a new one
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [ "$TERM" != "screen" ] && [ "$TERM" != "tmux" ] && [ -z "$TMUX" ]; then
+    open_tmux() {
+        tmux attach 2> /dev/null || tmux
+    }
+    exec open_tmux
+fi
