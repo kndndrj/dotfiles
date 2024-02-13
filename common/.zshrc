@@ -45,8 +45,8 @@ command -v exa &> /dev/null && alias l='exa' || alias l='ls --color=auto'
 command -v exa &> /dev/null && alias ll='exa -al --git' || alias ll='ls --color=auto -alh'
 command -v exa &> /dev/null && alias tree='exa -T' || alias tree='tree -C'
 command -v colordiff &> /dev/null && alias diff='colordiff'
-command -v bat &> /dev/null && alias cat='bat --theme=ansi --paging=never --style=plain'
-command -v bat &> /dev/null && export MANPAGER="sh -c 'col -bx | bat --theme=OneHalfDark -l man -p'"
+command -v bat &> /dev/null && alias cat='bat --theme=base16 --paging=never --style=plain'
+command -v bat &> /dev/null && export MANPAGER="sh -c 'col -bx | bat --theme=base16 -l man -p'"
 command -v fd &> /dev/null || alias fd='find -iname'
 alias mv='mv -i'
 alias grep='grep --color=auto'
@@ -122,9 +122,9 @@ RPROMPT='$(gitprompt)'
 # Tmux
 #
 # Try attaching to tmux session or create a new one
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [ "$TERM" != "screen" ] && [ "$TERM" != "tmux" ] && [ -z "$TMUX" ]; then
-    open_tmux() {
-        tmux attach 2> /dev/null || tmux
-    }
-    exec open_tmux
-fi
+# if command -v tmux &> /dev/null && [ -n "$PS1" ] && [ "$TERM" != "screen" ] && [ "$TERM" != "tmux" ] && [ -z "$TMUX" ]; then
+#     open_tmux() {
+#         tmux attach 2> /dev/null || tmux
+#     }
+#     exec open_tmux
+# fi
