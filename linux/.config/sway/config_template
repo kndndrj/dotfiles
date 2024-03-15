@@ -1,3 +1,5 @@
+# vim:ft=i3config
+
 # Config for sway
 # The real file is generated via envsubst in ~/.config/sway/wrapper.sh
 
@@ -27,10 +29,10 @@ set $menu "wofi --show drun"
 # Startup
 #
 # Detect monitor setup and apply it
-exec kanshi
+exec_always "pkill kanshi; exec kanshi"
 
 # Statusbar
-exec waybar
+exec_always "pkill waybar; exec waybar"
 
 # Notification daemon
 exec dunst
@@ -85,7 +87,6 @@ input "type:touchpad" {
     bindsym $mod+Return exec $term
 
     # Notification daemon
-    bindsym $mod+n exec "dunstctl close"
     bindsym $mod+Shift+n exec "dunstctl close-all"
 
     # Screenshots
@@ -164,72 +165,38 @@ input "type:touchpad" {
 # Layout stuff
     # Make the current focus fullscreen
     bindsym $mod+minus fullscreen
-
     # Toggle the current focus between tiling and floating mode
     bindsym $mod+comma floating toggle
-
     # Swap focus between the tiling area and the floating area
     bindsym $mod+space focus mode_toggle
-
-# Scratchpads
-    for_window [app_id="scratchpad*"] move scratchpad
-    for_window [app_id="scratchpad*"] scratchpad show
-
-    bindsym $mod+d exec $HOME/.config/sway/scripts/scratchpad.sh scratchpad left $term
-
-    bindsym $mod+f exec $HOME/.config/sway/scripts/scratchpad.sh scratchpad right $term
-
-# Resizing containers
-    mode "resize" {
-        # left will shrink the containers width
-        # right will grow the containers width
-        # up will shrink the containers height
-        # down will grow the containers height
-        bindsym h resize shrink width 15px
-        bindsym j resize grow height 15px
-        bindsym k resize shrink height 15px
-        bindsym l resize grow width 15px
-
-        # Return to default mode
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-    }
-    bindsym $mod+m mode "resize"
+    # Widen focus
+    bindsym $mod+n focus parent
+    # Return to most recent tiled window
+    bindsym $mod+m focus tiling
 
 
 #
 # Layout
 #
-assign [app_id="Slack"] 10
 for_window [class=".*"] inhibit_idle fullscreen
 for_window [app_id=".*"] inhibit_idle fullscreen
-
-# set workspaces per monitor
-workspace 1 output DP-4
-workspace 2 output DP-4
-workspace 3 output DP-4
-workspace 4 output DP-4
-workspace 5 output DP-4
-
-workspace 6 output DP-3
-workspace 7 output DP-3
-workspace 8 output DP-3
-workspace 9 output DP-3
-workspace 10 output DP-3
 
 
 #
 # Scripts
 #
-# Dynamic gaps
-exec_always $HOME/.config/sway/scripts/gaps.py \
-                --default_gaps_cmd="gaps outer current set 10" \
-                --large_gaps_cmd="gaps outer current set 200" \
-                --screen_size_limit=16
-# Toggle effect of the previous script
-bindsym $mod+g exec 'echo "gaps: toggle_current"'
 
-exec_always $HOME/.config/sway/scripts/autotiling.py
+# Scratchpads
+# server
+exec_always sway-scratch serve
+# bindings
+bindsym $mod+d exec sway-scratch call $term -position left
+bindsym $mod+f exec sway-scratch call $term -position right
+
+# Dynamic gaps
+exec_always sway-reflex -window_size 500x300 -default_gaps 20
+# Toggle effect of the previous script
+bindsym $mod+g exec 'echo "reflex: toggle_current"'
 
 
 #
@@ -248,7 +215,7 @@ client.urgent           ${COL_SYSTEM_BACKGROUND}     ${COL_SYSTEM_ALERT}        
 client.placeholder      ${COL_SYSTEM_BACKGROUND_ALT} ${COL_SYSTEM_BACKGROUND_ALT} ${COL_SYSTEM_FOREGROUND}     ${COL_SYSTEM_BACKGROUND_ALT} ${COL_SYSTEM_BACKGROUND_ALT}
 
 # Font
-font pango:Iosevka Nerd Font 9
+font pango:I%osevka Nerd Font 9
 
 # GTK themes
 set $gnome-schema org.gnome.desktop.interface
@@ -260,5 +227,3 @@ exec_always {
     # gsettings set $gnome-schema cursor-theme 'breeze_cursors'
     # gsettings set $gnome-schema font-name 'Your font name'
 }
-
-# vim:ft=i3config
