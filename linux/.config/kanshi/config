@@ -1,8 +1,0 @@
-profile zenbook_mobile {
-    output eDP-1 mode 1920x1080 scale 1
-}
-
-profile zenbook_home {
-    output eDP-1 disable
-    output HDMI-A-1 mode 3840x2160 position 0,0 scale 1.15
-}
