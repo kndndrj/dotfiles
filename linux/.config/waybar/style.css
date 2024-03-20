@@ -1,0 +1,149 @@
+/* All components */
+* {
+    padding: 0px;
+    border: 0px;
+    font-family: 'ComicCode Nerd Font';
+    font-size: 20px;
+    transition-property: background-color;
+    transition-duration: .3s;
+    color: #E9E8E8;
+}
+
+/* Window */
+window#waybar {
+    font-weight: bold;
+    background-color: transparent;
+}
+
+/* All modules */
+.module {
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 10px;
+    margin-right: 10px;
+    background-color: rgba(142, 145, 143, 0.7);
+}
+
+/* Workspace buttons */
+#workspaces {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+#workspaces button {
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+#workspaces button>label {
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#workspaces button:hover>label {
+    background-color: #555756;
+}
+
+#workspaces button:hover {
+    background-color: #555756;
+}
+
+#workspaces button.visible {
+    background-color: #1F1E1C;
+}
+
+#workspaces button.focused {
+    background-color: #4287f5;
+}
+
+#workspaces button.urgent {
+    background-color: #FF4545;
+}
+
+/* Battery */
+#battery.charging,
+#battery.plugged {
+    color: #AAAAAA;
+    background-color: #DCC080;
+}
+
+@keyframes blink {
+    to {
+        background-color: #1F1E1C;
+        color: #AAAAAA;
+    }
+}
+
+#battery.critical:not(.charging):not(.plugged) {
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    background-color: #FF4545;
+}
+
+#battery.warning:not(.charging) {
+    background-color: #FF875A;
+}
+
+/* Pulseaudio and Pulseaudio slider
+* These two modules are located next to each other
+* and made to look like they are one module.
+* */
+#pulseaudio {
+    border-radius: 10px 0px 0px 10px;
+    margin-right: 0px;
+}
+
+#pulseaudio-slider {
+    border-radius: 0px 10px 10px 0px;
+    margin-left: 0px;
+
+    padding-left: 10px;
+    padding-right: 15px;
+    min-width: 120px;
+}
+
+#pulseaudio-slider slider {
+    box-shadow: 0 0 2px #1F1E1C;
+}
+
+#pulseaudio-slider trough {
+    min-height: 10px;
+    border-radius: 5px;
+    background-color: rgb(142, 145, 143);
+}
+
+#pulseaudio-slider highlight {
+    min-height: 10px;
+    border-radius: 5px;
+    background-color: #E9E8E8;
+}
+
+/* Temperature */
+#temperature.critical {
+    background-color: #FF4545;
+}
+
+/* System tray */
+#tray>.passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #FF4545;
+}
+
+#tray menu {
+    margin: 10px;
+    border-radius: 10px;
+    background-color: #555756;
+}
+
+#tray menu * {
+    font-size: 15px;
+}

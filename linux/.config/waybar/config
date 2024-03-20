@@ -1,35 +1,67 @@
+// vim: ft=jsonc
 {
     "layer": "top",
-    "position": "bottom",
+    "position": "top",
     "height": 30,
-    "spacing": 5,
-
+    "width": 1600,
+    "spacing": 0,
     // Modules
-    "modules-left": ["sway/workspaces"],
-    "modules-center": ["clock"],
-    "modules-right": ["tray", "pulseaudio", "custom/updates", "cpu", "temperature", "battery", "battery#bat2"],
-
+    "modules-left": [
+        "sway/workspaces"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "tray",
+        "pulseaudio",
+        "pulseaudio/slider",
+        "custom/updates",
+        "cpu",
+        "temperature",
+        "battery"
+    ],
     // Modules configuration
     "sway/workspaces": {
         "all-outputs": false
     },
     "tray": {
-        "spacing": 8
+        "icon-size": 25
     },
     "clock": {
-        "format": "{:%H:%M | %d.%m.%Y}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}",
-        "locale": "sl_SI.UTF-8"
+        // "format": "{:%H:%M | %d.%m.%Y}",
+        // "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        // "format-alt": "{:%Y-%m-%d}",
+        "format": "{:%H:%M}",
+        "format-alt": "{:%d.%m.%Y (%H:%M)}",
+        "tooltip-format": "<big><b>{:%d. %B %Y}</b></big>\n<small>{calendar}</small>",
+        "locale": "sl_SI.UTF-8",
+        "calendar": {
+            "mode": "year",
+            "mode-mon-col": 3,
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#E9E8E8'><b>{}</b></span>",
+                "days": "<span color='#E9E8E8'><b>{}</b></span>",
+                "weekdays": "<span color='#4287f5'><b>{}</b></span>",
+                "today": "<span background='#4287f5'><b>{}</b></span>"
+            }
+        }
     },
     "cpu": {
-        "format": " {usage}%",
+        "format": " {usage:3}%",
         "tooltip": false
     },
     "temperature": {
         "critical-threshold": 75,
-        "format": "{icon}{temperatureC}°C",
-        "format-icons": [" ", " ", " ", " ", " "]
+        "format": "{icon}{temperatureC:2}°C",
+        "format-icons": [
+            " ",
+            " ",
+            " ",
+            " ",
+            " "
+        ]
     },
     "battery": {
         "states": {
@@ -37,55 +69,28 @@
             "critical": 15
         },
         "full-at": 95,
-        "format": "{icon} {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
-        "format-alt": "{icon}{time}",
-        "format-icons": ["", "", "", "", ""]
+        "format": "{icon} {capacity:3}%",
+        "format-charging": " {capacity:3}%",
+        "format-plugged": " {capacity:3}%",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
     },
-    "battery#bat2": {
-        "bat": "BAT1",
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        "full-at": 95,
-        "format": "{icon} {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
-        "format-alt": "{icon}{time}",
-        "format-icons": ["", "", "", "", ""]
+    "pulseaudio/slider": {
+        "min": 0,
+        "max": 100,
+        "orientation": "horizontal"
     },
     "pulseaudio": {
         "scroll-step": 5,
-        "format": "{icon} {volume}%",
-        "format-bluetooth": "{icon} {volume}% ",
-        "format-bluetooth-muted": "婢     muted      ",
-        "format-muted": "婢     muted     ",
-        "format-icons": {
-            "default": [
-                "奄 |---------",
-                "奄 -|--------",
-                "奄 --|-------",
-                "奔 ---|------",
-                "奔 ----|-----",
-                "奔 -----|----",
-                "奔 ------|---",
-                "墳 -------|--",
-                "墳 --------|-",
-                "墳 ---------|"
-            ]
-        },
+        "format": "󰕾  ",
+        "format-muted": "󰖁  ",
+        "format-bluetooth": "󰕾 󰂯",
+        "format-bluetooth-muted": "󰖁 󰂯",
         "on-click": "amixer -q set Master toggle"
-    },
-    "custom/updates": {
-        "format": " {}",
-        "interval": 600,
-        "exec": "echo $(checkupdates 2> /dev/null | wc -l)'|'$(paru -Qum 2> /dev/null | wc -l)",
-        "exec-if": "exit 0",
-        "on-click": "pkill -SIGRTMIN+8 waybar",
-        "signal": 8
     }
 }
-
-// vim: ft=json

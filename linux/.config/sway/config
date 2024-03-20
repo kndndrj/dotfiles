@@ -1,7 +1,6 @@
 # vim:ft=i3config
 
 # Config for sway
-# The real file is generated via envsubst in ~/.config/sway/wrapper.sh
 
 # Sway does not set DISPLAY/WAYLAND_DISPLAY in the systemd user environment
 # See FS#63021
@@ -20,9 +19,9 @@ set $down j
 set $up k
 set $right l
 
+# apps
 set $term kitty
-
-set $menu "wofi --show drun"
+set $menu fuzzel
 
 
 #
@@ -35,7 +34,7 @@ exec_always "pkill kanshi; exec kanshi"
 exec_always "pkill waybar; exec waybar"
 
 # Notification daemon
-exec dunst
+exec_always "pkill dunst; exec dunst"
 
 # Applets
 exec "nm-applet --indicator"
@@ -49,9 +48,9 @@ exec blueman-applet
 output * bg $(ls -d $(xdg-user-dir PICTURES)/wallpapers/* | shuf -n 1) fill
 
 exec swayidle -w \
-         timeout 600 'swaylock -f -c ${COL_SYSTEM_FOREGROUND}' \
+         timeout 600 'swaylock -f -c #E9E8E8' \
          timeout 605 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c ${COL_SYSTEM_FOREGROUND}'
+         before-sleep 'swaylock -f -c #E9E8E8'
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -112,7 +111,7 @@ input "type:touchpad" {
     bindsym $mod+Shift+d exec swaynag -t warning -m 'Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
     # Lock screen
-    bindsym $mod+Shift+x exec swaylock -c '${COL_SYSTEM_FOREGROUND}'
+    bindsym $mod+Shift+x exec swaylock -c '#E9E8E8'
 
 
 # Sound and brightness
@@ -190,8 +189,8 @@ for_window [app_id=".*"] inhibit_idle fullscreen
 # server
 exec_always sway-scratch serve
 # bindings
-bindsym $mod+d exec sway-scratch call $term -position left
-bindsym $mod+f exec sway-scratch call $term -position right
+bindsym $mod+d exec sway-scratch call $term -position left -window_size "200x130"
+bindsym $mod+f exec sway-scratch call $term -position right -window_size "200x130"
 
 # Dynamic gaps
 exec_always sway-reflex -window_size 500x300 -default_gaps 20
@@ -207,15 +206,12 @@ smart_borders on
 default_border pixel 2
 
 # Colorscheme for Sway
-# class                 border                       bground                      text                         indicator                    child_border
-client.focused          ${COL_SYSTEM_PRIMARY}        ${COL_SYSTEM_PRIMARY}        ${COL_SYSTEM_FOREGROUND}     ${COL_SYSTEM_PRIMARY}        ${COL_SYSTEM_PRIMARY}
-client.focused_inactive ${COL_SYSTEM_BACKGROUND}     ${COL_SYSTEM_BACKGROUND}     ${COL_SYSTEM_FOREGROUND}     ${COL_SYSTEM_FOREGROUND}     ${COL_SYSTEM_FOREGROUND_ALT}
-client.unfocused        ${COL_SYSTEM_BACKGROUND}     ${COL_SYSTEM_BACKGROUND}     ${COL_SYSTEM_FOREGROUND_ALT} ${COL_SYSTEM_BACKGROUND}     ${COL_SYSTEM_BACKGROUND_ALT}
-client.urgent           ${COL_SYSTEM_BACKGROUND}     ${COL_SYSTEM_ALERT}          ${COL_SYSTEM_FOREGROUND}     ${COL_SYSTEM_ALERT}          ${COL_SYSTEM_ALERT}
-client.placeholder      ${COL_SYSTEM_BACKGROUND_ALT} ${COL_SYSTEM_BACKGROUND_ALT} ${COL_SYSTEM_FOREGROUND}     ${COL_SYSTEM_BACKGROUND_ALT} ${COL_SYSTEM_BACKGROUND_ALT}
-
-# Font
-font pango:I%osevka Nerd Font 9
+# class                 border      background  text        indicator   child_border
+client.focused          #4287f5     #4287f5     #E9E8E8     #4287f5     #4287f5
+client.focused_inactive #555756     #555756     #E9E8E8     #E9E8E8     #AAAAAA
+client.unfocused        #555756     #555756     #AAAAAA     #555756     #1F1E1C
+client.urgent           #555756     #FF4545     #E9E8E8     #FF4545     #FF4545
+client.placeholder      #1F1E1C     #1F1E1C     #E9E8E8     #1F1E1C     #1F1E1C
 
 # GTK themes
 set $gnome-schema org.gnome.desktop.interface
@@ -224,6 +220,4 @@ set $gnome-schema org.gnome.desktop.interface
 exec_always {
     gsettings set $gnome-schema gtk-theme 'Arc'
     gsettings set $gnome-schema icon-theme 'Papirus-Dark'
-    # gsettings set $gnome-schema cursor-theme 'breeze_cursors'
-    # gsettings set $gnome-schema font-name 'Your font name'
 }
