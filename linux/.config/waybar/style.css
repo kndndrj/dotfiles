@@ -63,12 +63,6 @@ window#waybar {
 }
 
 /* Battery */
-#battery.charging,
-#battery.plugged {
-    color: #AAAAAA;
-    background-color: #DCC080;
-}
-
 @keyframes blink {
     to {
         background-color: #1F1E1C;
