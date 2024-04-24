@@ -1,0 +1,27 @@
+#!/bin/sh
+# Sway start script
+
+# Session
+export XDG_SESSION_TYPE=wayland
+export XDG_SESSION_DESKTOP=sway
+export XDG_CURRENT_DESKTOP=sway
+
+# Wayland related app fixes
+export MOZ_ENABLE_WAYLAND=1
+export QT_QPA_PLATFORM=wayland-egl
+export CLUTTER_BACKEND=wayland
+export ECORE_EVAS_ENGINE=wayland-egl
+export ELM_ENGINE=wayland_egl
+export SDL_VIDEODRIVER=wayland
+export _JAVA_AWT_WM_NONREPARENTING=1
+export NO_AT_BRIDGE=1
+
+# Set dependencies to run with proprietary drivers
+unsupported_gpu=""
+if grep -qE "nvidia|fglrx" /proc/modules; then
+   export WLR_NO_HARDWARE_CURSORS=1
+   unsupported_gpu="--unsupported-gpu"
+fi
+
+# Start sway
+exec sway $unsupported_gpu

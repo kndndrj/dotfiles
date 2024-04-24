@@ -119,12 +119,8 @@ RPROMPT='$(gitprompt)'
 
 
 #
-# Tmux
+# Platform specific script is ~/.platform (if it exists)
 #
-# Try attaching to tmux session or create a new one
-# if command -v tmux &> /dev/null && [ -n "$PS1" ] && [ "$TERM" != "screen" ] && [ "$TERM" != "tmux" ] && [ -z "$TMUX" ]; then
-#     open_tmux() {
-#         tmux attach 2> /dev/null || tmux
-#     }
-#     exec open_tmux
-# fi
+if [ -f "$HOME/.platform" ]; then
+    . "$HOME/.platform"
+fi
