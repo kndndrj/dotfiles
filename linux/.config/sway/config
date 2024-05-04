@@ -12,7 +12,7 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 #
 # Variables
 #
-set $mod Mod1
+set $mod Mod4
 
 set $left h
 set $down j
