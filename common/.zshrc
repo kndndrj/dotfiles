@@ -42,11 +42,10 @@ setopt COMPLETE_ALIASES
 #
 alias ls='ls --color=auto'
 command -v exa &> /dev/null && alias l='exa' || alias l='ls --color=auto'
-command -v exa &> /dev/null && alias ll='exa -al --git' || alias ll='ls --color=auto -alh'
+command -v exa &> /dev/null && alias ll='exa -alg --git' || alias ll='ls --color=auto -alh'
 command -v exa &> /dev/null && alias tree='exa -T' || alias tree='tree -C'
 command -v colordiff &> /dev/null && alias diff='colordiff'
 command -v bat &> /dev/null && alias cat='bat --theme=base16 --paging=never --style=plain'
-command -v bat &> /dev/null && export MANPAGER="sh -c 'col -bx | bat --theme=base16 -l man -p'"
 command -v fd &> /dev/null || alias fd='find -iname'
 alias mv='mv -i'
 alias grep='grep --color=auto'
@@ -78,7 +77,7 @@ fi
 source "$ZCOMET_HOME"/bin/zcomet.zsh
 
 # Plugin list
-zcomet load "woefe/git-prompt.zsh" git-prompt.zsh examples/compact.zsh
+zcomet load "woefe/git-prompt.zsh" git-prompt.zsh examples/default.zsh
 zcomet load "jeffreytse/zsh-vi-mode"
 zcomet load "zsh-users/zsh-autosuggestions"
 zcomet load "ohmyzsh" plugins/command-not-found
@@ -113,9 +112,7 @@ function zvm_after_lazy_keybindings() {
 #
 # Prompt
 #
-PROMPT='%B%F{yellow}%n%f@%M: %F{blue}%c%f%b
-%B%(?..%F{red})❯❯%f%b '
-RPROMPT='$(gitprompt)'
+PROMPT='%B%F{yellow}%n%f@%M: %F{blue}%c%f%b $(gitprompt)%B%(?..%F{red})$%f%b '
 
 
 #
@@ -124,3 +121,5 @@ RPROMPT='$(gitprompt)'
 if [ -f "$HOME/.platform" ]; then
     . "$HOME/.platform"
 fi
+export PATH="$PATH:/home/andrej/.modular/bin"
+export LD_LIBRARY_PATH=/home/andrej/.local/lib/arch-mojo:$LD_LIBRARY_PATH

@@ -26,12 +26,9 @@
         "all-outputs": false
     },
     "tray": {
-        "icon-size": 25
+        "icon-size": 24
     },
     "clock": {
-        // "format": "{:%H:%M | %d.%m.%Y}",
-        // "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        // "format-alt": "{:%Y-%m-%d}",
         "format": "{:%H:%M}",
         "format-alt": "{:%d.%m.%Y (%H:%M)}",
         "tooltip-format": "<big><b>{:%d. %B %Y}</b></big>\n<small>{calendar}</small>",
@@ -70,14 +67,14 @@
         },
         "full-at": 95,
         "format": "{icon} {capacity:3}%",
-        "format-charging": " {capacity:3}%",
+        "format-charging": "󰂄 {capacity:3}%",
         "format-plugged": " {capacity:3}%",
         "format-icons": [
-            "",
-            "",
-            "",
-            "",
-            ""
+            "󰁺",
+            "󰁼",
+            "󰁾",
+            "󰂀",
+            "󰁹"
         ]
     },
     "pulseaudio/slider": {

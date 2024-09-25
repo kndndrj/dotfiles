@@ -37,8 +37,8 @@ exec_always "pkill waybar; exec waybar"
 exec_always "pkill dunst; exec dunst"
 
 # Applets
-exec "nm-applet --indicator"
-exec blueman-applet
+exec_always "pkill nm-applet; exec nm-applet --indicator"
+exec_always "pkill blueman-applet; exec blueman-applet"
 
 
 #
@@ -80,8 +80,6 @@ input "type:touchpad" {
 # Key bindings
 #
 # Basics
-    # Start the browser
-    bindsym $mod+b exec "brave --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland"
     # Start a terminal
     bindsym $mod+Return exec $term
 
@@ -193,7 +191,7 @@ bindsym $mod+d exec sway-scratch call $term -position left -window_size "200x130
 bindsym $mod+f exec sway-scratch call $term -position right -window_size "200x130"
 
 # Dynamic gaps
-exec_always sway-reflex -window_size 500x300 -default_gaps 20
+exec_always sway-reflex -window_size 500x350 -default_gaps 20
 # Toggle effect of the previous script
 bindsym $mod+g exec 'echo "reflex: toggle_current"'
 
