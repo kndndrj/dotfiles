@@ -108,6 +108,21 @@ function zvm_after_lazy_keybindings() {
     command -v fzf &> /dev/null && bindkey -M vicmd '/' fzf_history_search
 }
 
+# Vim mode uses system clipboard
+#
+if (command -v wl-copy &> /dev/null); then # linux
+    zvm_vi_yank () {
+        zvm_yank
+        printf %s "${CUTBUFFER}" |  wl-copy -n
+        zvm_exit_visual_mode
+    }
+elif (command -v pbcopy &> /dev/null); then # macos
+    zvm_vi_yank () {
+        zvm_yank
+        printf %s "${CUTBUFFER}" |  pbcopy
+        zvm_exit_visual_mode
+    }
+fi
 
 #
 # Prompt
@@ -121,5 +136,3 @@ PROMPT='%B%F{yellow}%n%f@%M: %F{blue}%c%f%b $(gitprompt)%B%(?..%F{red})$%f%b '
 if [ -f "$HOME/.platform" ]; then
     . "$HOME/.platform"
 fi
-export PATH="$PATH:/home/andrej/.modular/bin"
-export LD_LIBRARY_PATH=/home/andrej/.local/lib/arch-mojo:$LD_LIBRARY_PATH
