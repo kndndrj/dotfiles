@@ -8,9 +8,6 @@
 export VISUAL=nvim;
 export EDITOR=nvim;
 
-# Set ssh-agent to the terminal
-eval $(ssh-agent) > /dev/null
-
 # Enable colors
 autoload -U colors && colors
 

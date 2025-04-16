@@ -12,7 +12,8 @@ export PATH="$PATH:$CARGO_HOME/bin"
 # Go
 export GO111MODULE=on
 export GOPATH="$XDG_DATA_HOME/go"
-export PATH="$PATH:$GOPATH/bin"
+export GOBIN="$GOPATH/bin"
+export PATH="$PATH:$GOBIN"
 # GTK
 export GTK_RC_FILES="$XDG_CONFIG_HOME/gtk-1.0/gtkrc"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"

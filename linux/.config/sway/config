@@ -64,7 +64,7 @@ input "type:keyboard" {
     xkb_layout "si_nodead"
     xkb_numlock enable
     repeat_rate 50
-    repeat_delay 300
+    repeat_delay 150
 }
 
 # Touchpad:
