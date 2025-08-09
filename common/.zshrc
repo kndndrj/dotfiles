@@ -49,6 +49,8 @@ alias grep='grep --color=auto'
 alias vim='nvim'
 alias vi='nvim'
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
+alias todo='note -e TODO.md'
+alias ink='note -e EVERYTHING.md'
 
 
 #

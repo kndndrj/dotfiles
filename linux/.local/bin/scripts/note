@@ -1,0 +1,148 @@
+#!/bin/dash
+
+#
+# Setup
+#
+if ! (command -v fzf >/dev/null 2>&1); then
+    echo "fzf is not installed!"
+    exit 1
+fi
+
+notes_dir="$HOME/Documents/notes/"
+editor="${EDITOR:-vim}"
+
+# Create directory if it doesn't exist.
+if [ ! -d "$notes_dir" ]; then
+    mkdir -p "$notes_dir"
+fi
+
+#
+# Helpers
+#
+
+list_notes() {
+    find "$notes_dir" -not -path '*/[@.]*' -type f |
+        sed 's@'"$HOME/Documents/notes/"'@@'
+}
+
+#
+# Commaand functions
+#
+
+# input: note_path note_name
+cmd_edit() {
+    note="$1"
+    note_name="$2"
+
+    if [ -z "$note_name" ]; then
+        echo "Note name not provided"
+        return 1
+    fi
+
+    if [ ! -f "$note" ]; then
+        printf "Note \"%s\" doesn't exist. Do you wish to create it? [Y/n] " "$note_name"
+        read -r ans
+        if [ -n "$ans" ] && [ "$ans" != "y" ]; then
+            echo "aborting"
+            exit 1
+        fi
+        mkdir -p "$(dirname "$note")"
+        echo "# Title" >"$note"
+    fi
+
+    "$editor" "$note"
+    return $?
+}
+
+# input: /
+cmd_search() {
+    note_name="$(list_notes | fzf)"
+    if [ -z "$note_name" ]; then
+        echo "aborting"
+        exit 1
+    fi
+
+    note="$(echo "$notes_dir/$note_name" | tr -s /)"
+
+    "$editor" "$note"
+    return $?
+}
+
+# input: note_path note_name
+cmd_remove() {
+    note="$1"
+    note_name="$2"
+
+    [ -z "$note" ] && echo "note name not provided" && return 1
+    [ ! -f "$note" ] && echo "note $note_name doesn't exist" && return 1
+
+    printf "Remove note \"%s\"? [y/N] " "$note_name"
+    read -r ans
+    if [ "$ans" != "y" ] && [ "$ans" != "Y" ]; then
+        echo "aborting"
+        return 1
+    fi
+
+    rm "$note"
+    return $?
+}
+
+# input: /
+cmd_tree() {
+    command -v exa >/dev/null 2>&1 && exa -T "$notes_dir" && return $?
+    command -v tree >/dev/null 2>&1 && tree "$notes_dir" && return $?
+
+    list_notes
+    return 0
+}
+
+#
+# Parse flags
+#
+if [ "$(echo "$1" | cut -c1-1)" = "-" ]; then
+    # first arg is a flag
+    [ "$#" -gt 2 ] && echo "too many args" && exit 1
+
+    flag="$1"
+    note_name="$2"
+elif [ -n "$1" ]; then
+    # first arg is a note
+    [ "$#" -gt 1 ] && echo "too many args" && exit 1
+
+    flag="--edit"
+    note_name="$1"
+else
+    # no arguments
+    [ "$#" -gt 0 ] && echo "too many args" && exit 1
+
+    flag="--search"
+    note_name=""
+fi
+
+note="$(echo "$notes_dir/$note_name" | tr -s /)"
+
+#
+# Subcommands
+#
+case "$flag" in
+"-s" | "--search")
+    cmd_search
+    exit $?
+    ;;
+"-e" | "--edit")
+    cmd_edit "$note" "$note_name"
+    exit $?
+    ;;
+"-r" | "--rm" | "--remove")
+    cmd_remove "$note" "$note_name"
+    exit $?
+    ;;
+"-l" | "--ls" | "--list" | "-t" | "--tree")
+    cmd_tree
+    exit $?
+    ;;
+*)
+    echo "Unknown flag: $flag"
+    exit 1
+    ;;
+esac
